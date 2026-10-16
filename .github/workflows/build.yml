@@ -1,0 +1,63 @@
+name: Build Aurum VPN
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate Android project
+        run: |
+          flutter --version
+          flutter create --platforms=android --org com.aurum --project-name aurum_vpn .
+          rm -f test/widget_test.dart
+          python3 tool/patch_android.py
+
+      - name: Dependencies
+        run: flutter pub get
+
+      - name: Build APKs
+        run: |
+          flutter build apk --release --split-per-abi
+          flutter build apk --release
+          cd build/app/outputs/flutter-apk
+          mv app-release.apk AurumVPN-universal.apk
+          mv app-arm64-v8a-release.apk AurumVPN-arm64-v8a.apk
+          mv app-armeabi-v7a-release.apk AurumVPN-armeabi-v7a.apk
+          mv app-x86_64-release.apk AurumVPN-x86_64.apk
+          ls -la
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AurumVPN-android
+          path: build/app/outputs/flutter-apk/AurumVPN-*.apk
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Aurum VPN build ${{ github.run_number }}
+          body: |
+            اکثر گوشی‌ها: AurumVPN-arm64-v8a.apk
+            گوشی‌های قدیمی: AurumVPN-armeabi-v7a.apk
+            اگر مطمئن نیستید: AurumVPN-universal.apk
+          files: build/app/outputs/flutter-apk/AurumVPN-*.apk
