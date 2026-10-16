@@ -1,0 +1,8 @@
+Analyzing -aurum-vpn...                                         
+
+warning • The URI 'package:flutter_lints/flutter.yaml' included in '/home/runner/work/-aurum-vpn/-aurum-vpn/analysis_options.yaml' can't be found when analyzing '/home/runner/work/-aurum-vpn/-aurum-vpn' • analysis_options.yaml:10:10 • include_file_not_found
+warning • The value of the local variable 'cred' isn't used. Try removing the variable or using it • lib/core/net.dart:24:13 • unused_local_variable
+  error • Undefined name 'cred127'. Try correcting the name to one that is defined, or defining the name • lib/core/net.dart:25:37 • undefined_identifier
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre. Try replacing the use of the deprecated member with the replacement • lib/ui/settings_page.dart:137:9 • deprecated_member_use
+
+4 issues found. (ran in 7.8s)
