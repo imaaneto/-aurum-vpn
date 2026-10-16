@@ -181,9 +181,47 @@ class CloudflareApi {
 
   /// Full setup used by the token manager: verifies the token, finds the
   /// account and deploys a fresh worker. Mutates and returns [acc].
+  /// Checks the token itself. Returns null when valid, else a readable reason.
+  Future<String?> verifyToken(String accountId) async {
+    final paths = [
+      '/user/tokens/verify',
+      if (accountId.isNotEmpty) '/accounts/$accountId/tokens/verify',
+    ];
+    String? last;
+    for (final p in paths) {
+      try {
+        final j = await _get(p);
+        final st = '${(j['result'] as Map?)?['status'] ?? ''}';
+        if (st == 'active') return null;
+        last = tr('وضعیت توکن: $st', 'Token status: $st');
+      } catch (e) {
+        last = '$e';
+      }
+    }
+    return last;
+  }
+
   static Future<CfAccount> setup(CfAccount acc, {void Function(String)? onStep}) async {
-    final api = CloudflareApi(acc.token);
-    onStep?.call(tr('بررسی توکن...', 'Checking token...'));
+    final api = CloudflareApi(acc.token.trim());
+    Future<T> step<T>(String fa, String en, Future<T> Function() f) async {
+      onStep?.call(tr(fa, en));
+      try {
+        return await f();
+      } on CfException catch (e) {
+        if (e.needsAccountId) rethrow;
+        throw CfException('${tr(fa, en)} — ${e.message}');
+      } catch (e) {
+        throw CfException('${tr(fa, en)} — $e');
+      }
+    }
+
+    final bad = await step('بررسی اعتبار توکن', 'Verifying token', () => api.verifyToken(acc.accountId));
+    if (bad != null) {
+      throw CfException(tr(
+        'توکن نامعتبر است یا کامل کپی نشده ($bad). یک توکن جدید بسازید و کل آن را کپی کنید.',
+        'The token is invalid or was not copied completely ($bad). Create a new token and copy all of it.',
+      ));
+    }
     if (acc.accountId.isEmpty) {
       final (id, name) = await api.firstAccount();
       acc.accountId = id;
@@ -193,17 +231,15 @@ class CloudflareApi {
         acc.accountName = await api.accountName(acc.accountId);
       } catch (_) {}
     }
-    onStep?.call(tr('آماده‌سازی دامنه workers.dev ...', 'Preparing workers.dev subdomain...'));
-    final sub = await api.ensureSubdomain(acc.accountId);
-    final scriptName = acc.workerName.isNotEmpty ? acc.workerName : 'aurum-${_randHex(6)}';
+    final sub = await step('ساخت/خواندن دامنه workers.dev', 'workers.dev subdomain', () => api.ensureSubdomain(acc.accountId));
+    final scriptName = acc.workerName.isNotEmpty ? acc.workerName : 'aida-${_randHex(6)}';
     final uuid = acc.workerUuid.isNotEmpty ? acc.workerUuid : randomUuid();
-    onStep?.call(tr('ساخت ورکر $scriptName ...', 'Deploying worker $scriptName ...'));
-    await api.deployWorker(
-      accountId: acc.accountId,
-      scriptName: scriptName,
-      uuid: uuid,
-      proxyIp: acc.proxyIp,
-    );
+    await step('آپلود ورکر', 'Uploading worker', () => api.deployWorker(
+          accountId: acc.accountId,
+          scriptName: scriptName,
+          uuid: uuid,
+          proxyIp: acc.proxyIp,
+        ));
     acc.workerName = scriptName;
     acc.workerUuid = uuid;
     acc.workerHost = '$scriptName.$sub.workers.dev';
@@ -212,6 +248,7 @@ class CloudflareApi {
     onStep?.call(tr('ورکر ساخته شد', 'Worker deployed'));
     return acc;
   }
+
 }
 
 String _randHex(int n) {
