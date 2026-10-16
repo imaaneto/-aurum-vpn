@@ -20,7 +20,7 @@ for name in ('configs', 'loadonly'):
     res = json.load(open(p))
     groups = collections.defaultdict(lambda: {'n': 0, 'ok': 0, 'load': 0, 'errs': collections.Counter()})
     for r in res:
-        m = re.match(r'(pub_[a-z0-9]+|warp|xdns)', r['file'])
+        m = re.match(r'(pub_[a-z0-9]+|warpnoise|warp|xdns|workerfrag)', r['file'])
         g = groups[m.group(1) if m else r['file']]
         g['n'] += 1
         if r['delay'] > 0: g['ok'] += 1

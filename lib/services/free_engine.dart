@@ -184,8 +184,13 @@ class FreeEngine extends ChangeNotifier {
       _warp(run, cap: hasWorkerSide ? 5 : cfTarget),
       if (hasWorkerSide) _worker(run, tokenAccs),
     ]);
-    if (!cfFull && !run.stopped) {
+    // Top up with WARP only when WARP actually works on this network.
+    if (!cfFull && !run.stopped && _countWhere('wireguard') > 0) {
       await _warp(run, cap: cfTarget, rounds: 2);
+    }
+    if (!run.stopped && cfCount == 0) {
+      _log(run, tr('کلودفلر: روی این اینترنت WARP و ورکر جواب ندادند. اگر ورکر تازه ساخته شده، چند دقیقه بعد دوباره امتحان کنید.',
+          'Cloudflare: neither WARP nor the worker answered on this network. If the worker is new, retry in a few minutes.'));
     }
     if (run.stopped) return;
     cfStage = cfFull
@@ -234,6 +239,7 @@ class FreeEngine extends ChangeNotifier {
           ip: WarpService.randomEndpointIp(),
           port: WarpService.randomPort(),
           name: 'WARP',
+          noise: i.isEven,
         );
         final c = configFromLink(link, Groups.freeCf);
         if (c != null) cands.add(c);
@@ -244,7 +250,7 @@ class FreeEngine extends ChangeNotifier {
         cfTested++;
         if (d > 0 && !cfFull && _countWhere('wireguard') < cap) {
           c.delay = d;
-          c.name = '☁ WARP ${c.host}:${c.port}';
+          c.name = '☁ WARP${c.link.contains('aida_noise') ? '+noise' : ''} ${c.host}:${c.port}';
           _addCf(run, c);
           _log(run, 'WARP ✓ ${c.host}:${c.port}  ${d}ms');
         } else {
@@ -272,8 +278,9 @@ class FreeEngine extends ChangeNotifier {
         _log(run, '${a.label}: $e');
       }
     }
-    final hosts = accs.where((a) => a.hasWorker).toList();
+    final hosts = accs.where((a) => a.hasWorker && !a.workerHost.contains('cloudflare.com')).toList();
     if (hosts.isEmpty || run.stopped) return;
+    _log(run, tr('ورکرها: ${hosts.map((h) => h.workerHost).join('، ')}', 'Workers: ${hosts.map((h) => h.workerHost).join(', ')}'));
 
     cfStage = tr('اسکن آی‌پی تمیز کلودفلر ...', 'Scanning clean Cloudflare IPs...');
     _notify();
@@ -305,6 +312,7 @@ class FreeEngine extends ChangeNotifier {
         address: ips[i],
         port: portCycle[i % portCycle.length],
         name: 'Worker',
+        fragment: i.isEven,
       );
       final c = configFromLink(link, Groups.freeCf);
       if (c != null) cands.add(c);
@@ -317,7 +325,7 @@ class FreeEngine extends ChangeNotifier {
       cfTested++;
       if (d > 0 && !cfFull) {
         c.delay = d;
-        c.name = '⚡ Worker ${c.host}:${c.port}';
+        c.name = '⚡ Worker${c.link.contains('aida_frag') ? '+frag' : ''} ${c.host}:${c.port}';
         _addCf(run, c);
         _log(run, 'Worker ✓ ${c.host}:${c.port}  ${d}ms');
       } else {

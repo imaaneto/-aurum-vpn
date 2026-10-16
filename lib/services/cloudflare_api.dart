@@ -335,6 +335,7 @@ String buildWorkerVlessLink({
   required String address,
   required int port,
   required String name,
+  bool fragment = false,
 }) {
   final tls = workerTlsPorts.contains(port);
   final q = <String>[
@@ -343,6 +344,7 @@ String buildWorkerVlessLink({
     'host=$host',
     'path=${Uri.encodeComponent('/?ed=2048')}',
     if (tls) ...['security=tls', 'sni=$host', 'fp=chrome', 'alpn=http%2F1.1'] else 'security=none',
+    if (fragment) 'aida_frag=1',
   ].join('&');
   final addr = address.contains(':') ? '[$address]' : address;
   return 'vless://$uuid@$addr:$port?$q#${Uri.encodeComponent(name)}';

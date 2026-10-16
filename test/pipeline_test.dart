@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:aida_vpn/core/link_parser.dart';
 import 'package:aida_vpn/models.dart';
 import 'package:aida_vpn/services/free_engine.dart' show defaultFreeSources;
+import 'package:aida_vpn/services/cloudflare_api.dart' show buildWorkerVlessLink;
 import 'package:aida_vpn/services/warp.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -79,9 +80,9 @@ void main() {
       warp['registered'] = accs.length;
       for (var i = 0; i < 10; i++) {
         final link = WarpService.linkFor(accs[i % accs.length],
-            ip: WarpService.randomEndpointIp(), port: WarpService.randomPort(), name: 'WARP');
+            ip: WarpService.randomEndpointIp(), port: WarpService.randomPort(), name: 'WARP', noise: i.isOdd);
         final c = configFromLink(link, Groups.freeCf)!;
-        File('${out.path}/warp_$i.json').writeAsStringSync(buildXrayJson(c, settings));
+        File('${out.path}/warp${i.isOdd ? 'noise' : ''}_$i.json').writeAsStringSync(buildXrayJson(c, settings));
         if (i == 0) warp['sample_link'] = link;
       }
     } catch (e) {
@@ -92,6 +93,8 @@ void main() {
     // Config-only checks (not expected to connect).
     final xdns = buildXdnsLink(uuid: '11111111-2222-3333-4444-555555555555', domain: 't.example.com', resolver: '8.8.8.8', name: 'x');
     Directory('out/loadonly').createSync(recursive: true);
+    final frag = buildWorkerVlessLink(uuid: '11111111-2222-3333-4444-555555555555', host: 'a.b.workers.dev', address: '104.16.1.1', port: 443, name: 'w', fragment: true);
+    File('out/loadonly/workerfrag.json').writeAsStringSync(buildXrayJson(configFromLink(frag, Groups.manual)!, settings));
     File('out/loadonly/xdns.json').writeAsStringSync(buildXrayJson(configFromLink(xdns, Groups.manual)!, settings));
 
     File('out/summary.json').writeAsStringSync(const JsonEncoder.withIndent('  ').convert(summary));

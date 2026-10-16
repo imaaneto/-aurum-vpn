@@ -203,7 +203,7 @@ class _TokensPageState extends State<TokensPage> {
     final raw = await askText(context, title: tr('آدرس ورکر', 'Worker address'), label: 'host', hint: 'name.xxx.workers.dev');
     if (raw == null) return;
     final host = raw.trim().replaceFirst(RegExp(r'^https?://'), '').split('/').first;
-    if (!host.contains('.')) {
+    if (!host.contains('.') || host.contains('cloudflare.com')) {
       if (mounted) toast(context, tr('آدرس ورکر نامعتبر است', 'Invalid worker address'), error: true);
       return;
     }
@@ -252,14 +252,14 @@ class _TokensPageState extends State<TokensPage> {
                 const SizedBox(height: 8),
                 Text(
                   tr(
-                    '۱. در dash.cloudflare.com ثبت‌نام کنید.\n'
-                        '۲. My Profile ← API Tokens ← Create Token\n'
-                        '۳. قالب «Edit Cloudflare Workers» را انتخاب و توکن را بسازید.\n'
+                    '۱. در dash.cloudflare.com ثبت‌نام کنید و یک بار وارد Workers & Pages شوید.\n'
+                        '۲. My Profile ← API Tokens ← Create Token ← Create Custom Token\n'
+                        '۳. Permissions: «Account | Workers Scripts | Edit» و «Account | Account Settings | Read» — Account Resources: All accounts\n'
                         '۴. توکن را اینجا وارد کنید؛ برنامه خودش ورکر VLESS را می‌سازد و با آی‌پی‌های تمیز کانفیگ می‌دهد.\n'
                         'توکن‌ها رمزنگاری‌شده روی همین گوشی ذخیره می‌شوند.',
-                    '1. Sign up at dash.cloudflare.com.\n'
-                        '2. My Profile → API Tokens → Create Token\n'
-                        '3. Pick the "Edit Cloudflare Workers" template and create the token.\n'
+                    '1. Sign up at dash.cloudflare.com and open Workers & Pages once.\n'
+                        '2. My Profile → API Tokens → Create Token → Create Custom Token\n'
+                        '3. Permissions: "Account | Workers Scripts | Edit" and "Account | Account Settings | Read" — Account Resources: All accounts\n'
                         '4. Paste it here; the app deploys a VLESS worker and builds configs on clean IPs.\n'
                         'Tokens are stored encrypted on this phone.',
                   ),

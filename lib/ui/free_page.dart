@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../core/link_parser.dart';
 import '../i18n.dart';
@@ -139,7 +140,17 @@ class FreePage extends StatelessWidget {
               if (e.publicStage.isNotEmpty) _stage(e.publicStage, e.running),
               for (final c in e.publicFound) ConfigTile(c: c),
               if (e.log.isNotEmpty) ...[
-                SectionTitle(tr('گزارش', 'Log')),
+                SectionTitle(
+                  tr('گزارش', 'Log'),
+                  trailing: GhostButton(
+                    label: tr('کپی', 'Copy'),
+                    icon: Icons.copy_rounded,
+                    onTap: () {
+                      Clipboard.setData(ClipboardData(text: e.log.join('\n')));
+                      toast(context, tr('گزارش کپی شد', 'Log copied'));
+                    },
+                  ),
+                ),
                 Panel(
                   padding: const EdgeInsets.all(12),
                   child: Column(

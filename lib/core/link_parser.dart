@@ -453,6 +453,42 @@ void _ensureServerHint(Map<String, dynamic> ob) {
   ];
 }
 
+
+/// Optional anti-filtering helpers, requested by app-generated links:
+///  aida_frag=1  -> split the TLS ClientHello (hides SNI like *.workers.dev)
+///  aida_noise=1 -> send random UDP noise before WireGuard (WARP in Iran)
+/// Both route the proxy's own socket through a local "freedom" dialer.
+void _applyAntiFilter(Map<String, dynamic> full, Map<String, dynamic> ob, Map<String, String> q) {
+  Map<String, dynamic>? dialer;
+  if (q['aida_frag'] == '1') {
+    dialer = {
+      'tag': 'aida-dialer',
+      'protocol': 'freedom',
+      'settings': {
+        'fragment': {'packets': 'tlshello', 'length': '10-30', 'interval': '10-20'},
+      },
+    };
+  } else if (q['aida_noise'] == '1') {
+    dialer = {
+      'tag': 'aida-dialer',
+      'protocol': 'freedom',
+      'settings': {
+        'noises': [
+          {'type': 'rand', 'packet': '50-100', 'delay': '10-16'},
+          {'type': 'rand', 'packet': '50-100', 'delay': '10-16'},
+        ],
+      },
+    };
+  }
+  if (dialer == null) return;
+  final ss = (ob['streamSettings'] is Map) ? (ob['streamSettings'] as Map).cast<String, dynamic>() : <String, dynamic>{};
+  final so = (ss['sockopt'] is Map) ? (ss['sockopt'] as Map).cast<String, dynamic>() : <String, dynamic>{};
+  so['dialerProxy'] = 'aida-dialer';
+  ss['sockopt'] = so;
+  ob['streamSettings'] = ss;
+  (full['outbounds'] as List).add(dialer);
+}
+
 Map<String, String> _linkParams(String link) {
   final p = _split(link);
   if (p == null) return {};
@@ -633,6 +669,7 @@ String buildXrayJson(VpnConfig c, AppSettings s) {
   }
   _ensureServerHint(outbound);
   full = _baseConfig(outbound, s);
+  _applyAntiFilter(full, outbound, _linkParams(c.link));
   return jsonEncode(full);
 }
 

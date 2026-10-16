@@ -87,8 +87,8 @@ class WarpService {
 
   static int randomPort() => ports[Random.secure().nextInt(ports.length)];
 
-  static String linkFor(WarpAccount a, {required String ip, required int port, required String name}) {
-    return buildWireguardLink(
+  static String linkFor(WarpAccount a, {required String ip, required int port, required String name, bool noise = false}) {
+    final l = buildWireguardLink(
       privateKey: a.privateKey,
       peerPublicKey: a.peerPublicKey,
       endpointHost: ip,
@@ -101,5 +101,8 @@ class WarpService {
       mtu: 1280,
       name: name,
     );
+    if (!noise) return l;
+    final h = l.indexOf('#');
+    return '${l.substring(0, h)}&aida_noise=1${l.substring(h)}';
   }
 }
