@@ -10,8 +10,11 @@ import '../i18n.dart';
 import '../models.dart';
 
 class CfException implements Exception {
-  CfException(this.message);
+  CfException(this.message, {this.needsAccountId = false});
   final String message;
+
+  /// The account could not be discovered from the token; ask the user for it.
+  final bool needsAccountId;
   @override
   String toString() => message;
 }
@@ -60,14 +63,53 @@ class CloudflareApi {
   }
 
   /// Returns (accountId, accountName) of the first account the token can see.
+  /// Finds the account the token belongs to. Tokens made from the
+  /// "Edit Cloudflare Workers" template often cannot list /accounts, so
+  /// memberships, zones and the token's own policies are tried as well.
   Future<(String, String)> firstAccount() async {
-    final j = await _get('/accounts?per_page=5');
-    final list = (j['result'] as List?) ?? const [];
-    if (list.isEmpty) {
-      throw CfException(tr('این توکن به هیچ اکانتی دسترسی ندارد', 'This token cannot access any account'));
+    final errors = <String>[];
+    Future<(String, String)?> tryList(String path, (String, String)? Function(Map) pick) async {
+      try {
+        final j = await _get(path);
+        for (final e in ((j['result'] as List?) ?? const [])) {
+          if (e is! Map) continue;
+          final r = pick(e);
+          if (r != null && r.$1.isNotEmpty && r.$1 != 'null') return r;
+        }
+      } catch (e) {
+        errors.add('$path: $e');
+      }
+      return null;
     }
-    final a = list.first as Map;
-    return ('${a['id']}', '${a['name'] ?? ''}');
+
+    final found = await tryList('/accounts?per_page=20', (a) => ('${a['id']}', '${a['name'] ?? ''}')) ??
+        await tryList('/memberships?per_page=20', (m) {
+          final a = m['account'];
+          return a is Map ? ('${a['id']}', '${a['name'] ?? ''}') : null;
+        }) ??
+        await tryList('/zones?per_page=20', (z) {
+          final a = z['account'];
+          return a is Map ? ('${a['id']}', '${a['name'] ?? ''}') : null;
+        });
+    if (found != null) return found;
+
+    // Token policies list resources like "com.cloudflare.api.account.<id>".
+    try {
+      final v = await _get('/user/tokens/verify');
+      final tokenId = '${(v['result'] as Map?)?['id'] ?? ''}';
+      if (tokenId.isNotEmpty) {
+        final t = await _get('/user/tokens/$tokenId');
+        final m = RegExp(r'com\.cloudflare\.api\.account\.([0-9a-f]{32})').firstMatch(jsonEncode(t['result']));
+        if (m != null) return (m[1]!, '');
+      }
+    } catch (e) {
+      errors.add('verify: $e');
+    }
+    throw CfException(
+      tr('Account ID از روی توکن پیدا نشد؛ لطفاً آن را دستی وارد کنید.',
+          'Could not detect the Account ID from this token; please enter it manually.'),
+      needsAccountId: true,
+    );
   }
 
   Future<String> accountName(String accountId) async {

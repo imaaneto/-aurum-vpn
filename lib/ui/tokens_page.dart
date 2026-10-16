@@ -34,6 +34,16 @@ class _TokensPageState extends State<TokensPage> {
     } catch (e) {
       a.status = 'invalid';
       await app.upsertAccount(a);
+      if (e is CfException && e.needsAccountId && mounted) {
+        setState(() {
+          _busy.remove(a.id);
+          _step = '';
+        });
+        if (await _askAccountId(a)) {
+          await _setup(a);
+        }
+        return;
+      }
       if (mounted) toast(context, '${tr('خطا', 'Error')}: $e', error: true);
     } finally {
       if (mounted) {
@@ -43,6 +53,30 @@ class _TokensPageState extends State<TokensPage> {
         });
       }
     }
+  }
+
+  /// Asks for the Cloudflare Account ID. Returns true when one was entered.
+  Future<bool> _askAccountId(CfAccount a) async {
+    final v = await askText(
+      context,
+      title: 'Account ID',
+      label: 'Account ID',
+      initial: a.accountId,
+      hint: '0123456789abcdef0123456789abcdef',
+      help: tr(
+        'در dash.cloudflare.com وارد Workers & Pages شوید؛ Account ID در ستون سمت راست است. یا از آدرس صفحه: dash.cloudflare.com/<Account ID>',
+        'Open Workers & Pages on dash.cloudflare.com; the Account ID is in the right sidebar, or in the URL: dash.cloudflare.com/<Account ID>',
+      ),
+    );
+    if (v == null) return false;
+    final m = RegExp(r'[0-9a-fA-F]{32}').firstMatch(v);
+    if (m == null) {
+      if (mounted) toast(context, tr('Account ID باید ۳۲ کاراکتر باشد', 'An Account ID has 32 characters'), error: true);
+      return false;
+    }
+    a.accountId = m[0]!.toLowerCase();
+    await app.upsertAccount(a);
+    return true;
   }
 
   Future<void> _addToken() async {
@@ -257,6 +291,16 @@ class _TokensPageState extends State<TokensPage> {
               label: a.hasWorker ? tr('ساخت مجدد ورکر', 'Redeploy worker') : tr('ساخت ورکر', 'Deploy worker'),
               icon: Icons.rocket_launch_rounded,
               onTap: busy ? null : () => _setup(a),
+            ),
+          if (!a.isManual)
+            GhostButton(
+              label: 'Account ID',
+              icon: Icons.badge_rounded,
+              onTap: busy
+                  ? null
+                  : () async {
+                      if (await _askAccountId(a)) await _setup(a);
+                    },
             ),
           GhostButton(
             label: tr('ویرایش نام', 'Rename'),

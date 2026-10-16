@@ -248,7 +248,7 @@ InputDecoration luxInput(String label, {String? hint, Widget? suffix}) {
   );
 }
 
-Future<String?> askText(BuildContext context, {required String title, String label = '', String initial = '', int maxLines = 1, String? hint, String? ok}) async {
+Future<String?> askText(BuildContext context, {required String title, String label = '', String initial = '', int maxLines = 1, String? hint, String? ok, String? help}) async {
   final ctrl = TextEditingController(text: initial);
   return showDialog<String>(
     context: context,
@@ -258,7 +258,12 @@ Future<String?> askText(BuildContext context, {required String title, String lab
       title: Text(title, style: TextStyle(color: pal.text, fontWeight: FontWeight.w800, fontSize: 17)),
       content: SizedBox(
         width: 420,
-        child: TextField(
+        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          if (help != null) ...[
+            Text(help, style: TextStyle(color: pal.sub, fontSize: 12.5, height: 1.6)),
+            const SizedBox(height: 12),
+          ],
+          TextField(
           controller: ctrl,
           autofocus: true,
           maxLines: maxLines,
@@ -267,6 +272,7 @@ Future<String?> askText(BuildContext context, {required String title, String lab
           style: TextStyle(color: pal.text, fontSize: 13),
           decoration: luxInput(label, hint: hint),
         ),
+        ]),
       ),
       actions: [
         TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('انصراف', 'Cancel'), style: TextStyle(color: pal.sub))),
