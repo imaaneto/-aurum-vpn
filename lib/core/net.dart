@@ -22,7 +22,7 @@ class Net {
       // Credentials in the proxy string are sent pre-emptively, which also
       // covers HTTPS (CONNECT) requests.
       final cred = LocalProxy.authFor(app.settings) ? '${LocalProxy.user}:${LocalProxy.pass}@' : '';
-      hc.findProxy = (_) => 'PROXY $cred127.0.0.1:$port';
+      hc.findProxy = (_) => 'PROXY ${cred}127.0.0.1:$port';
     }
     return IOClient(hc);
   }
