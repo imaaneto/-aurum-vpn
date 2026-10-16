@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter_v2ray_client/flutter_v2ray.dart';
 
@@ -514,29 +515,67 @@ void _applyExtras(Map<String, dynamic> ob, String link) {
   if (ss.isNotEmpty) ob['streamSettings'] = ss;
 }
 
+/// Local proxy the core exposes on 127.0.0.1.
+///
+/// In VPN mode other apps on the phone must not be able to use (or detect)
+/// it, so it gets a random port and random credentials per app start. In
+/// proxy-only mode the user wants other apps to use it, so the well-known
+/// ports 10808/10809 are used.
+class LocalProxy {
+  static final Random _r = Random.secure();
+  static final int socksPort = 20000 + _r.nextInt(30000);
+  static final int httpPort = socksPort + 1;
+  static final String user = _rand(16);
+  static final String pass = _rand(24);
+
+  static String _rand(int n) {
+    const chars = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    return List.generate(n, (_) => chars[_r.nextInt(chars.length)]).join();
+  }
+
+  static int httpPortFor(AppSettings s) => s.proxyOnly ? 10809 : httpPort;
+  static bool authFor(AppSettings s) => !s.proxyOnly;
+}
+
+List<Map<String, dynamic>> _localInbounds(AppSettings s) {
+  final auth = LocalProxy.authFor(s);
+  final accounts = [
+    {'user': LocalProxy.user, 'pass': LocalProxy.pass}
+  ];
+  return [
+    {
+      'tag': 'socks',
+      'port': s.proxyOnly ? 10808 : LocalProxy.socksPort,
+      'listen': '127.0.0.1',
+      'protocol': 'socks',
+      'settings': {
+        'auth': auth ? 'password' : 'noauth',
+        if (auth) 'accounts': accounts,
+        'udp': true,
+        'userLevel': 8,
+      },
+      'sniffing': {
+        'enabled': s.sniffing,
+        'destOverride': ['http', 'tls', 'quic'],
+        'routeOnly': true,
+      },
+    },
+    {
+      'tag': 'http',
+      'port': LocalProxy.httpPortFor(s),
+      'listen': '127.0.0.1',
+      'protocol': 'http',
+      'settings': {
+        if (auth) 'accounts': accounts,
+        'userLevel': 8,
+      },
+    },
+  ];
+}
+
 Map<String, dynamic> _baseConfig(Map<String, dynamic> outbound, AppSettings s) => {
       'log': {'loglevel': 'warning'},
-      'inbounds': [
-        {
-          'tag': 'socks',
-          'port': 10808,
-          'listen': '127.0.0.1',
-          'protocol': 'socks',
-          'settings': {'auth': 'noauth', 'udp': true, 'userLevel': 8},
-          'sniffing': {
-            'enabled': s.sniffing,
-            'destOverride': ['http', 'tls', 'quic'],
-            'routeOnly': true,
-          },
-        },
-        {
-          'tag': 'http',
-          'port': 10809,
-          'listen': '127.0.0.1',
-          'protocol': 'http',
-          'settings': {'userLevel': 8},
-        },
-      ],
+      'inbounds': _localInbounds(s),
       'outbounds': [
         outbound,
         {
@@ -568,32 +607,11 @@ String buildXrayJson(VpnConfig c, AppSettings s) {
   Map<String, dynamic> full;
   if (c.isJson) {
     full = (jsonDecode(c.link) as Map).cast<String, dynamic>();
-    final inb = full['inbounds'];
-    if (inb is! List || !inb.any((e) => e is Map && e['protocol'] == 'socks')) {
-      full['inbounds'] = [
-        ...(inb is List ? inb : const []),
-        {
-          'tag': 'socks',
-          'port': 10808,
-          'listen': '127.0.0.1',
-          'protocol': 'socks',
-          'settings': {'auth': 'noauth', 'udp': true, 'userLevel': 8},
-        },
-      ];
-    }
-    final inb2 = full['inbounds'] as List;
-    if (!inb2.any((e) => e is Map && e['protocol'] == 'http')) {
-      full['inbounds'] = [
-        ...inb2,
-        {
-          'tag': 'http',
-          'port': 10809,
-          'listen': '127.0.0.1',
-          'protocol': 'http',
-          'settings': {'userLevel': 8},
-        },
-      ];
-    }
+    // Imported JSON may open listeners on 0.0.0.0 or enable the gRPC API;
+    // only our own loopback inbounds are kept.
+    full['inbounds'] = _localInbounds(s);
+    full.remove('api');
+    full.remove('reverse');
     full['routing'] ??= {'domainStrategy': 'AsIs', 'rules': []};
     final obs = full['outbounds'] as List;
     if (obs.isNotEmpty && obs.first is Map) {

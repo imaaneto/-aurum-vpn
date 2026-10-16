@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 
 import '../store.dart';
+import 'link_parser.dart';
 
 /// HTTP for the app's own requests (sources, subscriptions, WARP, Cloudflare).
 ///
@@ -16,7 +17,15 @@ class Net {
       ..connectionTimeout = const Duration(seconds: 10)
       ..idleTimeout = const Duration(seconds: 5);
     if (app.vpn.connected) {
-      hc.findProxy = (_) => 'PROXY 127.0.0.1:10809';
+      final port = LocalProxy.httpPortFor(app.settings);
+      hc.findProxy = (_) => 'PROXY 127.0.0.1:$port';
+      if (LocalProxy.authFor(app.settings)) {
+        hc.addProxyCredentials('127.0.0.1', port, '', HttpClientBasicCredentials(LocalProxy.user, LocalProxy.pass));
+        hc.authenticateProxy = (host, p, scheme, realm) async {
+          hc.addProxyCredentials(host, p, realm ?? '', HttpClientBasicCredentials(LocalProxy.user, LocalProxy.pass));
+          return true;
+        };
+      }
     }
     return IOClient(hc);
   }

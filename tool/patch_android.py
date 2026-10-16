@@ -69,7 +69,41 @@ def patch_app_gradle():
                 s,
                 count=1,
             )
+    s = patch_signing(s, is_kts)
     write(p, s)
+
+
+def patch_signing(s, is_kts):
+    """Release-sign with the project keystore when CI provides its password."""
+    ks_pass = os.environ.get("KS_PASS", "")
+    enc = os.path.join(ROOT, "android_overrides", "aida.jks.enc")
+    if not ks_pass or not os.path.exists(enc):
+        print("signing: no KS_PASS, keeping debug signing")
+        return s
+    out = os.path.join(ANDROID, "app", "aida.jks")
+    rc = os.system(
+        f'openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in "{enc}" -out "{out}" -pass env:KS_PASS'
+    )
+    if rc != 0 or not os.path.exists(out):
+        sys.exit("signing: could not decrypt keystore (wrong KS_PASS?)")
+    if is_kts:
+        block = (
+            '\n    signingConfigs {\n        create("aida") {\n            storeFile = file("aida.jks")\n'
+            '            storePassword = System.getenv("KS_PASS")\n            keyAlias = "aida"\n'
+            '            keyPassword = System.getenv("KS_PASS")\n            storeType = "PKCS12"\n        }\n    }\n'
+        )
+        s = re.sub(r"android\s*\{", lambda m: m.group(0) + block, s, count=1)
+        s = s.replace('signingConfig = signingConfigs.getByName("debug")', 'signingConfig = signingConfigs.getByName("aida")')
+    else:
+        block = (
+            "\n    signingConfigs {\n        aida {\n            storeFile file('aida.jks')\n"
+            "            storePassword System.getenv('KS_PASS')\n            keyAlias 'aida'\n"
+            "            keyPassword System.getenv('KS_PASS')\n            storeType 'PKCS12'\n        }\n    }\n"
+        )
+        s = re.sub(r"android\s*\{", lambda m: m.group(0) + block, s, count=1)
+        s = s.replace("signingConfig signingConfigs.debug", "signingConfig signingConfigs.aida")
+    print("signing: release keystore enabled")
+    return s
 
 
 def patch_settings_gradle():
@@ -111,7 +145,15 @@ def patch_gradle_properties():
 def patch_manifest():
     p = os.path.join(ANDROID, "app", "src", "main", "AndroidManifest.xml")
     s = read(p)
-    s = re.sub(r'android:label="[^"]*"', 'android:label="Aurum VPN"', s, count=1)
+    s = re.sub(r'android:label="[^"]*"', 'android:label="Aida VPN"', s, count=1)
+    if "xmlns:tools" not in s:
+        s = s.replace("<manifest ", '<manifest xmlns:tools="http://schemas.android.com/tools" ', 1)
+    # No cloud/adb backups of settings and tokens.
+    if "android:allowBackup" not in s:
+        s = s.replace("<application", '<application\n        android:allowBackup="false"\n        android:fullBackupContent="false"', 1)
+    # The core plugin asks for storage access the app never uses.
+    if "READ_EXTERNAL_STORAGE" not in s:
+        s = re.sub(r"(<manifest[^>]*>\s*\n)", lambda m: m.group(1) + '    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />\n', s, count=1)
     perms = [
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE",

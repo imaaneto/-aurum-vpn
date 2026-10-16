@@ -39,7 +39,7 @@ class SettingsPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Column(children: [
                 _switch(tr('فقط پروکسی (بدون VPN)', 'Proxy only (no VPN)'),
-                    tr('SOCKS روی 10808 و HTTP روی 10809', 'SOCKS on 10808, HTTP on 10809'), s.proxyOnly, (v) {
+                    tr('SOCKS روی 10808 و HTTP روی 10809، بدون رمز و قابل استفاده برای اپ‌های دیگر', 'SOCKS 10808 / HTTP 10809 without a password, usable by other apps'), s.proxyOnly, (v) {
                   s.proxyOnly = v;
                   app.saveSettings();
                 }),
