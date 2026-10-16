@@ -103,7 +103,7 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text('Aida VPN 1.1.0', style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
+                    Text('Aida VPN 1.2.0', style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
                     const SizedBox(height: 4),
                     Text('Xray ${app.vpn.coreVersion.isEmpty ? '—' : app.vpn.coreVersion}', style: TextStyle(color: p.sub)),
                     const SizedBox(height: 4),
