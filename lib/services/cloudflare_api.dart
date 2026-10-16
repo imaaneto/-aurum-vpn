@@ -121,15 +121,26 @@ class CloudflareApi {
 
   /// workers.dev subdomain of the account; creates one if missing.
   Future<String> ensureSubdomain(String accountId) async {
+    Object? getErr;
     try {
       final j = await _get('/accounts/$accountId/workers/subdomain');
       final sub = '${(j['result'] as Map?)?['subdomain'] ?? ''}';
       if (sub.isNotEmpty) return sub;
-    } catch (_) {}
-    final name = 'aurum${_randHex(6)}';
+    } catch (e) {
+      getErr = e;
+    }
+    final notFound = getErr == null || '$getErr'.contains('10007') || '$getErr'.toLowerCase().contains('not found');
+    if (!notFound) {
+      throw CfException(tr(
+        '$getErr\nاحتمالاً ساب‌دامنه workers.dev هنوز ساخته نشده یا توکن به آن دسترسی ندارد. یک بار در داشبورد کلودفلر وارد Workers & Pages شوید و اگر خواست، ساب‌دامنه workers.dev را بسازید؛ بعد دوباره Deploy بزنید.',
+        '$getErr\nThe workers.dev subdomain may not exist yet, or the token cannot read it. Open Workers & Pages once in the Cloudflare dashboard, create the workers.dev subdomain if asked, then deploy again.',
+      ));
+    }
+    final name = 'aida${_randHex(6)}';
     final j = await _send('PUT', '/accounts/$accountId/workers/subdomain', {'subdomain': name});
     return '${(j['result'] as Map?)?['subdomain'] ?? name}';
   }
+
 
   /// Uploads the VLESS worker and enables its workers.dev route.
   Future<void> deployWorker({
@@ -164,6 +175,9 @@ class CloudflareApi {
 
     final r = await Net.send(build, timeout: const Duration(seconds: 40));
     _decode(r);
+  }
+
+  Future<void> enableWorkersDev(String accountId, String scriptName) async {
     await _send('POST', '/accounts/$accountId/workers/scripts/$scriptName/subdomain', {
       'enabled': true,
       'previews_enabled': false,
@@ -231,7 +245,6 @@ class CloudflareApi {
         acc.accountName = await api.accountName(acc.accountId);
       } catch (_) {}
     }
-    final sub = await step('ساخت/خواندن دامنه workers.dev', 'workers.dev subdomain', () => api.ensureSubdomain(acc.accountId));
     final scriptName = acc.workerName.isNotEmpty ? acc.workerName : 'aida-${_randHex(6)}';
     final uuid = acc.workerUuid.isNotEmpty ? acc.workerUuid : randomUuid();
     await step('آپلود ورکر', 'Uploading worker', () => api.deployWorker(
@@ -240,6 +253,11 @@ class CloudflareApi {
           uuid: uuid,
           proxyIp: acc.proxyIp,
         ));
+    // Remember the script so a retry reuses it instead of creating another.
+    acc.workerName = scriptName;
+    acc.workerUuid = uuid;
+    final sub = await step('دامنه workers.dev', 'workers.dev subdomain', () => api.ensureSubdomain(acc.accountId));
+    await step('فعال‌سازی آدرس workers.dev', 'Enabling workers.dev route', () => api.enableWorkersDev(acc.accountId, scriptName));
     acc.workerName = scriptName;
     acc.workerUuid = uuid;
     acc.workerHost = '$scriptName.$sub.workers.dev';
