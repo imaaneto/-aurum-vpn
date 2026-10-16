@@ -33,6 +33,7 @@ class _TokensPageState extends State<TokensPage> {
       if (mounted) toast(context, '${tr('ورکر آماده است', 'Worker ready')}: ${a.workerHost}');
     } catch (e) {
       a.status = 'invalid';
+      a.lastError = '$e';
       await app.upsertAccount(a);
       if (e is CfException && e.needsAccountId && mounted) {
         setState(() {
@@ -284,6 +285,30 @@ class _TokensPageState extends State<TokensPage> {
                 },
               )),
         if (a.proxyIp.isNotEmpty) _kv('ProxyIP', a.proxyIp),
+        if (a.status == 'invalid' && a.lastError.isNotEmpty)
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.only(top: 6),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Pal.danger.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Pal.danger.withValues(alpha: 0.4)),
+            ),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Icon(Icons.error_outline_rounded, color: Pal.danger, size: 18),
+              const SizedBox(width: 8),
+              Expanded(child: SelectableText(a.lastError, style: const TextStyle(color: Pal.danger, fontSize: 12, height: 1.5))),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.copy_rounded, size: 16, color: Pal.danger),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: a.lastError));
+                  toast(context, tr('کپی شد', 'Copied'));
+                },
+              ),
+            ]),
+          ),
         const SizedBox(height: 10),
         Wrap(spacing: 8, runSpacing: 8, children: [
           if (!a.isManual)

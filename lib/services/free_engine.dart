@@ -267,6 +267,7 @@ class FreeEngine extends ChangeNotifier {
         await Future.delayed(const Duration(seconds: 6));
       } catch (e) {
         a.status = 'invalid';
+        a.lastError = '$e';
         await app.upsertAccount(a);
         _log(run, '${a.label}: $e');
       }

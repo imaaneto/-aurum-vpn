@@ -55,10 +55,12 @@ class CloudflareApi {
   }
 
   Future<Map<String, dynamic>> _send(String method, String path, Object body) async {
-    final req = http.Request(method, Uri.parse('$_base$path'))
-      ..headers.addAll(_headers)
-      ..body = jsonEncode(body);
-    final r = await Net.send(req, timeout: _timeout);
+    final r = await Net.send(
+      () => http.Request(method, Uri.parse('$_base$path'))
+        ..headers.addAll(_headers)
+        ..body = jsonEncode(body),
+      timeout: _timeout,
+    );
     return _decode(r);
   }
 
@@ -138,11 +140,12 @@ class CloudflareApi {
   }) async {
     final template = await rootBundle.loadString('assets/worker.js');
     final script = template.replaceAll('__UUID__', uuid).replaceAll('__PROXYIP__', proxyIp);
-    final req = http.MultipartRequest(
+    http.BaseRequest build() {
+      final req = http.MultipartRequest(
       'PUT',
       Uri.parse('$_base/accounts/$accountId/workers/scripts/$scriptName'),
     )..headers['Authorization'] = 'Bearer $token';
-    req.files.add(http.MultipartFile.fromString(
+      req.files.add(http.MultipartFile.fromString(
       'metadata',
       jsonEncode({
         'main_module': 'worker.js',
@@ -150,13 +153,16 @@ class CloudflareApi {
       }),
       contentType: MediaType('application', 'json'),
     ));
-    req.files.add(http.MultipartFile.fromString(
+      req.files.add(http.MultipartFile.fromString(
       'worker.js',
       script,
       filename: 'worker.js',
       contentType: MediaType('application', 'javascript+module'),
     ));
-    final r = await Net.send(req, timeout: const Duration(seconds: 40));
+      return req;
+    }
+
+    final r = await Net.send(build, timeout: const Duration(seconds: 40));
     _decode(r);
     await _send('POST', '/accounts/$accountId/workers/scripts/$scriptName/subdomain', {
       'enabled': true,
@@ -165,9 +171,11 @@ class CloudflareApi {
   }
 
   Future<void> deleteWorker(String accountId, String scriptName) async {
-    final req = http.Request('DELETE', Uri.parse('$_base/accounts/$accountId/workers/scripts/$scriptName?force=true'))
-      ..headers.addAll(_headers);
-    final r = await Net.send(req, timeout: _timeout);
+    final r = await Net.send(
+      () => http.Request('DELETE', Uri.parse('$_base/accounts/$accountId/workers/scripts/$scriptName?force=true'))
+        ..headers.addAll(_headers),
+      timeout: _timeout,
+    );
     _decode(r);
   }
 
@@ -200,6 +208,7 @@ class CloudflareApi {
     acc.workerUuid = uuid;
     acc.workerHost = '$scriptName.$sub.workers.dev';
     acc.status = 'active';
+    acc.lastError = '';
     onStep?.call(tr('ورکر ساخته شد', 'Worker deployed'));
     return acc;
   }

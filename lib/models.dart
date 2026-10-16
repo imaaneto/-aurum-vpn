@@ -140,9 +140,11 @@ class CfAccount {
     this.proxyIp = '',
     this.status = 'unknown',
     this.createdAt = 0,
+    this.lastError = '',
   });
 
   final String id;
+  String lastError;
   String label;
   String token;
   String accountId;
@@ -176,6 +178,7 @@ class CfAccount {
         'proxyIp': proxyIp,
         'status': status,
         'createdAt': createdAt,
+        'lastError': lastError,
       };
 
   factory CfAccount.fromJson(Map<String, dynamic> j) => CfAccount(
@@ -190,6 +193,7 @@ class CfAccount {
         proxyIp: (j['proxyIp'] ?? '') as String,
         status: (j['status'] ?? 'unknown') as String,
         createdAt: (j['createdAt'] ?? 0) as int,
+        lastError: (j['lastError'] ?? '') as String,
       );
 }
 
