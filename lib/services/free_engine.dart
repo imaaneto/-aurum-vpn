@@ -293,7 +293,8 @@ class FreeEngine extends ChangeNotifier {
     if (ips.isEmpty) ips = pool.take(20).toList();
     _log(run, tr('آی‌پی تمیز: ${num2(scored.length)} پاسخ داد', 'Clean IPs: ${scored.length} responded'));
 
-    const portCycle = [443, 8443, 2053, 2096, 80, 8080, 2083, 2087, 8880, 2052];
+    // TLS ports only: the core refuses plain VLESS to public addresses.
+    const portCycle = [443, 8443, 2053, 2096, 2083, 2087];
     final cands = <VpnConfig>[];
     for (var i = 0; i < ips.length; i++) {
       final a = hosts[i % hosts.length];

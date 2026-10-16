@@ -259,6 +259,7 @@ VpnConfig? configFromLink(String raw, String group) {
     port = hp.port;
   }
   if (host.isEmpty) return null;
+  if (coreRejects(proto, link, host)) return null;
   if (name.trim().isEmpty) name = '${proto.toUpperCase()} $host';
 
   return VpnConfig(
@@ -271,6 +272,55 @@ VpnConfig? configFromLink(String raw, String group) {
     group: group,
     addedAt: DateTime.now().millisecondsSinceEpoch,
   );
+}
+
+bool _isPrivateHost(String h) {
+  final x = h.toLowerCase();
+  if (x == 'localhost' || x.endsWith('.local') || x.endsWith('.lan')) return true;
+  return RegExp(r'^(10\.|127\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.|fc|fd|fe80)').hasMatch(x);
+}
+
+const _deadSsCiphers = {
+  'aes-128-cfb', 'aes-192-cfb', 'aes-256-cfb', 'aes-128-ctr', 'aes-192-ctr', 'aes-256-ctr',
+  'chacha20-ietf', 'chacha20', 'rc4-md5', 'rc4', 'bf-cfb', 'camellia-128-cfb', 'camellia-256-cfb',
+  'salsa20', 'des-cfb', 'table',
+};
+
+/// True for configs the bundled Xray core refuses to load (checked against
+/// the real core in CI): plain VLESS/Trojan to public hosts, legacy
+/// Shadowsocks ciphers and the removed HTTP/2 transport.
+bool coreRejects(String proto, String link, String host) {
+  final p = _split(link);
+  if (p == null) return true;
+  if (proto == 'vless' || proto == 'trojan') {
+    final q = p.params;
+    final sec = (q['security'] ?? (proto == 'trojan' ? 'tls' : '')).toLowerCase();
+    final enc = (q['encryption'] ?? 'none').toLowerCase();
+    final secure = sec == 'tls' || sec == 'reality' || sec == 'xtls' || (proto == 'vless' && enc != 'none' && enc.isNotEmpty);
+    if (!secure && !_isPrivateHost(host)) return true;
+    final t = (q['type'] ?? '').toLowerCase();
+    if (t == 'h2' || t == 'http') return true;
+  }
+  if (proto == 'vmess') {
+    final d = tryBase64(p.body.split('?').first);
+    if (d != null) {
+      try {
+        final j = jsonDecode(d) as Map;
+        final net = '${j['net'] ?? ''}'.toLowerCase();
+        if (net == 'h2' || net == 'http') return true;
+      } catch (_) {}
+    }
+  }
+  if (proto == 'ss') {
+    final norm = normalizeLink(link);
+    final np = _split(norm);
+    if (np != null && np.authority.contains('@')) {
+      final mp = tryBase64(np.authority.substring(0, np.authority.lastIndexOf('@'))) ?? '';
+      final method = mp.split(':').first.toLowerCase();
+      if (_deadSsCiphers.contains(method)) return true;
+    }
+  }
+  return false;
 }
 
 /// A raw Xray JSON config pasted by the user.
@@ -602,14 +652,17 @@ String buildWireguardLink({
   return 'wireguard://${Uri.encodeComponent(privateKey)}@$host:$endpointPort?$q#${Uri.encodeComponent(name)}';
 }
 
-/// VLESS over mKCP with the XDNS finalmask (Xray's DNS tunnel, a modern
-/// DNSTT-style transport).
+/// XDNS (Xray's DNS tunnel, a modern DNSTT-style transport) over mKCP.
+/// The core refuses plain VLESS to public addresses, so the tunnel uses
+/// VMess, or VLESS when the server provides a VLESS encryption string.
 String buildXdnsLink({
   required String uuid,
   required String domain,
   required String resolver,
   int resolverPort = 53,
   required String name,
+  String protocol = 'vmess',
+  String vlessEncryption = '',
 }) {
   final fm = jsonEncode({
     'udp': [
@@ -626,15 +679,33 @@ String buildXdnsLink({
       }
     ],
   });
-  final q = [
-    'encryption=none',
-    'security=none',
-    'type=kcp',
-    'mtu=130',
-    'tti=200',
-    'fm=${Uri.encodeComponent(fm)}',
-  ].join('&');
-  return 'vless://$uuid@$resolver:$resolverPort?$q#${Uri.encodeComponent(name)}';
+  if (protocol == 'vless') {
+    final q = [
+      'encryption=${Uri.encodeComponent(vlessEncryption.isEmpty ? 'none' : vlessEncryption)}',
+      'security=none',
+      'type=kcp',
+      'mtu=130',
+      'tti=200',
+      'fm=${Uri.encodeComponent(fm)}',
+    ].join('&');
+    return 'vless://$uuid@$resolver:$resolverPort?$q#${Uri.encodeComponent(name)}';
+  }
+  final vm = {
+    'v': '2',
+    'ps': name,
+    'add': resolver,
+    'port': '$resolverPort',
+    'id': uuid,
+    'aid': '0',
+    'scy': 'auto',
+    'net': 'kcp',
+    'type': 'none',
+    'tls': '',
+    'fm': fm,
+    'mtu': '130',
+    'tti': '200',
+  };
+  return 'vmess://${base64.encode(utf8.encode(jsonEncode(vm)))}';
 }
 
 String protocolLabel(String p) {

@@ -355,7 +355,7 @@ class ConfigTile extends StatelessWidget {
     final p = pal;
     final selected = app.selectedId == c.id;
     final active = app.activeId == c.id && app.vpn.connected;
-    final tr = transportLabel(c);
+    final trn = transportLabel(c);
     return Panel(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
@@ -384,7 +384,7 @@ class ConfigTile extends StatelessWidget {
             const SizedBox(height: 6),
             Wrap(spacing: 6, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
               Badge2(protocolLabel(c.protocol)),
-              if (tr.isNotEmpty) Badge2(tr, color: p.accent),
+              if (trn.isNotEmpty) Badge2(trn, color: p.accent),
               if (showGroup) Badge2(app.groupName(c.group), color: p.sub),
             ]),
           ]),

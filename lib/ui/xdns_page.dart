@@ -19,16 +19,29 @@ class _XdnsPageState extends State<XdnsPage> {
   final _name = TextEditingController(text: 'DNS Tunnel');
   final _resolvers = <String>['8.8.8.8', '1.1.1.1', '9.9.9.9', '208.67.222.222'];
   final Set<String> _picked = {'8.8.8.8', '1.1.1.1'};
+  final _enc = TextEditingController();
+  String _proto = 'vmess';
 
   Future<void> _create() async {
     final uuid = _uuid.text.trim();
     final domain = _domain.text.trim();
+    if (_proto == 'vless' && _enc.text.trim().isEmpty) {
+      toast(context, tr('برای VLESS رشته Encryption سرور لازم است', 'VLESS needs the server encryption string'), error: true);
+      return;
+    }
     if (uuid.length < 8 || !domain.contains('.')) {
       toast(context, tr('UUID و دامنه تونل را درست وارد کنید', 'Enter a valid UUID and tunnel domain'), error: true);
       return;
     }
     final links = _picked
-        .map((r) => buildXdnsLink(uuid: uuid, domain: domain, resolver: r, name: '${_name.text.trim()} · $r'))
+        .map((r) => buildXdnsLink(
+              uuid: uuid,
+              domain: domain,
+              resolver: r,
+              name: '${_name.text.trim()} · $r',
+              protocol: _proto,
+              vlessEncryption: _enc.text.trim(),
+            ))
         .join('\n');
     final res = await app.importText(links);
     if (!mounted) return;
@@ -51,25 +64,43 @@ class _XdnsPageState extends State<XdnsPage> {
             tr(
               'XDNS تونل DNS داخلی هسته Xray است (نسل جدید DNSTT و Slipstream) که ترافیک را داخل کوئری‌های DNS '
                   'از طریق ریزالورهای عمومی عبور می‌دهد و در قطعی‌های شدید هم کار می‌کند.\n'
-                  'نیاز به سرور Xray با ورودی VLESS + mKCP + finalmask نوع xdns و رکوردهای NS برای ساب‌دامنه تونل دارد. '
+                  'نیاز به سرور Xray با ورودی VMess (یا VLESS با Encryption) روی mKCP و finalmask نوع xdns، و رکوردهای NS برای ساب‌دامنه تونل دارد. '
                   'برای هر ریزالور انتخاب‌شده یک کانفیگ ساخته می‌شود تا با تست، سریع‌ترین را انتخاب کنید.',
               'XDNS is the Xray core\'s built-in DNS tunnel (the successor of DNSTT and Slipstream). It carries traffic '
                   'inside DNS queries through public resolvers and keeps working during heavy shutdowns.\n'
-                  'It needs an Xray server with a VLESS + mKCP inbound using the xdns finalmask, and NS records for the tunnel subdomain. '
+                  'It needs an Xray server with a VMess (or VLESS with encryption) mKCP inbound using the xdns finalmask, and NS records for the tunnel subdomain. '
                   'One config is created per selected resolver so you can test and pick the fastest.',
             ),
             style: TextStyle(color: p.sub, height: 1.8, fontSize: 13),
           ),
         ),
         const SizedBox(height: 16),
+        SegmentedButton<String>(
+          segments: const [
+            ButtonSegment(value: 'vmess', label: Text('VMess')),
+            ButtonSegment(value: 'vless', label: Text('VLESS + Encryption')),
+          ],
+          selected: {_proto},
+          onSelectionChanged: (v) => setState(() => _proto = v.first),
+        ),
+        const SizedBox(height: 12),
         TextField(controller: _name, style: TextStyle(color: p.text), decoration: luxInput(tr('نام کانفیگ', 'Config name'))),
         const SizedBox(height: 12),
         TextField(
           controller: _uuid,
           textDirection: TextDirection.ltr,
           style: TextStyle(color: p.text),
-          decoration: luxInput(tr('UUID کاربر VLESS', 'VLESS user UUID')),
+          decoration: luxInput(tr('UUID کاربر', 'User UUID')),
         ),
+        if (_proto == 'vless') ...[
+          const SizedBox(height: 12),
+          TextField(
+            controller: _enc,
+            textDirection: TextDirection.ltr,
+            style: TextStyle(color: p.text, fontSize: 12),
+            decoration: luxInput('VLESS encryption', hint: 'mlkem768x25519plus.native.0rtt...'),
+          ),
+        ],
         const SizedBox(height: 12),
         TextField(
           controller: _domain,
