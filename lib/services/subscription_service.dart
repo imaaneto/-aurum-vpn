@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
 import '../core/link_parser.dart';
+import '../core/net.dart';
 
 class SubFetchResult {
   SubFetchResult(this.links);
@@ -15,10 +14,10 @@ class SubFetchResult {
 }
 
 Future<SubFetchResult> fetchSubscription(String url) async {
-  final r = await http.get(Uri.parse(url.trim()), headers: {
+  final r = await Net.get(url.trim(), headers: {
     'User-Agent': 'v2rayNG/1.9.30',
     'Accept': '*/*',
-  }).timeout(const Duration(seconds: 25));
+  }, timeout: const Duration(seconds: 25));
   if (r.statusCode != 200) {
     throw Exception('HTTP ${r.statusCode}');
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/link_parser.dart';
+import '../i18n.dart';
 import '../store.dart';
 import 'theme.dart';
 import 'widgets.dart';
@@ -23,7 +24,7 @@ class _XdnsPageState extends State<XdnsPage> {
     final uuid = _uuid.text.trim();
     final domain = _domain.text.trim();
     if (uuid.length < 8 || !domain.contains('.')) {
-      toast(context, 'UUID و دامنه تونل را درست وارد کنید', error: true);
+      toast(context, tr('UUID و دامنه تونل را درست وارد کنید', 'Enter a valid UUID and tunnel domain'), error: true);
       return;
     }
     final links = _picked
@@ -47,30 +48,36 @@ class _XdnsPageState extends State<XdnsPage> {
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Panel(
           child: Text(
-            'XDNS تونل DNS داخلی هسته Xray است (نسل جدید DNSTT و Slipstream) که ترافیک را داخل کوئری‌های DNS '
-            'از طریق ریزالورهای عمومی عبور می‌دهد و در قطعی‌های شدید هم کار می‌کند.\n'
-            'نیاز به سرور Xray با ورودی VLESS + mKCP + finalmask نوع xdns و رکوردهای NS برای ساب‌دامنه تونل دارد. '
-            'برای هر ریزالور انتخاب‌شده یک کانفیگ ساخته می‌شود تا با تست، سریع‌ترین را انتخاب کنید.',
+            tr(
+              'XDNS تونل DNS داخلی هسته Xray است (نسل جدید DNSTT و Slipstream) که ترافیک را داخل کوئری‌های DNS '
+                  'از طریق ریزالورهای عمومی عبور می‌دهد و در قطعی‌های شدید هم کار می‌کند.\n'
+                  'نیاز به سرور Xray با ورودی VLESS + mKCP + finalmask نوع xdns و رکوردهای NS برای ساب‌دامنه تونل دارد. '
+                  'برای هر ریزالور انتخاب‌شده یک کانفیگ ساخته می‌شود تا با تست، سریع‌ترین را انتخاب کنید.',
+              'XDNS is the Xray core\'s built-in DNS tunnel (the successor of DNSTT and Slipstream). It carries traffic '
+                  'inside DNS queries through public resolvers and keeps working during heavy shutdowns.\n'
+                  'It needs an Xray server with a VLESS + mKCP inbound using the xdns finalmask, and NS records for the tunnel subdomain. '
+                  'One config is created per selected resolver so you can test and pick the fastest.',
+            ),
             style: TextStyle(color: p.sub, height: 1.8, fontSize: 13),
           ),
         ),
         const SizedBox(height: 16),
-        TextField(controller: _name, style: TextStyle(color: p.text), decoration: luxInput('نام کانفیگ')),
+        TextField(controller: _name, style: TextStyle(color: p.text), decoration: luxInput(tr('نام کانفیگ', 'Config name'))),
         const SizedBox(height: 12),
         TextField(
           controller: _uuid,
           textDirection: TextDirection.ltr,
           style: TextStyle(color: p.text),
-          decoration: luxInput('UUID کاربر VLESS'),
+          decoration: luxInput(tr('UUID کاربر VLESS', 'VLESS user UUID')),
         ),
         const SizedBox(height: 12),
         TextField(
           controller: _domain,
           textDirection: TextDirection.ltr,
           style: TextStyle(color: p.text),
-          decoration: luxInput('دامنه تونل', hint: 't.example.com'),
+          decoration: luxInput(tr('دامنه تونل', 'Tunnel domain'), hint: 't.example.com'),
         ),
-        const SectionTitle('ریزالورهای DNS'),
+        SectionTitle(tr('ریزالورهای DNS', 'DNS resolvers')),
         Wrap(spacing: 8, runSpacing: 8, children: [
           for (final r in _resolvers)
             FilterChip(
@@ -84,11 +91,11 @@ class _XdnsPageState extends State<XdnsPage> {
             ),
           ActionChip(
             avatar: Icon(Icons.add, color: p.primary, size: 18),
-            label: const Text('ریزالور دلخواه'),
+            label: Text(tr('ریزالور دلخواه', 'Custom resolver')),
             backgroundColor: p.surface2,
             labelStyle: TextStyle(color: p.text),
             onPressed: () async {
-              final v = await askText(context, title: 'آی‌پی ریزالور', label: 'IP', hint: '8.8.4.4');
+              final v = await askText(context, title: tr('آی‌پی ریزالور', 'Resolver IP'), label: 'IP', hint: '8.8.4.4');
               if (v != null && v.trim().isNotEmpty) {
                 setState(() {
                   _resolvers.add(v.trim());
@@ -99,7 +106,7 @@ class _XdnsPageState extends State<XdnsPage> {
           ),
         ]),
         const SizedBox(height: 24),
-        LuxButton(label: 'ساخت و افزودن کانفیگ‌ها', icon: Icons.dns_rounded, onTap: _picked.isEmpty ? null : _create),
+        LuxButton(label: tr('ساخت و افزودن کانفیگ‌ها', 'Build and add configs'), icon: Icons.dns_rounded, onTap: _picked.isEmpty ? null : _create),
       ]),
     );
   }

@@ -1,8 +1,9 @@
-name: Build Aurum VPN
+name: Build Aida VPN
 
 on:
   push:
     branches: [main, master]
+    paths-ignore: ['README.md']
   workflow_dispatch:
 
 permissions:
@@ -28,7 +29,7 @@ jobs:
       - name: Generate Android project
         run: |
           flutter --version
-          flutter create --platforms=android --org com.aurum --project-name aurum_vpn .
+          flutter create --platforms=android --org com.aida --project-name aida_vpn .
           rm -f test/widget_test.dart
           python3 tool/patch_android.py
 
@@ -44,10 +45,10 @@ jobs:
           flutter build apk --release --split-per-abi 2>&1 | tee build.log
           flutter build apk --release
           cd build/app/outputs/flutter-apk
-          mv app-release.apk AurumVPN-universal.apk
-          mv app-arm64-v8a-release.apk AurumVPN-arm64-v8a.apk
-          mv app-armeabi-v7a-release.apk AurumVPN-armeabi-v7a.apk
-          mv app-x86_64-release.apk AurumVPN-x86_64.apk
+          mv app-release.apk AidaVPN-universal.apk
+          mv app-arm64-v8a-release.apk AidaVPN-arm64-v8a.apk
+          mv app-armeabi-v7a-release.apk AidaVPN-armeabi-v7a.apk
+          mv app-x86_64-release.apk AidaVPN-x86_64.apk
           ls -la
 
       - name: Save logs on failure
@@ -63,16 +64,16 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AurumVPN-android
-          path: build/app/outputs/flutter-apk/AurumVPN-*.apk
+          name: AidaVPN-android
+          path: build/app/outputs/flutter-apk/AidaVPN-*.apk
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
-          name: Aurum VPN build ${{ github.run_number }}
+          name: Aida VPN build ${{ github.run_number }}
           body: |
-            اکثر گوشی‌ها: AurumVPN-arm64-v8a.apk
-            گوشی‌های قدیمی: AurumVPN-armeabi-v7a.apk
-            اگر مطمئن نیستید: AurumVPN-universal.apk
-          files: build/app/outputs/flutter-apk/AurumVPN-*.apk
+            اکثر گوشی‌ها: AidaVPN-arm64-v8a.apk
+            گوشی‌های قدیمی: AidaVPN-armeabi-v7a.apk
+            اگر مطمئن نیستید: AidaVPN-universal.apk
+          files: build/app/outputs/flutter-apk/AidaVPN-*.apk

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_v2ray_client/flutter_v2ray.dart';
 
+import '../i18n.dart';
+
 /// Thin wrapper around the Xray core plugin.
 class VpnService extends ChangeNotifier {
   VpnService() {
@@ -40,7 +42,7 @@ class VpnService extends ChangeNotifier {
   }
 
   /// Real (through-the-proxy) delay in ms, -1 on failure.
-  Future<int> realDelay(String json, String url, {Duration timeout = const Duration(seconds: 12)}) async {
+  Future<int> realDelay(String json, String url, {Duration timeout = const Duration(seconds: 26)}) async {
     if (!ready) return -1;
     try {
       final d = await _v2ray.getServerDelay(config: json, url: url).timeout(timeout);
@@ -52,7 +54,7 @@ class VpnService extends ChangeNotifier {
 
   Future<int> connectedDelay(String url) async {
     try {
-      final d = await _v2ray.getConnectedServerDelay(url: url).timeout(const Duration(seconds: 12));
+      final d = await _v2ray.getConnectedServerDelay(url: url).timeout(const Duration(seconds: 26));
       return d > 0 ? d : -1;
     } catch (_) {
       return -1;
@@ -66,7 +68,7 @@ class VpnService extends ChangeNotifier {
     required bool proxyOnly,
     List<String>? blockedApps,
   }) async {
-    if (!ready) return 'هسته Xray آماده نیست';
+    if (!ready) return tr('هسته Xray آماده نیست', 'Xray core is not ready');
     busy = true;
     notifyListeners();
     try {
@@ -75,7 +77,7 @@ class VpnService extends ChangeNotifier {
         if (!ok) {
           busy = false;
           notifyListeners();
-          return 'اجازه VPN داده نشد';
+          return tr('اجازه VPN داده نشد', 'VPN permission was not granted');
         }
       }
       await _v2ray.startV2Ray(
@@ -83,7 +85,7 @@ class VpnService extends ChangeNotifier {
         config: json,
         blockedApps: (blockedApps == null || blockedApps.isEmpty) ? null : blockedApps,
         proxyOnly: proxyOnly,
-        notificationDisconnectButtonName: 'قطع اتصال',
+        notificationDisconnectButtonName: tr('قطع اتصال', 'Disconnect'),
       );
       // Safety: clear busy flag if no status arrives.
       Timer(const Duration(seconds: 15), () {
@@ -98,6 +100,20 @@ class VpnService extends ChangeNotifier {
       notifyListeners();
       return e.toString();
     }
+  }
+
+  Future<List<String>> logs() async {
+    try {
+      return await _v2ray.getLogs();
+    } catch (e) {
+      return ['$e'];
+    }
+  }
+
+  Future<void> clearLogs() async {
+    try {
+      await _v2ray.clearLogs();
+    } catch (_) {}
   }
 
   Future<void> stop() async {

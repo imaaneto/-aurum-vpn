@@ -5,6 +5,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
+import '../core/net.dart';
+import '../i18n.dart';
 import '../models.dart';
 
 class CfException implements Exception {
@@ -32,7 +34,7 @@ class CloudflareApi {
     try {
       j = (jsonDecode(utf8.decode(r.bodyBytes)) as Map).cast<String, dynamic>();
     } catch (_) {
-      throw CfException('پاسخ نامعتبر از کلودفلر (HTTP ${r.statusCode})');
+      throw CfException(tr('پاسخ نامعتبر از کلودفلر', 'Invalid response from Cloudflare') + ' (HTTP ${r.statusCode})');
     }
     if (j['success'] != true) {
       final errs = (j['errors'] as List?) ?? const [];
@@ -45,7 +47,7 @@ class CloudflareApi {
   }
 
   Future<Map<String, dynamic>> _get(String path) async {
-    final r = await http.get(Uri.parse('$_base$path'), headers: _headers).timeout(_timeout);
+    final r = await Net.get('$_base$path', headers: _headers, timeout: _timeout);
     return _decode(r);
   }
 
@@ -53,7 +55,7 @@ class CloudflareApi {
     final req = http.Request(method, Uri.parse('$_base$path'))
       ..headers.addAll(_headers)
       ..body = jsonEncode(body);
-    final r = await http.Response.fromStream(await req.send().timeout(_timeout));
+    final r = await Net.send(req, timeout: _timeout);
     return _decode(r);
   }
 
@@ -62,7 +64,7 @@ class CloudflareApi {
     final j = await _get('/accounts?per_page=5');
     final list = (j['result'] as List?) ?? const [];
     if (list.isEmpty) {
-      throw CfException('این توکن به هیچ اکانتی دسترسی ندارد');
+      throw CfException(tr('این توکن به هیچ اکانتی دسترسی ندارد', 'This token cannot access any account'));
     }
     final a = list.first as Map;
     return ('${a['id']}', '${a['name'] ?? ''}');
@@ -112,7 +114,7 @@ class CloudflareApi {
       filename: 'worker.js',
       contentType: MediaType('application', 'javascript+module'),
     ));
-    final r = await http.Response.fromStream(await req.send().timeout(const Duration(seconds: 40)));
+    final r = await Net.send(req, timeout: const Duration(seconds: 40));
     _decode(r);
     await _send('POST', '/accounts/$accountId/workers/scripts/$scriptName/subdomain', {
       'enabled': true,
@@ -121,9 +123,9 @@ class CloudflareApi {
   }
 
   Future<void> deleteWorker(String accountId, String scriptName) async {
-    final r = await http
-        .delete(Uri.parse('$_base/accounts/$accountId/workers/scripts/$scriptName?force=true'), headers: _headers)
-        .timeout(_timeout);
+    final req = http.Request('DELETE', Uri.parse('$_base/accounts/$accountId/workers/scripts/$scriptName?force=true'))
+      ..headers.addAll(_headers);
+    final r = await Net.send(req, timeout: _timeout);
     _decode(r);
   }
 
@@ -131,7 +133,7 @@ class CloudflareApi {
   /// account and deploys a fresh worker. Mutates and returns [acc].
   static Future<CfAccount> setup(CfAccount acc, {void Function(String)? onStep}) async {
     final api = CloudflareApi(acc.token);
-    onStep?.call('بررسی توکن...');
+    onStep?.call(tr('بررسی توکن...', 'Checking token...'));
     if (acc.accountId.isEmpty) {
       final (id, name) = await api.firstAccount();
       acc.accountId = id;
@@ -141,11 +143,11 @@ class CloudflareApi {
         acc.accountName = await api.accountName(acc.accountId);
       } catch (_) {}
     }
-    onStep?.call('آماده‌سازی دامنه workers.dev ...');
+    onStep?.call(tr('آماده‌سازی دامنه workers.dev ...', 'Preparing workers.dev subdomain...'));
     final sub = await api.ensureSubdomain(acc.accountId);
     final scriptName = acc.workerName.isNotEmpty ? acc.workerName : 'aurum-${_randHex(6)}';
     final uuid = acc.workerUuid.isNotEmpty ? acc.workerUuid : randomUuid();
-    onStep?.call('ساخت ورکر $scriptName ...');
+    onStep?.call(tr('ساخت ورکر $scriptName ...', 'Deploying worker $scriptName ...'));
     await api.deployWorker(
       accountId: acc.accountId,
       scriptName: scriptName,
@@ -156,7 +158,7 @@ class CloudflareApi {
     acc.workerUuid = uuid;
     acc.workerHost = '$scriptName.$sub.workers.dev';
     acc.status = 'active';
-    onStep?.call('ورکر ساخته شد');
+    onStep?.call(tr('ورکر ساخته شد', 'Worker deployed'));
     return acc;
   }
 }

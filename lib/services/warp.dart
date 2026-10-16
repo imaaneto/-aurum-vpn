@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:http/http.dart' as http;
 
 import '../core/link_parser.dart';
+import '../core/net.dart';
 import '../models.dart';
 
 /// Free Cloudflare WARP (WireGuard) identities.
@@ -46,17 +46,16 @@ class WarpService {
       'serial_number': '',
       'locale': 'en_US',
     });
-    final r = await http
-        .post(
-          Uri.parse(_api),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'User-Agent': 'okhttp/3.12.1',
-            'CF-Client-Version': 'a-6.10-2158',
-          },
-          body: body,
-        )
-        .timeout(const Duration(seconds: 20));
+    final r = await Net.post(
+      _api,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'User-Agent': 'okhttp/3.12.1',
+        'CF-Client-Version': 'a-6.10-2158',
+      },
+      body: body,
+      timeout: const Duration(seconds: 15),
+    );
     if (r.statusCode != 200) {
       throw Exception('WARP HTTP ${r.statusCode}');
     }

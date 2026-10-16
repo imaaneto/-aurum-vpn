@@ -238,6 +238,7 @@ class AppSettings {
     this.cleanIps = '',
     this.freeSources = '',
     this.sniffing = true,
+    this.lang = '',
   });
 
   bool darkGold;
@@ -253,6 +254,9 @@ class AppSettings {
   String freeSources;
   bool sniffing;
 
+  /// '' = follow device, 'fa' or 'en'
+  String lang;
+
   Map<String, dynamic> toJson() => {
         'darkGold': darkGold,
         'testUrl': testUrl,
@@ -264,6 +268,7 @@ class AppSettings {
         'cleanIps': cleanIps,
         'freeSources': freeSources,
         'sniffing': sniffing,
+        'lang': lang,
       };
 
   factory AppSettings.fromJson(Map<String, dynamic> j) => AppSettings(
@@ -277,5 +282,6 @@ class AppSettings {
         cleanIps: (j['cleanIps'] ?? '') as String,
         freeSources: (j['freeSources'] ?? '') as String,
         sniffing: (j['sniffing'] ?? true) as bool,
+        lang: (j['lang'] ?? '') as String,
       );
 }

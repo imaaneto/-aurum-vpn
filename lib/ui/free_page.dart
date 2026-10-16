@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/link_parser.dart';
+import '../i18n.dart';
 import '../models.dart';
 import '../services/free_engine.dart';
 import '../store.dart';
@@ -33,50 +34,72 @@ class FreePage extends StatelessWidget {
       builder: (context, _) {
         final p = pal;
         final e = freeEngine;
-        final secs = e.watch.elapsed.inMilliseconds / 1000;
+        final secs = e.watch.elapsed.inSeconds;
         final hasCf = app.accounts.isNotEmpty;
+        final total = e.cfCount + e.publicFound.length;
         return SafeArea(
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 30),
             children: [
-              const GradientText('کانفیگ رایگان', size: 24),
+              GradientText(tr('کانفیگ رایگان', 'Free configs'), size: 24),
               const SizedBox(height: 6),
               Text(
-                'با یک دکمه: ساخت ۱۰ کانفیگ کلودفلر (WARP و ورکر اختصاصی شما) + جمع‌آوری از منابع عمومی، '
-                'همه به‌صورت موازی و هر کانفیگ قبل از افزودن با هسته Xray واقعاً تست می‌شود.',
+                tr(
+                  'با یک دکمه: ساخت ۱۰ کانفیگ کلودفلر (WARP و ورکر اختصاصی شما) و جمع‌آوری از ${num2(defaultFreeSources.length)} منبع عمومی، '
+                      'همه به‌صورت موازی. هر کانفیگ قبل از افزودن با هسته Xray واقعاً تست می‌شود.',
+                  'One tap: build 10 Cloudflare configs (WARP and your own Worker) and collect from ${defaultFreeSources.length} public sources, '
+                      'all in parallel. Every config is really tested with the Xray core before it is added.',
+                ),
                 style: TextStyle(color: p.sub, height: 1.7, fontSize: 13),
               ),
               const SizedBox(height: 16),
               e.running
-                  ? LuxButton(label: 'توقف (${secs.toStringAsFixed(0)} ثانیه)', icon: Icons.stop_rounded, danger: true, onTap: e.stop)
+                  ? LuxButton(
+                      label: '${tr('توقف', 'Stop')} (${num2(secs)}${tr(' ثانیه', 's')})',
+                      icon: Icons.stop_rounded,
+                      danger: true,
+                      onTap: e.stop,
+                    )
                   : LuxButton(
-                      label: 'دریافت کانفیگ رایگان',
+                      label: tr('دریافت کانفیگ رایگان', 'Get free configs'),
                       icon: Icons.bolt_rounded,
-                      onTap: app.vpn.ready
-                          ? () => e.start()
-                          : null,
+                      onTap: app.vpn.ready ? () => e.start() : null,
                     ),
               if (!app.vpn.ready)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Text('هسته Xray هنوز آماده نیست...', style: TextStyle(color: Pal.warning, fontSize: 12)),
+                  child: Text(tr('هسته Xray هنوز آماده نیست...', 'Xray core is not ready yet...'),
+                      style: const TextStyle(color: Pal.warning, fontSize: 12)),
                 ),
-              if (!e.running && (e.cfCount > 0 || e.publicFound.isNotEmpty)) ...[
+              if (e.running || total > 0) ...[
+                const SizedBox(height: 12),
+                Panel(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                    Labeled(icon: Icons.source_rounded, label: tr('منبع', 'Sources'), value: '${e.sourcesOk}/${e.sourcesTotal}'),
+                    Labeled(icon: Icons.inventory_2_outlined, label: tr('کاندید', 'Found'), value: '${e.publicCandidates}'),
+                    Labeled(icon: Icons.wifi_tethering_rounded, label: tr('زنده', 'Alive'), value: '${e.tcpAlive}'),
+                    Labeled(icon: Icons.science_outlined, label: tr('تست', 'Tested'), value: '${e.publicTested + e.cfTested}'),
+                    Labeled(icon: Icons.verified_rounded, label: tr('سالم', 'Working'), value: '$total'),
+                  ]),
+                ),
+              ],
+              if (!e.running && total > 0) ...[
                 const SizedBox(height: 10),
                 Row(children: [
                   Expanded(
                     child: Text(
-                      '${e.cfCount + e.publicFound.length} کانفیگ سالم در ${secs.toStringAsFixed(1)} ثانیه',
-                      style: TextStyle(color: Pal.success, fontWeight: FontWeight.w700),
+                      tr('${num2(total)} کانفیگ سالم در ${num2(secs)} ثانیه', '$total working configs in ${secs}s'),
+                      style: const TextStyle(color: Pal.success, fontWeight: FontWeight.w700),
                     ),
                   ),
-                  GhostButton(label: 'اتصال به سریع‌ترین', icon: Icons.flash_on_rounded, onTap: () => _connectBest(context)),
+                  GhostButton(label: tr('اتصال به سریع‌ترین', 'Connect fastest'), icon: Icons.flash_on_rounded, onTap: () => _connectBest(context)),
                 ]),
               ],
               SectionTitle(
-                'کلودفلر (${e.cfCount}/${FreeEngine.cfTarget})',
+                '${tr('کلودفلر', 'Cloudflare')} (${num2(e.cfCount)}/${num2(FreeEngine.cfTarget)})',
                 trailing: GhostButton(
-                  label: 'مدیریت توکن',
+                  label: tr('مدیریت توکن', 'Tokens'),
                   icon: Icons.key_rounded,
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TokensPage())),
                 ),
@@ -90,7 +113,7 @@ class FreePage extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 2.1,
+                  childAspectRatio: 2.3,
                 ),
                 itemBuilder: (_, i) => _Slot(index: i, config: e.cfSlots[i], running: e.running),
               ),
@@ -103,26 +126,34 @@ class FreePage extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'برای ساخت کانفیگ VLESS اختصاصی روی ورکر کلودفلر (پایدارتر از WARP)، یک توکن کلودفلر اضافه کنید. رایگان است.',
+                        tr(
+                          'برای کانفیگ VLESS اختصاصی روی ورکر کلودفلر (پایدارتر از WARP)، یک توکن کلودفلر اضافه کنید. رایگان است.',
+                          'Add a Cloudflare token to get your own VLESS Worker configs (more reliable than WARP). It is free.',
+                        ),
                         style: TextStyle(color: p.sub, fontSize: 12.5, height: 1.6),
                       ),
                     ),
                   ]),
                 ),
-              SectionTitle('منابع عمومی (${e.publicFound.length}/${FreeEngine.publicTarget})'),
+              SectionTitle('${tr('منابع عمومی', 'Public sources')} (${num2(e.publicFound.length)}/${num2(FreeEngine.publicTarget)})'),
               if (e.publicStage.isNotEmpty) _stage(e.publicStage, e.running),
-              if (e.running || e.publicCandidates > 0)
-                Panel(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                    Labeled(icon: Icons.source_rounded, label: 'منبع موفق', value: '${e.sourcesOk}'),
-                    Labeled(icon: Icons.inventory_2_outlined, label: 'کاندید', value: '${e.publicCandidates}'),
-                    Labeled(icon: Icons.science_outlined, label: 'تست واقعی', value: '${e.publicTested}'),
-                    Labeled(icon: Icons.verified_rounded, label: 'سالم', value: '${e.publicFound.length}'),
-                  ]),
-                ),
               for (final c in e.publicFound) ConfigTile(c: c),
+              if (e.log.isNotEmpty) ...[
+                SectionTitle(tr('گزارش', 'Log')),
+                Panel(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      for (final l in e.log.take(14))
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Text(l, style: TextStyle(color: p.sub, fontSize: 11.5)),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
             ],
           ),
         );
@@ -169,7 +200,7 @@ class _Slot extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              running ? 'در حال ساخت...' : 'کانفیگ ${index + 1}',
+              running ? tr('در حال ساخت...', 'Building...') : '${tr('کانفیگ', 'Config')} ${num2(index + 1)}',
               style: TextStyle(color: p.sub, fontSize: 12.5, fontWeight: FontWeight.w600),
             ),
           ),
@@ -196,8 +227,7 @@ class _Slot extends StatelessWidget {
                 const Icon(Icons.check_circle_rounded, color: Pal.success, size: 16),
                 const SizedBox(width: 6),
                 Expanded(
-                  child: Text(protocolLabel(c.protocol),
-                      style: TextStyle(color: p.text, fontWeight: FontWeight.w800, fontSize: 13)),
+                  child: Text(protocolLabel(c.protocol), style: TextStyle(color: p.text, fontWeight: FontWeight.w800, fontSize: 13)),
                 ),
                 Text('${c.delay}ms', style: TextStyle(color: delayColor(c.delay), fontWeight: FontWeight.w800, fontSize: 12)),
               ]),
@@ -206,6 +236,7 @@ class _Slot extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textDirection: TextDirection.ltr,
+                  textAlign: ltrValueAlign,
                   style: TextStyle(color: p.sub, fontSize: 11)),
             ]),
           ),

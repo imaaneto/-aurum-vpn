@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../i18n.dart';
 import '../models.dart';
 import '../services/cloudflare_api.dart';
 import '../store.dart';
@@ -29,11 +30,11 @@ class _TokensPageState extends State<TokensPage> {
         if (mounted) setState(() => _step = s);
       });
       await app.upsertAccount(a);
-      if (mounted) toast(context, 'ورکر آماده است: ${a.workerHost}');
+      if (mounted) toast(context, '${tr('ورکر آماده است', 'Worker ready')}: ${a.workerHost}');
     } catch (e) {
       a.status = 'invalid';
       await app.upsertAccount(a);
-      if (mounted) toast(context, 'خطا: $e', error: true);
+      if (mounted) toast(context, '${tr('خطا', 'Error')}: $e', error: true);
     } finally {
       if (mounted) {
         setState(() {
@@ -45,7 +46,7 @@ class _TokensPageState extends State<TokensPage> {
   }
 
   Future<void> _addToken() async {
-    final label = TextEditingController(text: 'اکانت ${app.accounts.length + 1}');
+    final label = TextEditingController(text: '${tr('اکانت', 'Account')} ${app.accounts.length + 1}');
     final token = TextEditingController();
     final accId = TextEditingController();
     final proxy = TextEditingController();
@@ -54,12 +55,12 @@ class _TokensPageState extends State<TokensPage> {
       builder: (ctx) => AlertDialog(
         backgroundColor: pal.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22), side: BorderSide(color: pal.border)),
-        title: Text('افزودن توکن کلودفلر', style: TextStyle(color: pal.text, fontWeight: FontWeight.w800)),
+        title: Text(tr('افزودن توکن کلودفلر', 'Add Cloudflare token'), style: TextStyle(color: pal.text, fontWeight: FontWeight.w800)),
         content: SizedBox(
           width: 420,
           child: SingleChildScrollView(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              TextField(controller: label, style: TextStyle(color: pal.text), decoration: luxInput('نام')),
+              TextField(controller: label, style: TextStyle(color: pal.text), decoration: luxInput(tr('نام', 'Name'))),
               const SizedBox(height: 10),
               TextField(
                 controller: token,
@@ -81,23 +82,23 @@ class _TokensPageState extends State<TokensPage> {
                 controller: accId,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(color: pal.text, fontSize: 13),
-                decoration: luxInput('Account ID (اختیاری، خودکار پیدا می‌شود)'),
+                decoration: luxInput(tr('Account ID (اختیاری، خودکار پیدا می‌شود)', 'Account ID (optional, auto-detected)')),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: proxy,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(color: pal.text, fontSize: 13),
-                decoration: luxInput('ProxyIP (اختیاری)', hint: 'برای باز کردن سایت‌های پشت کلودفلر'),
+                decoration: luxInput(tr('ProxyIP (اختیاری)', 'ProxyIP (optional)'), hint: tr('برای باز کردن سایت‌های پشت کلودفلر', 'For sites hosted behind Cloudflare')),
               ),
             ]),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text('انصراف', style: TextStyle(color: pal.sub))),
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('انصراف', 'Cancel'), style: TextStyle(color: pal.sub))),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: Text('ذخیره و ساخت ورکر', style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
+            child: Text(tr('ذخیره و ساخت ورکر', 'Save & deploy worker'), style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
           ),
         ],
       ),
@@ -105,7 +106,7 @@ class _TokensPageState extends State<TokensPage> {
     if (ok != true || token.text.trim().isEmpty) return;
     final a = CfAccount(
       id: newId(),
-      label: label.text.trim().isEmpty ? 'اکانت' : label.text.trim(),
+      label: label.text.trim().isEmpty ? tr('اکانت', 'Account') : label.text.trim(),
       token: token.text.trim(),
       accountId: accId.text.trim(),
       proxyIp: proxy.text.trim(),
@@ -116,13 +117,13 @@ class _TokensPageState extends State<TokensPage> {
   }
 
   Future<void> _addManual() async {
-    final host = await askText(context, title: 'هاست ورکر', label: 'host', hint: 'name.user.workers.dev یا دامنه شما');
+    final host = await askText(context, title: tr('هاست ورکر', 'Worker host'), label: 'host', hint: 'name.user.workers.dev');
     if (host == null || host.trim().isEmpty || !mounted) return;
-    final uuid = await askText(context, title: 'UUID ورکر', label: 'UUID');
+    final uuid = await askText(context, title: tr('UUID ورکر', 'Worker UUID'), label: 'UUID');
     if (uuid == null || uuid.trim().isEmpty) return;
     final a = CfAccount(
       id: newId(),
-      label: 'ورکر دستی',
+      label: tr('ورکر دستی', 'Manual worker'),
       workerHost: host.trim(),
       workerUuid: uuid.trim(),
       status: 'manual',
@@ -132,7 +133,7 @@ class _TokensPageState extends State<TokensPage> {
   }
 
   Future<void> _delete(CfAccount a) async {
-    final ok = await confirm(context, 'حذف توکن', '«${a.label}» حذف شود؟ ورکر ساخته‌شده هم از اکانت کلودفلر پاک می‌شود.', ok: 'حذف');
+    final ok = await confirm(context, tr('حذف توکن', 'Delete token'), tr('«${a.label}» حذف شود؟ ورکر ساخته‌شده هم از اکانت کلودفلر پاک می‌شود.', 'Delete "${a.label}"? Its worker is also removed from Cloudflare.'), ok: tr('حذف', 'Delete'));
     if (!ok) return;
     if (!a.isManual && a.workerName.isNotEmpty && a.accountId.isNotEmpty) {
       try {
@@ -154,28 +155,35 @@ class _TokensPageState extends State<TokensPage> {
             backgroundColor: p.bg,
             foregroundColor: p.text,
             surfaceTintColor: Colors.transparent,
-            title: const Text('مدیریت توکن کلودفلر', style: TextStyle(fontWeight: FontWeight.w800)),
+            title: Text(tr('مدیریت توکن کلودفلر', 'Cloudflare tokens'), style: const TextStyle(fontWeight: FontWeight.w800)),
           ),
           body: ListView(padding: const EdgeInsets.all(16), children: [
             Panel(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('ساخت توکن (یک بار، رایگان):', style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
+                Text(tr('ساخت توکن (یک بار، رایگان):', 'Create a token (once, free):'), style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 8),
                 Text(
-                  '۱. در dash.cloudflare.com ثبت‌نام کنید.\n'
-                  '۲. My Profile ← API Tokens ← Create Token\n'
-                  '۳. قالب «Edit Cloudflare Workers» را انتخاب و توکن را بسازید.\n'
-                  '۴. توکن را اینجا وارد کنید؛ برنامه خودش ورکر VLESS را می‌سازد و با آی‌پی‌های تمیز کانفیگ می‌دهد.\n'
-                  'توکن‌ها رمزنگاری‌شده روی همین گوشی ذخیره می‌شوند.',
+                  tr(
+                    '۱. در dash.cloudflare.com ثبت‌نام کنید.\n'
+                        '۲. My Profile ← API Tokens ← Create Token\n'
+                        '۳. قالب «Edit Cloudflare Workers» را انتخاب و توکن را بسازید.\n'
+                        '۴. توکن را اینجا وارد کنید؛ برنامه خودش ورکر VLESS را می‌سازد و با آی‌پی‌های تمیز کانفیگ می‌دهد.\n'
+                        'توکن‌ها رمزنگاری‌شده روی همین گوشی ذخیره می‌شوند.',
+                    '1. Sign up at dash.cloudflare.com.\n'
+                        '2. My Profile → API Tokens → Create Token\n'
+                        '3. Pick the "Edit Cloudflare Workers" template and create the token.\n'
+                        '4. Paste it here; the app deploys a VLESS worker and builds configs on clean IPs.\n'
+                        'Tokens are stored encrypted on this phone.',
+                  ),
                   style: TextStyle(color: p.sub, height: 1.9, fontSize: 13),
                 ),
               ]),
             ),
             const SizedBox(height: 14),
             Row(children: [
-              Expanded(child: LuxButton(label: 'افزودن توکن', icon: Icons.key_rounded, onTap: _addToken)),
+              Expanded(child: LuxButton(label: tr('افزودن توکن', 'Add token'), icon: Icons.key_rounded, onTap: _addToken)),
               const SizedBox(width: 10),
-              GhostButton(label: 'ورکر دستی', icon: Icons.add_link_rounded, onTap: _addManual),
+              GhostButton(label: tr('ورکر دستی', 'Manual worker'), icon: Icons.add_link_rounded, onTap: _addManual),
             ]),
             if (_step.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -185,11 +193,11 @@ class _TokensPageState extends State<TokensPage> {
                 Expanded(child: Text(_step, style: TextStyle(color: p.sub, fontSize: 12.5))),
               ]),
             ],
-            const SectionTitle('توکن‌ها و ورکرها'),
+            SectionTitle(tr('توکن‌ها و ورکرها', 'Tokens & workers')),
             if (app.accounts.isEmpty)
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Text('هنوز توکنی اضافه نشده', textAlign: TextAlign.center, style: TextStyle(color: p.sub)),
+                child: Text(tr('هنوز توکنی اضافه نشده', 'No tokens yet'), textAlign: TextAlign.center, style: TextStyle(color: p.sub)),
               ),
             for (final a in app.accounts) _card(a),
           ]),
@@ -208,10 +216,10 @@ class _TokensPageState extends State<TokensPage> {
       _ => Pal.warning,
     };
     final statusText = switch (a.status) {
-      'active' => 'فعال',
-      'manual' => 'دستی',
-      'invalid' => 'خطا',
-      _ => 'بررسی‌نشده',
+      'active' => tr('فعال', 'Active'),
+      'manual' => tr('دستی', 'Manual'),
+      'invalid' => tr('خطا', 'Error'),
+      _ => tr('بررسی‌نشده', 'Unchecked'),
     };
     return Panel(
       margin: const EdgeInsets.only(bottom: 12),
@@ -224,21 +232,21 @@ class _TokensPageState extends State<TokensPage> {
         ]),
         const SizedBox(height: 10),
         if (!a.isManual)
-          _kv('توکن', _reveal.contains(a.id) ? a.token : a.maskedToken,
+          _kv(tr('توکن', 'Token'), _reveal.contains(a.id) ? a.token : a.maskedToken,
               trailing: IconButton(
                 visualDensity: VisualDensity.compact,
                 icon: Icon(_reveal.contains(a.id) ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 18, color: p.sub),
                 onPressed: () => setState(() => _reveal.contains(a.id) ? _reveal.remove(a.id) : _reveal.add(a.id)),
               )),
-        if (a.accountName.isNotEmpty || a.accountId.isNotEmpty) _kv('اکانت', a.accountName.isNotEmpty ? a.accountName : a.accountId),
+        if (a.accountName.isNotEmpty || a.accountId.isNotEmpty) _kv(tr('اکانت', 'Account'), a.accountName.isNotEmpty ? a.accountName : a.accountId),
         if (a.workerHost.isNotEmpty)
-          _kv('ورکر', a.workerHost,
+          _kv(tr('ورکر', 'Worker'), a.workerHost,
               trailing: IconButton(
                 visualDensity: VisualDensity.compact,
                 icon: Icon(Icons.copy_rounded, size: 18, color: p.sub),
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: a.workerHost));
-                  toast(context, 'کپی شد');
+                  toast(context, tr('کپی شد', 'Copied'));
                 },
               )),
         if (a.proxyIp.isNotEmpty) _kv('ProxyIP', a.proxyIp),
@@ -246,15 +254,15 @@ class _TokensPageState extends State<TokensPage> {
         Wrap(spacing: 8, runSpacing: 8, children: [
           if (!a.isManual)
             GhostButton(
-              label: a.hasWorker ? 'ساخت مجدد ورکر' : 'ساخت ورکر',
+              label: a.hasWorker ? tr('ساخت مجدد ورکر', 'Redeploy worker') : tr('ساخت ورکر', 'Deploy worker'),
               icon: Icons.rocket_launch_rounded,
               onTap: busy ? null : () => _setup(a),
             ),
           GhostButton(
-            label: 'ویرایش نام',
+            label: tr('ویرایش نام', 'Rename'),
             icon: Icons.edit_rounded,
             onTap: () async {
-              final v = await askText(context, title: 'نام', label: 'نام', initial: a.label);
+              final v = await askText(context, title: tr('نام', 'Name'), label: tr('نام', 'Name'), initial: a.label);
               if (v != null && v.trim().isNotEmpty) {
                 a.label = v.trim();
                 await app.upsertAccount(a);
@@ -266,14 +274,14 @@ class _TokensPageState extends State<TokensPage> {
               label: 'ProxyIP',
               icon: Icons.alt_route_rounded,
               onTap: () async {
-                final v = await askText(context, title: 'ProxyIP', label: 'IP یا دامنه', initial: a.proxyIp);
+                final v = await askText(context, title: 'ProxyIP', label: tr('IP یا دامنه', 'IP or domain'), initial: a.proxyIp);
                 if (v == null) return;
                 a.proxyIp = v.trim();
                 await app.upsertAccount(a);
                 if (a.hasWorker) await _setup(a);
               },
             ),
-          GhostButton(label: 'حذف', icon: Icons.delete_outline_rounded, onTap: busy ? null : () => _delete(a)),
+          GhostButton(label: tr('حذف', 'Delete'), icon: Icons.delete_outline_rounded, onTap: busy ? null : () => _delete(a)),
         ]),
       ]),
     );
@@ -288,7 +296,7 @@ class _TokensPageState extends State<TokensPage> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textDirection: TextDirection.ltr,
-                textAlign: TextAlign.right,
+                textAlign: ltrValueAlign,
                 style: TextStyle(color: pal.text, fontSize: 12.5, fontWeight: FontWeight.w600)),
           ),
           if (trailing != null) trailing,

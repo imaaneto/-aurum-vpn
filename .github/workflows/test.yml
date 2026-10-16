@@ -1,0 +1,55 @@
+name: Pipeline test
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Generate configs with the app's own code
+        run: |
+          flutter pub get
+          flutter test test/pipeline_test.dart --reporter expanded 2>&1 | tee out-test.log || true
+          mkdir -p out && mv out-test.log out/
+
+      - name: Load and connect with the real Xray core
+        run: |
+          cd tool/delaytest
+          go get github.com/xtls/xray-core@v1.260327.1-0.20261010092107-701af60772cd
+          go mod tidy
+          go build -o delaytest .
+          ./delaytest ../../out/configs || true
+          ./delaytest ../../out/loadonly load || true
+          cd ../..
+          python3 tool/report.py
+
+      - name: Publish report
+        if: always()
+        run: |
+          mkdir -p /tmp/rep && cp -r out/* /tmp/rep/ 2>/dev/null || true
+          git config user.name "ci" && git config user.email "ci@users.noreply.github.com"
+          git checkout --orphan test-report
+          git rm -rf --cached . >/dev/null
+          rm -rf out && mkdir out && cp -r /tmp/rep/* out/ 2>/dev/null || true
+          rm -rf out/configs
+          git add -f out
+          git commit -m "report ${{ github.run_number }}" && git push -f origin test-report

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/link_parser.dart';
+import 'i18n.dart';
 import 'store.dart';
 import 'ui/configs_page.dart';
 import 'ui/free_page.dart';
@@ -16,11 +17,11 @@ import 'ui/widgets.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await app.load();
-  runApp(const AurumApp());
+  runApp(const AidaApp());
 }
 
-class AurumApp extends StatelessWidget {
-  const AurumApp({super.key});
+class AidaApp extends StatelessWidget {
+  const AidaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +36,17 @@ class AurumApp extends StatelessWidget {
           systemNavigationBarIconBrightness: p.dark ? Brightness.light : Brightness.dark,
         ));
         return MaterialApp(
-          title: 'Aurum VPN',
+          title: 'Aida VPN',
           debugShowCheckedModeBanner: false,
           theme: buildTheme(p),
-          locale: const Locale('fa'),
+          locale: Locale(appLang),
           supportedLocales: const [Locale('fa'), Locale('en')],
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: Shell(key: ValueKey(app.settings.darkGold)),
+          home: Shell(key: ValueKey('${app.settings.darkGold}-$appLang')),
         );
       },
     );
@@ -107,9 +108,9 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: pal.primary)),
-        content: Text('$fresh کانفیگ جدید در کلیپ‌بورد پیدا شد', style: TextStyle(color: pal.text, fontFamily: 'Vazirmatn')),
+        content: Text(tr('${num2(fresh)} کانفیگ جدید در کلیپ‌بورد پیدا شد', '$fresh new configs found in clipboard'), style: TextStyle(color: pal.text, fontFamily: 'Vazirmatn')),
         action: SnackBarAction(
-          label: 'وارد کن',
+          label: tr('وارد کن', 'Import'),
           textColor: pal.primary,
           onPressed: () async {
             final r = await app.importText(text);
@@ -123,9 +124,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final p = pal;
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: p.bg,
         body: IndexedStack(index: tabIndex.value, children: _pages),
         bottomNavigationBar: NavigationBarTheme(
@@ -140,16 +139,15 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
           child: NavigationBar(
             selectedIndex: tabIndex.value,
             onDestinationSelected: (i) => tabIndex.value = i,
-            destinations: const [
-              NavigationDestination(icon: Icon(Icons.power_settings_new_rounded), label: 'خانه'),
-              NavigationDestination(icon: Icon(Icons.layers_rounded), label: 'کانفیگ‌ها'),
-              NavigationDestination(icon: Icon(Icons.card_giftcard_rounded), label: 'رایگان'),
-              NavigationDestination(icon: Icon(Icons.rss_feed_rounded), label: 'ساب‌ها'),
-              NavigationDestination(icon: Icon(Icons.tune_rounded), label: 'تنظیمات'),
+            destinations: [
+              NavigationDestination(icon: const Icon(Icons.power_settings_new_rounded), label: tr('خانه', 'Home')),
+              NavigationDestination(icon: const Icon(Icons.layers_rounded), label: tr('کانفیگ‌ها', 'Configs')),
+              NavigationDestination(icon: const Icon(Icons.card_giftcard_rounded), label: tr('رایگان', 'Free')),
+              NavigationDestination(icon: const Icon(Icons.rss_feed_rounded), label: tr('ساب‌ها', 'Subs')),
+              NavigationDestination(icon: const Icon(Icons.tune_rounded), label: tr('تنظیمات', 'Settings')),
             ],
           ),
         ),
-      ),
     );
   }
 }

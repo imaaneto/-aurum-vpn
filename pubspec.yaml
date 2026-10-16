@@ -1,5 +1,5 @@
-name: aurum_vpn
-description: Aurum VPN - Xray based VPN client with Cloudflare free config builder.
+name: aida_vpn
+description: Aida VPN - Xray based VPN client with Cloudflare free config builder.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -29,6 +29,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/worker.js
+    - assets/logo.png
   fonts:
     - family: Vazirmatn
       fonts:

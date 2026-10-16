@@ -531,6 +531,19 @@ String buildXrayJson(VpnConfig c, AppSettings s) {
         },
       ];
     }
+    final inb2 = full['inbounds'] as List;
+    if (!inb2.any((e) => e is Map && e['protocol'] == 'http')) {
+      full['inbounds'] = [
+        ...inb2,
+        {
+          'tag': 'http',
+          'port': 10809,
+          'listen': '127.0.0.1',
+          'protocol': 'http',
+          'settings': {'userLevel': 8},
+        },
+      ];
+    }
     full['routing'] ??= {'domainStrategy': 'AsIs', 'rules': []};
     final obs = full['outbounds'] as List;
     if (obs.isNotEmpty && obs.first is Map) {

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/link_parser.dart';
 import 'core/pool.dart';
 import 'core/vpn_service.dart';
+import 'i18n.dart';
 import 'models.dart';
 import 'services/subscription_service.dart';
 
@@ -20,12 +21,12 @@ class ImportResult {
 
   String get summary {
     final parts = <String>[];
-    if (added > 0) parts.add('$added کانفیگ اضافه شد');
-    if (subscriptions > 0) parts.add('$subscriptions ساب اضافه شد');
-    if (duplicates > 0) parts.add('$duplicates تکراری');
-    if (unsupported > 0) parts.add('$unsupported پشتیبانی‌نشده');
+    if (added > 0) parts.add(tr('${num2(added)} کانفیگ اضافه شد', '$added configs added'));
+    if (subscriptions > 0) parts.add(tr('${num2(subscriptions)} ساب اضافه شد', '$subscriptions subscriptions added'));
+    if (duplicates > 0) parts.add(tr('${num2(duplicates)} تکراری', '$duplicates duplicates'));
+    if (unsupported > 0) parts.add(tr('${num2(unsupported)} پشتیبانی‌نشده', '$unsupported unsupported'));
     if (errors.isNotEmpty) parts.add(errors.first);
-    return parts.isEmpty ? 'چیزی برای وارد کردن پیدا نشد' : parts.join(' • ');
+    return parts.isEmpty ? tr('چیزی برای وارد کردن پیدا نشد', 'Nothing to import was found') : parts.join(' • ');
   }
 }
 
@@ -82,13 +83,13 @@ class AppState extends ChangeNotifier {
   String groupName(String g) {
     switch (g) {
       case Groups.manual:
-        return 'دستی';
+        return tr('دستی', 'Manual');
       case Groups.freeCf:
-        return 'رایگان کلودفلر';
+        return tr('رایگان کلودفلر', 'Free Cloudflare');
       case Groups.freePublic:
-        return 'رایگان عمومی';
+        return tr('رایگان عمومی', 'Free public');
       default:
-        return subById(g)?.name ?? 'ساب';
+        return subById(g)?.name ?? tr('ساب', 'Subscription');
     }
   }
 
@@ -281,14 +282,17 @@ class AppState extends ChangeNotifier {
   // ---------------------------------------------------------------- testing
 
   /// Real delay through the core, limited app-wide.
-  Future<int> realDelay(VpnConfig c) async {
+  Future<int> realDelay(VpnConfig c, {bool Function()? cancelled}) async {
     String json;
     try {
       json = buildXrayJson(c, settings);
     } catch (_) {
       return -1;
     }
-    return coreLimiter.run(() => vpn.realDelay(json, settings.testUrl));
+    return coreLimiter.run(() async {
+      if (cancelled != null && cancelled()) return -1;
+      return vpn.realDelay(json, settings.testUrl);
+    });
   }
 
   Future<void> testConfigs(List<VpnConfig> list, {bool real = true}) async {
@@ -302,7 +306,7 @@ class AppState extends ChangeNotifier {
       testingIds.add(c.id);
       notifyListeners();
       if (real) {
-        c.delay = await realDelay(c);
+        c.delay = await realDelay(c, cancelled: () => _cancelTest);
       } else {
         c.tcpDelay = isUdpTransport(c) ? null : await tcpPing(c.host, c.port);
       }
@@ -326,6 +330,7 @@ class AppState extends ChangeNotifier {
     if (vpn.connected || vpn.connecting) {
       await vpn.stop();
       activeId = null;
+      connHealth = null;
       notifyListeners();
       return null;
     }
@@ -342,12 +347,12 @@ class AppState extends ChangeNotifier {
         selectedId = c.id;
       }
     }
-    if (c == null) return 'ابتدا یک کانفیگ انتخاب کنید';
+    if (c == null) return tr('ابتدا یک کانفیگ انتخاب کنید', 'Select a config first');
     String json;
     try {
       json = buildXrayJson(c, settings);
     } catch (e) {
-      return 'کانفیگ نامعتبر است: $e';
+      return tr('کانفیگ نامعتبر است: ', 'Invalid config: ') + '$e';
     }
     activeId = c.id;
     notifyListeners();
@@ -356,7 +361,38 @@ class AppState extends ChangeNotifier {
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toList();
-    return vpn.start(remark: c.name, json: json, proxyOnly: settings.proxyOnly, blockedApps: apps);
+    connHealth = null;
+    final err = await vpn.start(remark: c.name, json: json, proxyOnly: settings.proxyOnly, blockedApps: apps);
+    if (err == null) _healthCheck(c);
+    return err;
+  }
+
+  /// Result of the automatic check after connecting:
+  /// null = not checked yet, 0 = checking, -1 = no internet through config, >0 = ms.
+  int? connHealth;
+
+  Future<void> _healthCheck(VpnConfig c) async {
+    for (var i = 0; i < 30 && !vpn.connected; i++) {
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+    if (!vpn.connected) return;
+    connHealth = 0;
+    notifyListeners();
+    final d = await vpn.connectedDelay(settings.testUrl);
+    if (activeId != c.id) return;
+    connHealth = d;
+    c.delay = d;
+    notifyListeners();
+    saveConfigs();
+  }
+
+  Future<int> checkConnection() async {
+    connHealth = 0;
+    notifyListeners();
+    final d = await vpn.connectedDelay(settings.testUrl);
+    connHealth = d;
+    notifyListeners();
+    return d;
   }
 
   Future<void> reconnect() async {
@@ -369,10 +405,10 @@ class AppState extends ChangeNotifier {
 
   Future<String?> addSubscription(String name, String url) async {
     final u = url.trim();
-    if (subs.any((s) => s.url == u)) return 'این ساب قبلاً اضافه شده';
+    if (subs.any((s) => s.url == u)) return tr('این ساب قبلاً اضافه شده', 'This subscription already exists');
     final s = Subscription(
       id: newId(),
-      name: name.trim().isEmpty ? (Uri.tryParse(u)?.host ?? 'ساب') : name.trim(),
+      name: name.trim().isEmpty ? (Uri.tryParse(u)?.host ?? 'Sub') : name.trim(),
       url: u,
     );
     subs.add(s);
@@ -393,7 +429,7 @@ class AppState extends ChangeNotifier {
         final c = configFromLink(l, s.id);
         if (c != null && seen.add(c.dedupeKey)) fresh.add(c);
       }
-      if (fresh.isEmpty) throw Exception('هیچ کانفیگ قابل‌استفاده‌ای در ساب پیدا نشد');
+      if (fresh.isEmpty) throw Exception(tr('هیچ کانفیگ قابل‌استفاده‌ای در ساب پیدا نشد', 'No usable config found in this subscription'));
       final old = {for (final c in configs.where((c) => c.group == s.id)) c.dedupeKey: c};
       final selectedKey = configById(selectedId)?.group == s.id ? configById(selectedId)!.dedupeKey : null;
       for (final c in fresh) {

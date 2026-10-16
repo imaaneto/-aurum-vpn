@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../i18n.dart';
 import '../store.dart';
 
 /// Two luxury palettes: black & gold, white & navy.
@@ -112,10 +113,13 @@ Color delayColor(int? d) {
 }
 
 String timeAgo(int ms) {
-  if (ms == 0) return 'هرگز';
+  if (ms == 0) return tr('هرگز', 'never');
   final d = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(ms));
-  if (d.inMinutes < 1) return 'همین الان';
-  if (d.inHours < 1) return '${d.inMinutes} دقیقه پیش';
-  if (d.inDays < 1) return '${d.inHours} ساعت پیش';
-  return '${d.inDays} روز پیش';
+  if (d.inMinutes < 1) return tr('همین الان', 'just now');
+  if (d.inHours < 1) return tr('${num2(d.inMinutes)} دقیقه پیش', '${d.inMinutes} min ago');
+  if (d.inDays < 1) return tr('${num2(d.inHours)} ساعت پیش', '${d.inHours} h ago');
+  return tr('${num2(d.inDays)} روز پیش', '${d.inDays} days ago');
 }
+
+/// Chevron pointing "forward" for the current layout direction.
+IconData get forwardChevron => isFa ? Icons.chevron_left_rounded : Icons.chevron_right_rounded;

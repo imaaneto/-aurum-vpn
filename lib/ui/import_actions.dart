@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../models.dart';
+import '../i18n.dart';
 import '../store.dart';
 import 'qr_scan_page.dart';
 import 'theme.dart';
@@ -12,7 +13,7 @@ Future<void> importFromClipboard(BuildContext context) async {
   final data = await Clipboard.getData(Clipboard.kTextPlain);
   final text = data?.text ?? '';
   if (text.trim().isEmpty) {
-    if (context.mounted) toast(context, 'کلیپ‌بورد خالی است', error: true);
+    if (context.mounted) toast(context, tr('کلیپ‌بورد خالی است', 'Clipboard is empty'), error: true);
     return;
   }
   final r = await app.importText(text);
@@ -29,11 +30,11 @@ Future<void> importFromQr(BuildContext context) async {
 Future<void> importManual(BuildContext context) async {
   final t = await askText(
     context,
-    title: 'وارد کردن دستی',
-    label: 'لینک‌ها، متن ساب یا JSON',
+    title: tr('وارد کردن دستی', 'Manual import'),
+    label: tr('لینک‌ها، متن ساب یا JSON', 'Links, subscription text or JSON'),
     hint: 'vless://...  vmess://...  trojan://...  ss://...  hy2://...  wireguard://...',
     maxLines: 8,
-    ok: 'وارد کن',
+    ok: tr('وارد کن', 'Import'),
   );
   if (t == null || t.trim().isEmpty) return;
   final r = await app.importText(t);
@@ -51,22 +52,22 @@ Future<void> addSubscriptionDialog(BuildContext context) async {
     builder: (ctx) => AlertDialog(
       backgroundColor: pal.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22), side: BorderSide(color: pal.border)),
-      title: Text('افزودن ساب', style: TextStyle(color: pal.text, fontWeight: FontWeight.w800)),
+      title: Text(tr('افزودن ساب', 'Add subscription'), style: TextStyle(color: pal.text, fontWeight: FontWeight.w800)),
       content: SizedBox(
         width: 420,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          TextField(controller: nameCtrl, style: TextStyle(color: pal.text), decoration: luxInput('نام ساب (اختیاری)')),
+          TextField(controller: nameCtrl, style: TextStyle(color: pal.text), decoration: luxInput(tr('نام ساب (اختیاری)', 'Name (optional)'))),
           const SizedBox(height: 12),
           TextField(
             controller: urlCtrl,
             textDirection: TextDirection.ltr,
             style: TextStyle(color: pal.text, fontSize: 13),
             decoration: luxInput(
-              'لینک ساب',
+              tr('لینک ساب', 'Subscription URL'),
               hint: 'https://...',
               suffix: Row(mainAxisSize: MainAxisSize.min, children: [
                 IconButton(
-                  tooltip: 'چسباندن',
+                  tooltip: tr('چسباندن', 'Paste'),
                   icon: Icon(Icons.content_paste_rounded, color: pal.primary),
                   onPressed: () async {
                     final d = await Clipboard.getData(Clipboard.kTextPlain);
@@ -74,7 +75,7 @@ Future<void> addSubscriptionDialog(BuildContext context) async {
                   },
                 ),
                 IconButton(
-                  tooltip: 'اسکن QR',
+                  tooltip: tr('اسکن QR', 'Scan QR'),
                   icon: Icon(Icons.qr_code_scanner_rounded, color: pal.primary),
                   onPressed: () async {
                     final v = await Navigator.push<String>(ctx, MaterialPageRoute(builder: (_) => const QrScanPage()));
@@ -87,22 +88,22 @@ Future<void> addSubscriptionDialog(BuildContext context) async {
         ]),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text('انصراف', style: TextStyle(color: pal.sub))),
+        TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('انصراف', 'Cancel'), style: TextStyle(color: pal.sub))),
         TextButton(
           onPressed: () => Navigator.pop(ctx, true),
-          child: Text('افزودن و دریافت', style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
+          child: Text(tr('افزودن و دریافت', 'Add & fetch'), style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
         ),
       ],
     ),
   );
   if (ok != true || urlCtrl.text.trim().isEmpty) return;
   if (!urlCtrl.text.trim().startsWith('http')) {
-    if (context.mounted) toast(context, 'لینک ساب باید با http شروع شود', error: true);
+    if (context.mounted) toast(context, tr('لینک ساب باید با http شروع شود', 'URL must start with http'), error: true);
     return;
   }
-  if (context.mounted) toast(context, 'در حال دریافت ساب...');
+  if (context.mounted) toast(context, tr('در حال دریافت ساب...', 'Fetching subscription...'));
   final err = await app.addSubscription(nameCtrl.text, urlCtrl.text);
-  if (context.mounted) toast(context, err ?? 'ساب اضافه شد ✓', error: err != null);
+  if (context.mounted) toast(context, err ?? tr('ساب اضافه شد ✓', 'Subscription added ✓'), error: err != null);
 }
 
 void showImportSheet(BuildContext context) {
@@ -132,11 +133,11 @@ void showImportSheet(BuildContext context) {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Container(width: 40, height: 4, decoration: BoxDecoration(color: pal.border, borderRadius: BorderRadius.circular(4))),
               const SizedBox(height: 8),
-              item(Icons.content_paste_rounded, 'از کلیپ‌بورد', 'لینک، چند لینک، متن base64 یا لینک ساب', () => importFromClipboard(context)),
-              item(Icons.qr_code_scanner_rounded, 'اسکن QR', 'با دوربین یا از تصویر گالری', () => importFromQr(context)),
-              item(Icons.edit_note_rounded, 'وارد کردن دستی', 'چسباندن متن یا کانفیگ JSON ایکس‌ری', () => importManual(context)),
-              item(Icons.rss_feed_rounded, 'افزودن ساب', 'لینک اشتراک با نام دلخواه', () => addSubscriptionDialog(context)),
-              item(Icons.dns_rounded, 'ساخت کانفیگ DNS Tunnel', 'XDNS (نسل جدید DNSTT) روی هسته Xray', () {
+              item(Icons.content_paste_rounded, tr('از کلیپ‌بورد', 'From clipboard'), tr('لینک، چند لینک، متن base64 یا لینک ساب', 'Links, base64 text or a subscription URL'), () => importFromClipboard(context)),
+              item(Icons.qr_code_scanner_rounded, tr('اسکن QR', 'Scan QR'), tr('با دوربین یا از تصویر گالری', 'Camera or gallery image'), () => importFromQr(context)),
+              item(Icons.edit_note_rounded, tr('وارد کردن دستی', 'Manual import'), tr('چسباندن متن یا کانفیگ JSON ایکس‌ری', 'Paste text or a full Xray JSON config'), () => importManual(context)),
+              item(Icons.rss_feed_rounded, tr('افزودن ساب', 'Add subscription'), tr('لینک اشتراک با نام دلخواه', 'Subscription URL with a custom name'), () => addSubscriptionDialog(context)),
+              item(Icons.dns_rounded, tr('ساخت کانفیگ DNS Tunnel', 'Build DNS tunnel config'), tr('XDNS (نسل جدید DNSTT) روی هسته Xray', 'XDNS (next-gen DNSTT) on the Xray core'), () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) => const XdnsPage()));
               }),
             ]),

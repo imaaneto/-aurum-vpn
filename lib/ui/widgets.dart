@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../core/link_parser.dart';
+import '../i18n.dart';
 import '../models.dart';
 import '../store.dart';
 import 'theme.dart';
@@ -198,7 +199,7 @@ class DelayChip extends StatelessWidget {
       return SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: pal.primary));
     }
     final d = delay ?? tcp;
-    final label = d == null ? '—' : (d < 0 ? 'خطا' : '$d ms');
+    final label = d == null ? '—' : (d < 0 ? tr('خطا', 'fail') : '$d ms');
     return Badge2(delay == null && tcp != null ? 'TCP $label' : label, color: delayColor(d));
   }
 }
@@ -247,7 +248,7 @@ InputDecoration luxInput(String label, {String? hint, Widget? suffix}) {
   );
 }
 
-Future<String?> askText(BuildContext context, {required String title, String label = '', String initial = '', int maxLines = 1, String? hint, String ok = 'تأیید'}) async {
+Future<String?> askText(BuildContext context, {required String title, String label = '', String initial = '', int maxLines = 1, String? hint, String? ok}) async {
   final ctrl = TextEditingController(text: initial);
   return showDialog<String>(
     context: context,
@@ -268,17 +269,17 @@ Future<String?> askText(BuildContext context, {required String title, String lab
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(ctx), child: Text('انصراف', style: TextStyle(color: pal.sub))),
+        TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('انصراف', 'Cancel'), style: TextStyle(color: pal.sub))),
         TextButton(
           onPressed: () => Navigator.pop(ctx, ctrl.text),
-          child: Text(ok, style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
+          child: Text(ok ?? tr('تأیید', 'OK'), style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
         ),
       ],
     ),
   );
 }
 
-Future<bool> confirm(BuildContext context, String title, String body, {String ok = 'بله'}) async {
+Future<bool> confirm(BuildContext context, String title, String body, {String? ok}) async {
   final r = await showDialog<bool>(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -287,8 +288,8 @@ Future<bool> confirm(BuildContext context, String title, String body, {String ok
       title: Text(title, style: TextStyle(color: pal.text, fontWeight: FontWeight.w800, fontSize: 17)),
       content: Text(body, style: TextStyle(color: pal.sub, height: 1.6)),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text('خیر', style: TextStyle(color: pal.sub))),
-        TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(ok, style: const TextStyle(color: Pal.danger, fontWeight: FontWeight.w800))),
+        TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('خیر', 'No'), style: TextStyle(color: pal.sub))),
+        TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(ok ?? tr('بله', 'Yes'), style: const TextStyle(color: Pal.danger, fontWeight: FontWeight.w800))),
       ],
     ),
   );
@@ -323,18 +324,18 @@ void showQrSheet(BuildContext context, String title, String data) {
               errorStateBuilder: (c, e) => const SizedBox(
                 width: 250,
                 height: 250,
-                child: Center(child: Text('این لینک برای QR خیلی طولانی است', textAlign: TextAlign.center, style: TextStyle(color: Colors.black))),
+                child: Center(child: Text('QR too long', textAlign: TextAlign.center, style: TextStyle(color: Colors.black))),
               ),
             ),
           ),
           const SizedBox(height: 16),
           LuxButton(
-            label: 'کپی لینک',
+            label: tr('کپی لینک', 'Copy link'),
             icon: Icons.copy_rounded,
             onTap: () {
               Clipboard.setData(ClipboardData(text: data));
               Navigator.pop(ctx);
-              toast(context, 'کپی شد');
+              toast(context, tr('کپی شد', 'Copied'));
             },
           ),
         ]),
@@ -378,7 +379,7 @@ class ConfigTile extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis, textDirection: TextDirection.ltr, textAlign: TextAlign.right,
+            Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: p.text, fontWeight: FontWeight.w700, fontSize: 14)),
             const SizedBox(height: 6),
             Wrap(spacing: 6, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
@@ -399,7 +400,7 @@ class ConfigTile extends StatelessWidget {
                 break;
               case 'copy':
                 await Clipboard.setData(ClipboardData(text: c.link));
-                if (context.mounted) toast(context, 'لینک کپی شد');
+                if (context.mounted) toast(context, tr('لینک کپی شد', 'Link copied'));
                 break;
               case 'test':
                 app.testConfigs([c]);
@@ -408,7 +409,7 @@ class ConfigTile extends StatelessWidget {
                 app.testConfigs([c], real: false);
                 break;
               case 'rename':
-                final n = await askText(context, title: 'تغییر نام', label: 'نام', initial: c.name);
+                final n = await askText(context, title: tr('تغییر نام', 'Rename'), label: tr('نام', 'Name'), initial: c.name);
                 if (n != null && n.trim().isNotEmpty) app.renameConfig(c, n.trim());
                 break;
               case 'delete':
@@ -417,12 +418,12 @@ class ConfigTile extends StatelessWidget {
             }
           },
           itemBuilder: (_) => [
-            _mi('qr', Icons.qr_code_2_rounded, 'نمایش QR'),
-            _mi('copy', Icons.copy_rounded, 'کپی لینک'),
-            _mi('test', Icons.speed_rounded, 'تست واقعی'),
-            _mi('tcp', Icons.network_ping_rounded, 'پینگ TCP'),
-            _mi('rename', Icons.edit_rounded, 'تغییر نام'),
-            _mi('delete', Icons.delete_outline_rounded, 'حذف'),
+            _mi('qr', Icons.qr_code_2_rounded, tr('نمایش QR', 'Show QR')),
+            _mi('copy', Icons.copy_rounded, tr('کپی لینک', 'Copy link')),
+            _mi('test', Icons.speed_rounded, tr('تست واقعی', 'Real test')),
+            _mi('tcp', Icons.network_ping_rounded, tr('پینگ TCP', 'TCP ping')),
+            _mi('rename', Icons.edit_rounded, tr('تغییر نام', 'Rename')),
+            _mi('delete', Icons.delete_outline_rounded, tr('حذف', 'Delete')),
           ],
         ),
       ]),
@@ -445,7 +446,7 @@ class Labeled extends StatelessWidget {
     return Column(children: [
       Icon(icon, size: 18, color: pal.primary),
       const SizedBox(height: 6),
-      Text(value, textDirection: TextDirection.ltr, style: TextStyle(color: pal.text, fontWeight: FontWeight.w800, fontSize: 13)),
+      Text(value, textDirection: TextDirection.ltr, textAlign: TextAlign.center, style: TextStyle(color: pal.text, fontWeight: FontWeight.w800, fontSize: 13)),
       const SizedBox(height: 2),
       Text(label, style: TextStyle(color: pal.sub, fontSize: 11)),
     ]);

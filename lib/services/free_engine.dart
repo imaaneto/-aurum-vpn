@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
 import '../core/link_parser.dart';
+import '../core/net.dart';
 import '../core/pool.dart';
+import '../i18n.dart';
 import '../models.dart';
 import '../store.dart';
 import 'cloudflare_api.dart';
@@ -13,40 +14,62 @@ import 'warp.dart';
 
 /// Public config lists (checked to be live). Editable in settings.
 const defaultFreeSources = [
+  'https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt',
   'https://raw.githubusercontent.com/barry-far/V2ray-Config/main/Sub1.txt',
+  'https://raw.githubusercontent.com/barry-far/V2ray-Config/main/Sub2.txt',
   'https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub1.txt',
+  'https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub2.txt',
   'https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/subs/sub1.txt',
-  'https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt',
-  'https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt',
+  'https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/subs/sub2.txt',
+  'https://raw.githubusercontent.com/NiREvil/vless/main/sub/SSTime',
+  'https://raw.githubusercontent.com/Rayan-Config/C-Sub/main/configs/proxy.txt',
+  'https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/main/mix/sub.html',
+  'https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt',
   'https://raw.githubusercontent.com/Kwinshadow/TelegramV2rayCollector/main/sublinks/mix.txt',
   'https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt',
   'https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt',
   'https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs.txt',
+  'https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt',
 ];
 
-/// raw.githubusercontent.com -> jsDelivr mirror (often reachable when raw is not).
-String? _mirror(String url) {
+/// Mirror URLs for a GitHub raw file; the first one to answer wins.
+List<String> mirrorsFor(String url) {
   final m = RegExp(r'^https://raw\.githubusercontent\.com/([^/]+)/([^/]+)/([^/]+)/(.+)$').firstMatch(url);
-  if (m == null) return null;
-  return 'https://cdn.jsdelivr.net/gh/${m[1]}/${m[2]}@${m[3]}/${m[4]}';
+  if (m == null) return [url];
+  final u = m[1], r = m[2], b = m[3], p = m[4];
+  return [
+    url,
+    'https://fastly.jsdelivr.net/gh/$u/$r@$b/$p',
+    'https://gcore.jsdelivr.net/gh/$u/$r@$b/$p',
+    'https://cdn.jsdelivr.net/gh/$u/$r@$b/$p',
+    'https://cdn.statically.io/gh/$u/$r/$b/$p',
+  ];
 }
 
-Future<String?> _fetchText(String url) async {
-  for (final u in [url, _mirror(url)]) {
-    if (u == null) continue;
-    try {
-      final r = await http.get(Uri.parse(u)).timeout(const Duration(seconds: 15));
-      if (r.statusCode == 200) return utf8.decode(r.bodyBytes, allowMalformed: true);
-    } catch (_) {}
+/// Fetches a text file trying all mirrors at once; returns the first success.
+Future<String?> fetchFast(String url) {
+  final done = Completer<String?>();
+  final urls = mirrorsFor(url);
+  var pending = urls.length;
+  for (final u in urls) {
+    Net.get(u, timeout: const Duration(seconds: 14)).then((r) {
+      if (!done.isCompleted && r.statusCode == 200 && r.bodyBytes.length > 20) {
+        done.complete(utf8.decode(r.bodyBytes, allowMalformed: true));
+      }
+    }).catchError((Object _) {}).whenComplete(() {
+      pending--;
+      if (pending == 0 && !done.isCompleted) done.complete(null);
+    });
   }
-  return null;
+  return done.future;
 }
 
-enum SlotState { building, ready }
+/// One run of the engine. Stopping a run only flips this flag; late results
+/// from a stopped run are ignored, so the UI is free immediately.
+class _Run {
+  bool stopped = false;
+}
 
-/// Produces verified free configs as fast as possible: Cloudflare (WARP and
-/// the user's own Worker) and public lists run in parallel; every candidate is
-/// tested through the real core before it is accepted.
 class FreeEngine extends ChangeNotifier {
   FreeEngine(this.app);
   final AppState app;
@@ -54,8 +77,9 @@ class FreeEngine extends ChangeNotifier {
   static const cfTarget = 10;
   static const publicTarget = 20;
 
-  bool running = false;
-  bool _stop = false;
+  _Run? _run;
+  bool get running => _run != null && !_run!.stopped;
+
   List<VpnConfig?> cfSlots = List<VpnConfig?>.filled(cfTarget, null);
   List<VpnConfig> publicFound = [];
   String cfStage = '';
@@ -63,8 +87,12 @@ class FreeEngine extends ChangeNotifier {
   int cfTested = 0;
   int publicTested = 0;
   int publicCandidates = 0;
+  int tcpAlive = 0;
   int sourcesOk = 0;
+  int sourcesTotal = 0;
+  final List<String> log = [];
   final Stopwatch watch = Stopwatch();
+  Timer? _ticker;
 
   int get cfCount => cfSlots.whereType<VpnConfig>().length;
   bool get cfFull => cfCount >= cfTarget;
@@ -72,8 +100,15 @@ class FreeEngine extends ChangeNotifier {
 
   void _notify() => notifyListeners();
 
-  void _addCf(VpnConfig c) {
-    if (cfFull) return;
+  void _log(_Run run, String s) {
+    if (run.stopped) return;
+    log.insert(0, s);
+    if (log.length > 40) log.removeLast();
+    _notify();
+  }
+
+  void _addCf(_Run run, VpnConfig c) {
+    if (run.stopped || cfFull) return;
     final i = cfSlots.indexOf(null);
     if (i < 0) return;
     c.group = Groups.freeCf;
@@ -82,26 +117,39 @@ class FreeEngine extends ChangeNotifier {
     _notify();
   }
 
+  /// Stops instantly; anything still in flight is discarded.
   void stop() {
-    _stop = true;
+    final r = _run;
+    if (r == null || r.stopped) return;
+    r.stopped = true;
+    watch.stop();
+    _ticker?.cancel();
+    if (!cfFull) cfStage = tr('متوقف شد', 'Stopped');
+    if (!publicFull) publicStage = tr('متوقف شد', 'Stopped');
+    app.saveConfigs();
     _notify();
   }
 
   Future<void> start() async {
     if (running) return;
-    running = true;
-    _stop = false;
+    final run = _Run();
+    _run = run;
     cfSlots = List<VpnConfig?>.filled(cfTarget, null);
     publicFound = [];
     cfTested = 0;
     publicTested = 0;
     publicCandidates = 0;
+    tcpAlive = 0;
     sourcesOk = 0;
-    cfStage = 'شروع...';
-    publicStage = 'شروع...';
+    sourcesTotal = 0;
+    log.clear();
+    cfStage = tr('شروع...', 'Starting...');
+    publicStage = tr('شروع...', 'Starting...');
     watch
       ..reset()
       ..start();
+    _ticker?.cancel();
+    _ticker = Timer.periodic(const Duration(seconds: 1), (_) => _notify());
     app.clearGroup(Groups.freeCf);
     app.clearGroup(Groups.freePublic);
     _notify();
@@ -110,36 +158,39 @@ class FreeEngine extends ChangeNotifier {
       try {
         await f();
       } catch (e) {
-        onErr(e);
+        if (!run.stopped) onErr(e);
       }
     }
 
     await Future.wait([
-      guard(_cloudflare, (e) => cfStage = 'خطا: $e'),
-      guard(_public, (e) => publicStage = 'خطا: $e'),
+      guard(() => _cloudflare(run), (e) => cfStage = '${tr('خطا', 'Error')}: $e'),
+      guard(() => _public(run), (e) => publicStage = '${tr('خطا', 'Error')}: $e'),
     ]);
 
+    if (run.stopped) return;
+    run.stopped = true;
     watch.stop();
-    running = false;
+    _ticker?.cancel();
     await app.saveConfigs();
     _notify();
   }
 
   // ------------------------------------------------------------ Cloudflare
 
-  Future<void> _cloudflare() async {
+  Future<void> _cloudflare(_Run run) async {
     final tokenAccs = app.accounts.where((a) => a.token.isNotEmpty || a.hasWorker).toList();
     final hasWorkerSide = tokenAccs.isNotEmpty;
     await Future.wait([
-      _warp(cap: hasWorkerSide ? 5 : cfTarget),
-      if (hasWorkerSide) _worker(tokenAccs),
+      _warp(run, cap: hasWorkerSide ? 5 : cfTarget),
+      if (hasWorkerSide) _worker(run, tokenAccs),
     ]);
-    if (!cfFull && !_stop) {
-      await _warp(cap: cfTarget);
+    if (!cfFull && !run.stopped) {
+      await _warp(run, cap: cfTarget, rounds: 2);
     }
+    if (run.stopped) return;
     cfStage = cfFull
-        ? '۱۰ کانفیگ کلودفلر ساخته و ایمپورت شد ✓'
-        : (_stop ? 'متوقف شد' : '$cfCount کانفیگ سالم ساخته شد');
+        ? tr('۱۰ کانفیگ کلودفلر ساخته و ایمپورت شد ✓', '10 Cloudflare configs built and imported ✓')
+        : tr('${num2(cfCount)} کانفیگ سالم کلودفلر ساخته شد', '$cfCount working Cloudflare configs built');
     _notify();
   }
 
@@ -153,28 +204,31 @@ class FreeEngine extends ChangeNotifier {
     }
   }
 
-  Future<void> _warp({required int cap}) async {
-    if (_stop || cfFull) return;
-    cfStage = 'ثبت اکانت رایگان WARP ...';
+  Future<void> _warp(_Run run, {required int cap, int rounds = 4}) async {
+    if (run.stopped || cfFull) return;
+    cfStage = tr('ثبت اکانت رایگان WARP ...', 'Registering free WARP accounts...');
     _notify();
     final fresh = (await Future.wait(List.generate(3, (_) => _tryRegister()))).whereType<WarpAccount>().toList();
+    if (run.stopped) return;
     var accs = fresh;
     if (fresh.isNotEmpty) {
       await app.addWarps(fresh);
+      _log(run, tr('WARP: ${num2(fresh.length)} اکانت جدید ثبت شد', 'WARP: ${fresh.length} new accounts registered'));
     } else {
       accs = app.warps;
+      _log(run, tr('WARP: ثبت جدید ممکن نشد، از اکانت‌های ذخیره‌شده استفاده می‌شود', 'WARP: registration failed, using saved accounts'));
     }
     if (accs.isEmpty) {
-      cfStage = 'ثبت WARP ممکن نشد (API در دسترس نیست)';
+      cfStage = tr('API ثبت WARP در دسترس نیست (فیلتر است)', 'WARP registration API is unreachable');
       _notify();
       return;
     }
-    for (var round = 0; round < 4; round++) {
-      if (_stop || cfFull || _countWhere('wireguard') >= cap) break;
-      cfStage = 'ساخت و تست کانفیگ‌های WARP (دور ${round + 1}) ...';
+    for (var round = 0; round < rounds; round++) {
+      if (run.stopped || cfFull || _countWhere('wireguard') >= cap) break;
+      cfStage = tr('تست اندپوینت‌های WARP (دور ${num2(round + 1)}) ...', 'Testing WARP endpoints (round ${round + 1})...');
       _notify();
       final cands = <VpnConfig>[];
-      for (var i = 0; i < 12; i++) {
+      for (var i = 0; i < 16; i++) {
         final link = WarpService.linkFor(
           accs[i % accs.length],
           ip: WarpService.randomEndpointIp(),
@@ -184,155 +238,203 @@ class FreeEngine extends ChangeNotifier {
         final c = configFromLink(link, Groups.freeCf);
         if (c != null) cands.add(c);
       }
-      await runPool<VpnConfig>(cands, 12, (c) async {
-        final d = await app.realDelay(c);
+      await runPool<VpnConfig>(cands, 16, (c) async {
+        final d = await app.realDelay(c, cancelled: () => run.stopped);
+        if (run.stopped) return;
         cfTested++;
         if (d > 0 && !cfFull && _countWhere('wireguard') < cap) {
           c.delay = d;
           c.name = '☁ WARP ${c.host}:${c.port}';
-          _addCf(c);
+          _addCf(run, c);
+          _log(run, 'WARP ✓ ${c.host}:${c.port}  ${d}ms');
         } else {
           _notify();
         }
-      }, shouldStop: () => _stop || cfFull || _countWhere('wireguard') >= cap);
+      }, shouldStop: () => run.stopped || cfFull || _countWhere('wireguard') >= cap);
     }
   }
 
-  Future<void> _worker(List<CfAccount> accs) async {
-    // Deploy workers for tokens that do not have one yet.
+  Future<void> _worker(_Run run, List<CfAccount> accs) async {
     for (final a in accs.where((a) => !a.hasWorker && a.token.isNotEmpty)) {
-      if (_stop) return;
+      if (run.stopped) return;
       try {
         await CloudflareApi.setup(a, onStep: (s) {
+          if (run.stopped) return;
           cfStage = '${a.label}: $s';
           _notify();
         });
         await app.upsertAccount(a);
-        // New workers.dev routes need a few seconds to propagate.
         await Future.delayed(const Duration(seconds: 6));
       } catch (e) {
         a.status = 'invalid';
         await app.upsertAccount(a);
-        cfStage = '${a.label}: $e';
-        _notify();
+        _log(run, '${a.label}: $e');
       }
     }
     final hosts = accs.where((a) => a.hasWorker).toList();
-    if (hosts.isEmpty) return;
+    if (hosts.isEmpty || run.stopped) return;
 
-    cfStage = 'اسکن آی‌پی تمیز کلودفلر ...';
+    cfStage = tr('اسکن آی‌پی تمیز کلودفلر ...', 'Scanning clean Cloudflare IPs...');
     _notify();
     final userIps = app.settings.cleanIps
         .split(RegExp(r'[\s,]+'))
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toList();
-    final pool = [...userIps, ...randomCloudflareIps(90)];
+    final pool = [...userIps, ...randomCloudflareIps(120)];
     final scored = <MapEntry<String, int>>[];
-    await runPool<String>(pool, 48, (ip) async {
-      final t = await tcpPing(ip, 443, timeout: const Duration(milliseconds: 1500));
+    await runPool<String>(pool, 60, (ip) async {
+      final t = await tcpPing(ip, 443, timeout: const Duration(milliseconds: 1200));
       if (t > 0) scored.add(MapEntry(ip, t));
-    }, shouldStop: () => _stop);
+    }, shouldStop: () => run.stopped);
+    if (run.stopped) return;
     scored.sort((a, b) => a.value.compareTo(b.value));
     var ips = scored.map((e) => e.key).take(30).toList();
     if (ips.isEmpty) ips = pool.take(20).toList();
+    _log(run, tr('آی‌پی تمیز: ${num2(scored.length)} پاسخ داد', 'Clean IPs: ${scored.length} responded'));
 
     const portCycle = [443, 8443, 2053, 2096, 80, 8080, 2083, 2087, 8880, 2052];
     final cands = <VpnConfig>[];
     for (var i = 0; i < ips.length; i++) {
       final a = hosts[i % hosts.length];
-      final port = portCycle[i % portCycle.length];
       final link = buildWorkerVlessLink(
         uuid: a.workerUuid,
         host: a.workerHost,
         address: ips[i],
-        port: port,
+        port: portCycle[i % portCycle.length],
         name: 'Worker',
       );
       final c = configFromLink(link, Groups.freeCf);
       if (c != null) cands.add(c);
     }
-    cfStage = 'تست کانفیگ‌های ورکر روی آی‌پی‌های تمیز ...';
+    cfStage = tr('تست کانفیگ‌های ورکر ...', 'Testing worker configs...');
     _notify();
     await runPool<VpnConfig>(cands, 12, (c) async {
-      final d = await app.realDelay(c);
+      final d = await app.realDelay(c, cancelled: () => run.stopped);
+      if (run.stopped) return;
       cfTested++;
       if (d > 0 && !cfFull) {
         c.delay = d;
         c.name = '⚡ Worker ${c.host}:${c.port}';
-        _addCf(c);
+        _addCf(run, c);
+        _log(run, 'Worker ✓ ${c.host}:${c.port}  ${d}ms');
       } else {
         _notify();
       }
-    }, shouldStop: () => _stop || cfFull);
+    }, shouldStop: () => run.stopped || cfFull);
   }
 
   // ------------------------------------------------------------ public lists
 
-  Future<void> _public() async {
+  static int _protoRank(VpnConfig c) {
+    switch (c.protocol) {
+      case 'vless':
+        return 0;
+      case 'trojan':
+        return 1;
+      case 'hysteria2':
+        return 2;
+      case 'vmess':
+        return 3;
+      default:
+        return 4;
+    }
+  }
+
+  Future<void> _public(_Run run) async {
     final sources = app.settings.freeSources.trim().isEmpty
         ? defaultFreeSources
-        : app.settings.freeSources.split(RegExp(r'[\r\n]+')).map((e) => e.trim()).where((e) => e.startsWith('http')).toList();
-    publicStage = 'دریافت از ${sources.length} منبع به‌صورت موازی ...';
+        : app.settings.freeSources
+            .split(RegExp(r'[\r\n]+'))
+            .map((e) => e.trim())
+            .where((e) => e.startsWith('http'))
+            .toList();
+    sourcesTotal = sources.length;
+    publicStage = tr('دریافت هم‌زمان از ${num2(sources.length)} منبع (با میرور) ...',
+        'Fetching ${sources.length} sources in parallel (with mirrors)...');
     _notify();
-    final links = <String>{};
-    await Future.wait(sources.map((u) async {
-      final body = await _fetchText(u);
-      if (body == null) return;
-      sourcesOk++;
-      links.addAll(extractLinks(body));
-      _notify();
-    }));
-    if (_stop) return;
 
     final existing = app.configs.map((c) => c.dedupeKey).toSet();
     final seenHost = <String>{};
-    final cands = <VpnConfig>[];
-    for (final l in links) {
-      final c = configFromLink(l, Groups.freePublic);
-      if (c == null || existing.contains(c.dedupeKey)) continue;
-      if (!seenHost.add('${c.host}:${c.port}')) continue;
-      cands.add(c);
-    }
-    cands.shuffle();
-    publicCandidates = cands.length;
-    if (cands.isEmpty) {
-      publicStage = sourcesOk == 0 ? 'منابع در دسترس نبودند' : 'کانفیگی پیدا نشد';
-      _notify();
-      return;
-    }
+    final queue = <VpnConfig>[];
+    var producing = true;
 
-    publicStage = 'فیلتر سریع ${cands.length} سرور (TCP) ...';
-    _notify();
-    final pre = cands.take(450).toList();
-    final alive = <VpnConfig>[];
-    await runPool<VpnConfig>(pre, 64, (c) async {
-      if (isUdpTransport(c)) {
-        alive.add(c);
+    // Producer: every source, as soon as it arrives, is parsed and TCP-filtered
+    // and the survivors are queued for the real test.
+    Future<void> handleSource(String url) async {
+      final body = await fetchFast(url);
+      if (run.stopped) return;
+      if (body == null) {
+        _log(run, '✗ ${Uri.tryParse(url)?.pathSegments.take(2).join('/') ?? url}');
         return;
       }
-      final t = await tcpPing(c.host, c.port, timeout: const Duration(seconds: 2));
-      if (t > 0) {
-        c.tcpDelay = t;
-        alive.add(c);
+      sourcesOk++;
+      final cands = <VpnConfig>[];
+      for (final l in extractLinks(body)) {
+        final c = configFromLink(l, Groups.freePublic);
+        if (c == null || existing.contains(c.dedupeKey)) continue;
+        if (!seenHost.add('${c.host}:${c.port}')) continue;
+        cands.add(c);
       }
-    }, shouldStop: () => _stop);
-    alive.sort((a, b) => (a.tcpDelay ?? 9999).compareTo(b.tcpDelay ?? 9999));
+      cands.shuffle();
+      cands.sort((a, b) => _protoRank(a).compareTo(_protoRank(b)));
+      final take = cands.take(120).toList();
+      publicCandidates += cands.length;
+      _log(run, tr('✓ منبع: ${num2(cands.length)} کانفیگ جدید', '✓ source: ${cands.length} new configs'));
+      await runPool<VpnConfig>(take, 40, (c) async {
+        if (isUdpTransport(c)) {
+          queue.add(c);
+          return;
+        }
+        final t = await tcpPing(c.host, c.port, timeout: const Duration(milliseconds: 1800));
+        if (t > 0 && !run.stopped) {
+          c.tcpDelay = t;
+          tcpAlive++;
+          queue.add(c);
+        }
+      }, shouldStop: () => run.stopped || publicFull);
+    }
 
-    publicStage = 'تست واقعی اتصال ${alive.length} سرور زنده ...';
+    final producer = Future.wait(sources.map(handleSource)).whenComplete(() => producing = false);
+
+    publicStage = tr('تست واقعی اتصال سرورهای زنده ...', 'Real-testing live servers...');
     _notify();
-    await runPool<VpnConfig>(alive.take(160).toList(), 12, (c) async {
-      final d = await app.realDelay(c);
-      publicTested++;
-      if (d > 0 && !publicFull) {
-        c.delay = d;
-        c.group = Groups.freePublic;
-        publicFound.add(c);
-        app.addConfigs([c]);
+
+    // Consumers: real core tests, fastest TCP first.
+    Future<void> consumer() async {
+      while (!run.stopped && !publicFull) {
+        if (queue.isEmpty) {
+          if (!producing) return;
+          await Future.delayed(const Duration(milliseconds: 150));
+          continue;
+        }
+        queue.sort((a, b) => (a.tcpDelay ?? 900).compareTo(b.tcpDelay ?? 900));
+        final c = queue.removeAt(0);
+        final d = await app.realDelay(c, cancelled: () => run.stopped || publicFull);
+        if (run.stopped) return;
+        publicTested++;
+        if (d > 0 && !publicFull) {
+          c.delay = d;
+          c.group = Groups.freePublic;
+          publicFound.add(c);
+          app.addConfigs([c]);
+          _log(run, '✓ ${protocolLabel(c.protocol)} ${c.host}  ${d}ms');
+        }
+        _notify();
       }
-      _notify();
-    }, shouldStop: () => _stop || publicFull);
-    publicStage = publicFound.isEmpty ? 'هیچ سرور سالمی پیدا نشد' : '${publicFound.length} کانفیگ سالم تست و ایمپورت شد ✓';
+    }
+
+    await Future.wait([producer, ...List.generate(app.settings.testConcurrency.clamp(4, 24).toInt(), (_) => consumer())]);
+    if (run.stopped) return;
+    if (publicFound.isNotEmpty) {
+      publicStage = tr('${num2(publicFound.length)} کانفیگ سالم تست و ایمپورت شد ✓',
+          '${publicFound.length} working configs tested and imported ✓');
+    } else if (sourcesOk == 0) {
+      publicStage = tr('هیچ منبعی در دسترس نبود؛ اینترنت یا فیلترینگ را بررسی کنید',
+          'No source was reachable; check your internet');
+    } else {
+      publicStage = tr('سرور سالمی پیدا نشد؛ دوباره امتحان کنید', 'No working server found; try again');
+    }
     _notify();
   }
 }

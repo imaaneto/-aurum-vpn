@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../i18n.dart';
 import '../models.dart';
 import '../store.dart';
 import 'import_actions.dart';
@@ -40,19 +41,19 @@ class _ConfigsPageState extends State<ConfigsPage> {
         break;
       case 'failed':
         final n = app.removeFailed(list);
-        toast(context, '$n کانفیگ خراب حذف شد');
+        toast(context, tr('${num2(n)} کانفیگ خراب حذف شد', '$n broken configs removed'));
         break;
       case 'dupes':
         final n = app.removeDuplicates();
-        toast(context, '$n تکراری حذف شد');
+        toast(context, tr('${num2(n)} تکراری حذف شد', '$n duplicates removed'));
         break;
       case 'export':
         await Clipboard.setData(ClipboardData(text: list.map((c) => c.link).join('\n')));
-        if (mounted) toast(context, '${list.length} لینک کپی شد');
+        if (mounted) toast(context, tr('${num2(list.length)} لینک کپی شد', '${list.length} links copied'));
         break;
       case 'clear':
-        final label = _group == null ? 'همه کانفیگ‌ها' : app.groupName(_group!);
-        if (await confirm(context, 'حذف', 'همه موارد «$label» حذف شوند؟', ok: 'حذف')) {
+        final label = _group == null ? tr('همه کانفیگ‌ها', 'all configs') : app.groupName(_group!);
+        if (await confirm(context, tr('حذف', 'Delete'), tr('همه موارد «$label» حذف شوند؟', 'Delete everything in "$label"?'), ok: tr('حذف', 'Delete'))) {
           app.removeConfigs(list.map((e) => e.id).toList());
         }
         break;
@@ -74,10 +75,10 @@ class _ConfigsPageState extends State<ConfigsPage> {
             backgroundColor: p.bg,
             foregroundColor: p.text,
             surfaceTintColor: Colors.transparent,
-            title: Text('کانفیگ‌ها (${app.configs.length})', style: const TextStyle(fontWeight: FontWeight.w800)),
+            title: Text('${tr('کانفیگ‌ها', 'Configs')} (${num2(app.configs.length)})', style: const TextStyle(fontWeight: FontWeight.w800)),
             actions: [
               IconButton(
-                tooltip: 'افزودن',
+                tooltip: tr('افزودن', 'Add'),
                 icon: Icon(Icons.add_circle_rounded, color: p.primary, size: 30),
                 onPressed: () => showImportSheet(context),
               ),
@@ -86,13 +87,13 @@ class _ConfigsPageState extends State<ConfigsPage> {
                 icon: Icon(Icons.tune_rounded, color: p.text),
                 onSelected: _menu,
                 itemBuilder: (_) => [
-                  _mi('real', Icons.speed_rounded, 'تست واقعی همه (موازی)'),
-                  _mi('tcp', Icons.network_ping_rounded, 'پینگ TCP همه'),
-                  _mi('sort', Icons.sort_rounded, 'مرتب‌سازی بر اساس سرعت'),
-                  _mi('failed', Icons.delete_sweep_rounded, 'حذف کانفیگ‌های خراب'),
-                  _mi('dupes', Icons.filter_alt_rounded, 'حذف تکراری‌ها'),
-                  _mi('export', Icons.ios_share_rounded, 'کپی همه لینک‌ها'),
-                  _mi('clear', Icons.delete_forever_rounded, 'حذف همه موارد این بخش'),
+                  _mi('real', Icons.speed_rounded, tr('تست واقعی همه (موازی)', 'Real-test all (parallel)')),
+                  _mi('tcp', Icons.network_ping_rounded, tr('پینگ TCP همه', 'TCP ping all')),
+                  _mi('sort', Icons.sort_rounded, tr('مرتب‌سازی بر اساس سرعت', 'Sort by speed')),
+                  _mi('failed', Icons.delete_sweep_rounded, tr('حذف کانفیگ‌های خراب', 'Remove failed configs')),
+                  _mi('dupes', Icons.filter_alt_rounded, tr('حذف تکراری‌ها', 'Remove duplicates')),
+                  _mi('export', Icons.ios_share_rounded, tr('کپی همه لینک‌ها', 'Copy all links')),
+                  _mi('clear', Icons.delete_forever_rounded, tr('حذف همه موارد این بخش', 'Delete everything here')),
                 ],
               ),
             ],
@@ -104,7 +105,7 @@ class _ConfigsPageState extends State<ConfigsPage> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
-                  _chip('همه', null, app.configs.length),
+                  _chip(tr('همه', 'All'), null, app.configs.length),
                   for (final g in groups) _chip(app.groupName(g), g, app.inGroup(g).length),
                 ],
               ),
@@ -114,7 +115,7 @@ class _ConfigsPageState extends State<ConfigsPage> {
               child: TextField(
                 onChanged: (v) => setState(() => _query = v.trim()),
                 style: TextStyle(color: p.text),
-                decoration: luxInput('جستجو', suffix: Icon(Icons.search_rounded, color: p.sub)),
+                decoration: luxInput(tr('جستجو', 'Search'), suffix: Icon(Icons.search_rounded, color: p.sub)),
               ),
             ),
             if (app.testing)
@@ -133,17 +134,17 @@ class _ConfigsPageState extends State<ConfigsPage> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Text('${app.testDone}/${app.testTotal}', style: TextStyle(color: p.sub)),
-                  TextButton(onPressed: app.cancelTest, child: const Text('توقف', style: TextStyle(color: Pal.danger))),
+                  Text('${num2(app.testDone)}/${num2(app.testTotal)}', style: TextStyle(color: p.sub)),
+                  TextButton(onPressed: app.cancelTest, child: Text(tr('توقف', 'Stop'), style: const TextStyle(color: Pal.danger))),
                 ]),
               ),
             Expanded(
               child: list.isEmpty
                   ? EmptyState(
                       icon: Icons.layers_outlined,
-                      title: 'کانفیگی وجود ندارد',
-                      subtitle: 'از کلیپ‌بورد، QR، ساب یا بخش کانفیگ رایگان اضافه کنید',
-                      action: LuxButton(label: 'افزودن کانفیگ', icon: Icons.add_rounded, expand: false, onTap: () => showImportSheet(context)),
+                      title: tr('کانفیگی وجود ندارد', 'No configs'),
+                      subtitle: tr('از کلیپ‌بورد، QR، ساب یا بخش کانفیگ رایگان اضافه کنید', 'Add from clipboard, QR, a subscription or the free section'),
+                      action: LuxButton(label: tr('افزودن کانفیگ', 'Add config'), icon: Icons.add_rounded, expand: false, onTap: () => showImportSheet(context)),
                     )
                   : ListView.builder(
                       padding: const EdgeInsets.fromLTRB(16, 10, 16, 90),
@@ -163,7 +164,7 @@ class _ConfigsPageState extends State<ConfigsPage> {
     return Padding(
       padding: const EdgeInsetsDirectional.only(end: 8),
       child: ChoiceChip(
-        label: Text('$label  $count'),
+        label: Text('$label  ${num2(count)}'),
         selected: sel,
         onSelected: (_) => setState(() => _group = g),
         selectedColor: p.primary,

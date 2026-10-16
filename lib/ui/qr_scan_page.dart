@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../i18n.dart';
 import 'theme.dart';
 import 'widgets.dart';
 
@@ -29,7 +30,7 @@ class _QrScanPageState extends State<QrScanPage> {
     final res = await _ctrl.analyzeImage(x.path);
     final codes = res?.barcodes ?? const <Barcode>[];
     if (codes.isEmpty || codes.first.rawValue == null) {
-      if (mounted) toast(context, 'QR در تصویر پیدا نشد', error: true);
+      if (mounted) toast(context, tr('QR در تصویر پیدا نشد', 'No QR code found in the image'), error: true);
       return;
     }
     _finish(codes.first.rawValue);
@@ -49,7 +50,7 @@ class _QrScanPageState extends State<QrScanPage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        title: const Text('اسکن QR', style: TextStyle(fontWeight: FontWeight.w800)),
+        title: Text(tr('اسکن QR', 'Scan QR'), style: const TextStyle(fontWeight: FontWeight.w800)),
         actions: [
           IconButton(onPressed: () => _ctrl.toggleTorch(), icon: const Icon(Icons.flash_on_rounded)),
           IconButton(onPressed: () => _ctrl.switchCamera(), icon: const Icon(Icons.cameraswitch_rounded)),
@@ -78,7 +79,7 @@ class _QrScanPageState extends State<QrScanPage> {
           left: 24,
           right: 24,
           bottom: 36,
-          child: LuxButton(label: 'انتخاب QR از گالری', icon: Icons.photo_library_rounded, onTap: _gallery),
+          child: LuxButton(label: tr('انتخاب QR از گالری', 'Pick QR from gallery'), icon: Icons.photo_library_rounded, onTap: _gallery),
         ),
       ]),
     );
