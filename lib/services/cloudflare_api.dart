@@ -223,7 +223,13 @@ class CloudflareApi {
         return await f();
       } on CfException catch (e) {
         if (e.needsAccountId) rethrow;
-        throw CfException('${tr(fa, en)} — ${e.message}');
+        final m = e.message;
+        final perm = m.contains('No access') || m.contains('10000') || m.contains('9109');
+        throw CfException('${tr(fa, en)} — $m' +
+            (perm
+                ? tr('\nتوکن اجازه ساخت ورکر روی این اکانت را ندارد. در توکن باید Account › Workers Scripts › Edit باشد و در Account Resources همین اکانت انتخاب شده باشد. یا از دکمه «ورکر دستی» استفاده کنید که توکن لازم ندارد.',
+                    '\nThe token may not deploy workers on this account. It needs Account › Workers Scripts › Edit with this account under Account Resources. Or use "Manual worker", which needs no token.')
+                : ''));
       } catch (e) {
         throw CfException('${tr(fa, en)} — $e');
       }

@@ -151,21 +151,74 @@ class _TokensPageState extends State<TokensPage> {
     await _setup(a);
   }
 
+  /// Manual worker: the user pastes our script into the Cloudflare
+  /// dashboard (works without any API token), then gives us the host.
   Future<void> _addManual() async {
-    final host = await askText(context, title: tr('هاست ورکر', 'Worker host'), label: 'host', hint: 'name.user.workers.dev');
-    if (host == null || host.trim().isEmpty || !mounted) return;
-    final uuid = await askText(context, title: tr('UUID ورکر', 'Worker UUID'), label: 'UUID');
-    if (uuid == null || uuid.trim().isEmpty) return;
+    final uuid = randomUuid();
+    final template = await rootBundle.loadString('assets/worker.js');
+    final script = template.replaceAll('__UUID__', uuid).replaceAll('__PROXYIP__', '');
+    if (!mounted) return;
+    final go = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: pal.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22), side: BorderSide(color: pal.border)),
+        title: Text(tr('ساخت ورکر بدون توکن', 'Worker without a token'), style: TextStyle(color: pal.text, fontWeight: FontWeight.w800)),
+        content: SingleChildScrollView(
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text(
+              tr(
+                '۱. دکمه زیر را بزنید تا کد ورکر کپی شود.\n'
+                    '۲. در dash.cloudflare.com وارد Workers & Pages شوید ← Create ← Create Worker (Hello World) ← Deploy.\n'
+                    '۳. روی Edit code بزنید، همه کد را پاک کنید، کد کپی‌شده را Paste و Deploy کنید.\n'
+                    '۴. آدرس ورکر (مثل name.xxx.workers.dev) را کپی کنید و در مرحله بعد وارد کنید.',
+                '1. Tap the button below to copy the worker code.\n'
+                    '2. On dash.cloudflare.com open Workers & Pages → Create → Create Worker (Hello World) → Deploy.\n'
+                    '3. Tap Edit code, delete everything, paste the copied code and Deploy.\n'
+                    '4. Copy the worker address (like name.xxx.workers.dev) and enter it in the next step.',
+              ),
+              style: TextStyle(color: pal.sub, height: 1.8, fontSize: 13),
+            ),
+            const SizedBox(height: 14),
+            LuxButton(
+              label: tr('کپی کد ورکر', 'Copy worker code'),
+              icon: Icons.copy_rounded,
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: script));
+                toast(context, tr('کد ورکر کپی شد', 'Worker code copied'));
+              },
+            ),
+          ]),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('انصراف', 'Cancel'), style: TextStyle(color: pal.sub))),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(tr('ادامه', 'Next'), style: TextStyle(color: pal.primary, fontWeight: FontWeight.w800)),
+          ),
+        ],
+      ),
+    );
+    if (go != true || !mounted) return;
+    final raw = await askText(context, title: tr('آدرس ورکر', 'Worker address'), label: 'host', hint: 'name.xxx.workers.dev');
+    if (raw == null) return;
+    final host = raw.trim().replaceFirst(RegExp(r'^https?://'), '').split('/').first;
+    if (!host.contains('.')) {
+      if (mounted) toast(context, tr('آدرس ورکر نامعتبر است', 'Invalid worker address'), error: true);
+      return;
+    }
     final a = CfAccount(
       id: newId(),
       label: tr('ورکر دستی', 'Manual worker'),
-      workerHost: host.trim(),
-      workerUuid: uuid.trim(),
+      workerHost: host,
+      workerUuid: uuid,
       status: 'manual',
       createdAt: DateTime.now().millisecondsSinceEpoch,
     );
     await app.upsertAccount(a);
+    if (mounted) toast(context, tr('ورکر اضافه شد ✓ حالا از تب رایگان کانفیگ بگیرید', 'Worker added ✓ Now get configs in the Free tab'));
   }
+
 
   Future<void> _delete(CfAccount a) async {
     final ok = await confirm(context, tr('حذف توکن', 'Delete token'), tr('«${a.label}» حذف شود؟ ورکر ساخته‌شده هم از اکانت کلودفلر پاک می‌شود.', 'Delete "${a.label}"? Its worker is also removed from Cloudflare.'), ok: tr('حذف', 'Delete'));
