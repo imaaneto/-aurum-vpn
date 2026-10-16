@@ -102,8 +102,9 @@ def bump_wrapper(minimum):
 def patch_gradle_properties():
     p = os.path.join(ANDROID, "gradle.properties")
     s = read(p) if os.path.exists(p) else ""
-    if "enableUncompressedNativeLibs" not in s:
-        s = s.rstrip() + "\nandroid.bundle.enableUncompressedNativeLibs=false\n"
+    # Removed in AGP 8.1+; keep the file clean if a template adds it.
+    if "enableUncompressedNativeLibs" in s:
+        s = "\n".join(l for l in s.splitlines() if "enableUncompressedNativeLibs" not in l) + "\n"
         write(p, s)
 
 
