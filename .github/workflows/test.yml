@@ -37,8 +37,9 @@ jobs:
           go get github.com/xtls/xray-core@v1.260327.1-0.20261010092107-701af60772cd
           go mod tidy
           go build -o delaytest .
-          ./delaytest ../../out/configs || true
-          ./delaytest ../../out/loadonly load || true
+          ./delaytest ../../out/configs > ../../out/harness.log 2>&1 || true
+          ./delaytest ../../out/loadonly load >> ../../out/harness.log 2>&1 || true
+          tail -c 3000 ../../out/harness.log
           cd ../..
           python3 tool/report.py
 

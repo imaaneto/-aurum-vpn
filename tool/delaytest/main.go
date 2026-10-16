@@ -94,6 +94,11 @@ func main() {
 			defer wg.Done()
 			sem <- struct{}{}
 			defer func() { <-sem }()
+			defer func() {
+				if p := recover(); p != nil {
+					results[i] = result{File: filepath.Base(f), Delay: -1, Error: fmt.Sprintf("PANIC: %v", p)}
+				}
+			}()
 			b, _ := os.ReadFile(f)
 			d, err := measure(string(b), url)
 			r := result{File: filepath.Base(f), Delay: d}
