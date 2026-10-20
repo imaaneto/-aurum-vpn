@@ -145,7 +145,7 @@ def patch_gradle_properties():
 def patch_manifest():
     p = os.path.join(ANDROID, "app", "src", "main", "AndroidManifest.xml")
     s = read(p)
-    s = re.sub(r'android:label="[^"]*"', 'android:label="Aida VPN"', s, count=1)
+    s = re.sub(r'android:label="[^"]*"', 'android:label="No VPN"', s, count=1)
     if "xmlns:tools" not in s:
         s = s.replace("<manifest ", '<manifest xmlns:tools="http://schemas.android.com/tools" ', 1)
     # No cloud/adb backups of settings and tokens.

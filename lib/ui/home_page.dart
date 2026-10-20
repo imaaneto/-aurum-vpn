@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
               Row(children: [
                 Image.asset('assets/logo.png', width: 40, height: 40),
                 const SizedBox(width: 8),
-                const GradientText('Aida VPN', size: 24),
+                const GradientText('No VPN', size: 24),
                 const Spacer(),
                 Badge2(
                   vpn.ready ? 'Xray ${vpn.coreVersion}' : tr('آماده‌سازی هسته...', 'Starting core...'),

@@ -130,6 +130,8 @@ class AppState extends ChangeNotifier {
           .map((e) => WarpAccount.fromJson((e as Map).cast<String, dynamic>()))
           .toList();
     } catch (_) {}
+    // Cloudflare features are disabled; drop configs they created earlier.
+    configs.removeWhere((c) => c.group == Groups.freeCf);
     final sel = p.getString('selected');
     selectedId = (sel == null || sel.isEmpty) ? null : sel;
     try {

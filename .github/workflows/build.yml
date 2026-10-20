@@ -1,4 +1,4 @@
-name: Build Aida VPN
+name: Build No VPN
 
 on:
   push:
@@ -47,10 +47,10 @@ jobs:
           flutter build apk --release --split-per-abi 2>&1 | tee build.log
           flutter build apk --release
           cd build/app/outputs/flutter-apk
-          mv app-release.apk AidaVPN-universal.apk
-          mv app-arm64-v8a-release.apk AidaVPN-arm64-v8a.apk
-          mv app-armeabi-v7a-release.apk AidaVPN-armeabi-v7a.apk
-          mv app-x86_64-release.apk AidaVPN-x86_64.apk
+          mv app-release.apk NoVPN-universal.apk
+          mv app-arm64-v8a-release.apk NoVPN-arm64-v8a.apk
+          mv app-armeabi-v7a-release.apk NoVPN-armeabi-v7a.apk
+          mv app-x86_64-release.apk NoVPN-x86_64.apk
           ls -la
 
       - name: Save logs on failure
@@ -66,16 +66,16 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AidaVPN-android
-          path: build/app/outputs/flutter-apk/AidaVPN-*.apk
+          name: NoVPN-android
+          path: build/app/outputs/flutter-apk/NoVPN-*.apk
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
-          name: Aida VPN build ${{ github.run_number }}
+          name: No VPN build ${{ github.run_number }}
           body: |
-            اکثر گوشی‌ها: AidaVPN-arm64-v8a.apk
-            گوشی‌های قدیمی: AidaVPN-armeabi-v7a.apk
-            اگر مطمئن نیستید: AidaVPN-universal.apk
-          files: build/app/outputs/flutter-apk/AidaVPN-*.apk
+            اکثر گوشی‌ها: NoVPN-arm64-v8a.apk
+            گوشی‌های قدیمی: NoVPN-armeabi-v7a.apk
+            اگر مطمئن نیستید: NoVPN-universal.apk
+          files: build/app/outputs/flutter-apk/NoVPN-*.apk

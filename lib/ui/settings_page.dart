@@ -5,7 +5,6 @@ import '../services/free_engine.dart';
 import '../store.dart';
 import 'logs_page.dart';
 import 'theme.dart';
-import 'tokens_page.dart';
 import 'widgets.dart';
 import 'xdns_page.dart';
 
@@ -80,10 +79,6 @@ class SettingsPage extends StatelessWidget {
               ]),
             ),
             SectionTitle(tr('کانفیگ رایگان', 'Free configs')),
-            _nav(context, Icons.key_rounded, '${tr('مدیریت توکن کلودفلر', 'Cloudflare tokens')} (${num2(app.accounts.length)})', const TokensPage()),
-            const SizedBox(height: 10),
-            _field(context, tr('آی‌پی‌های تمیز کلودفلر (اختیاری)', 'Clean Cloudflare IPs (optional)'), s.cleanIps, (v) => s.cleanIps = v,
-                hint: tr('هر آی‌پی در یک خط یا با کاما', 'One per line or comma separated'), lines: 3),
             _field(
               context,
               tr('منابع کانفیگ عمومی (خالی = پیش‌فرض)', 'Public config sources (empty = default)'),
@@ -103,12 +98,12 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text('Aida VPN 1.3.0', style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
+                    Text('No VPN 1.4.0', style: TextStyle(color: p.text, fontWeight: FontWeight.w800)),
                     const SizedBox(height: 4),
                     Text('Xray ${app.vpn.coreVersion.isEmpty ? '—' : app.vpn.coreVersion}', style: TextStyle(color: p.sub)),
                     const SizedBox(height: 4),
                     Text(
-                      'VLESS · VMess · Trojan · Shadowsocks · Hysteria2 · WireGuard/WARP · XDNS · Xray JSON',
+                      'VLESS · VMess · Trojan · Shadowsocks · Hysteria2 · WireGuard · XDNS · Xray JSON',
                       style: TextStyle(color: p.sub, fontSize: 11.5, height: 1.6),
                     ),
                   ]),

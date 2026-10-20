@@ -9,18 +9,26 @@ import '../core/pool.dart';
 import '../i18n.dart';
 import '../models.dart';
 import '../store.dart';
-import 'cloudflare_api.dart';
-import 'warp.dart';
 
 /// Public config lists (checked to be live). Editable in settings.
 const defaultFreeSources = [
   'https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt',
   'https://raw.githubusercontent.com/barry-far/V2ray-Config/main/Sub1.txt',
   'https://raw.githubusercontent.com/barry-far/V2ray-Config/main/Sub2.txt',
+  'https://raw.githubusercontent.com/barry-far/V2ray-Config/main/Sub3.txt',
   'https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub1.txt',
   'https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub2.txt',
+  'https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Sub3.txt',
   'https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/subs/sub1.txt',
   'https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/subs/sub2.txt',
+  'https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/subs/sub3.txt',
+  'https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/mix',
+  'https://raw.githubusercontent.com/Kolandone/v2raycollector/main/config.txt',
+  'https://raw.githubusercontent.com/Danialsamadi/v2go/main/AllConfigsSub.txt',
+  'https://raw.githubusercontent.com/10ium/ScrapeAndCategorize/main/output_configs/Trojan.txt',
+  'https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/main/splitted-by-protocol/vless.txt',
+  'https://raw.githubusercontent.com/ShatakVPN/ConfigForge-V2Ray/main/configs/vless.txt',
+  'https://raw.githubusercontent.com/Mahdi0024/ProxyCollector/master/sub/proxies.txt',
   'https://raw.githubusercontent.com/NiREvil/vless/main/sub/SSTime',
   'https://raw.githubusercontent.com/Rayan-Config/C-Sub/main/configs/proxy.txt',
   'https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/main/mix/sub.html',
@@ -29,7 +37,6 @@ const defaultFreeSources = [
   'https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt',
   'https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt',
   'https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs.txt',
-  'https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt',
 ];
 
 /// Mirror URLs for a GitHub raw file; the first one to answer wins.
@@ -75,7 +82,7 @@ class FreeEngine extends ChangeNotifier {
   final AppState app;
 
   static const cfTarget = 10;
-  static const publicTarget = 20;
+  static const publicTarget = 30;
 
   _Run? _run;
   bool get running => _run != null && !_run!.stopped;
@@ -107,16 +114,6 @@ class FreeEngine extends ChangeNotifier {
     _notify();
   }
 
-  void _addCf(_Run run, VpnConfig c) {
-    if (run.stopped || cfFull) return;
-    final i = cfSlots.indexOf(null);
-    if (i < 0) return;
-    c.group = Groups.freeCf;
-    cfSlots[i] = c;
-    app.addConfigs([c]);
-    _notify();
-  }
-
   /// Stops instantly; anything still in flight is discarded.
   void stop() {
     final r = _run;
@@ -124,7 +121,6 @@ class FreeEngine extends ChangeNotifier {
     r.stopped = true;
     watch.stop();
     _ticker?.cancel();
-    if (!cfFull) cfStage = tr('متوقف شد', 'Stopped');
     if (!publicFull) publicStage = tr('متوقف شد', 'Stopped');
     app.saveConfigs();
     _notify();
@@ -150,7 +146,6 @@ class FreeEngine extends ChangeNotifier {
       ..start();
     _ticker?.cancel();
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) => _notify());
-    app.clearGroup(Groups.freeCf);
     app.clearGroup(Groups.freePublic);
     _notify();
 
@@ -163,8 +158,7 @@ class FreeEngine extends ChangeNotifier {
     }
 
     await Future.wait([
-      guard(() => _cloudflare(run), (e) => cfStage = '${tr('خطا', 'Error')}: $e'),
-      guard(() => _public(run), (e) => publicStage = '${tr('خطا', 'Error')}: $e'),
+            guard(() => _public(run), (e) => publicStage = '${tr('خطا', 'Error')}: $e'),
     ]);
 
     if (run.stopped) return;
@@ -173,164 +167,6 @@ class FreeEngine extends ChangeNotifier {
     _ticker?.cancel();
     await app.saveConfigs();
     _notify();
-  }
-
-  // ------------------------------------------------------------ Cloudflare
-
-  Future<void> _cloudflare(_Run run) async {
-    final tokenAccs = app.accounts.where((a) => a.token.isNotEmpty || a.hasWorker).toList();
-    final hasWorkerSide = tokenAccs.isNotEmpty;
-    await Future.wait([
-      _warp(run, cap: hasWorkerSide ? 5 : cfTarget),
-      if (hasWorkerSide) _worker(run, tokenAccs),
-    ]);
-    // Top up with WARP only when WARP actually works on this network.
-    if (!cfFull && !run.stopped && _countWhere('wireguard') > 0) {
-      await _warp(run, cap: cfTarget, rounds: 2);
-    }
-    if (!run.stopped && cfCount == 0) {
-      _log(run, tr('کلودفلر: روی این اینترنت WARP و ورکر جواب ندادند. اگر ورکر تازه ساخته شده، چند دقیقه بعد دوباره امتحان کنید.',
-          'Cloudflare: neither WARP nor the worker answered on this network. If the worker is new, retry in a few minutes.'));
-    }
-    if (run.stopped) return;
-    cfStage = cfFull
-        ? tr('۱۰ کانفیگ کلودفلر ساخته و ایمپورت شد ✓', '10 Cloudflare configs built and imported ✓')
-        : tr('${num2(cfCount)} کانفیگ سالم کلودفلر ساخته شد', '$cfCount working Cloudflare configs built');
-    _notify();
-  }
-
-  int _countWhere(String proto) => cfSlots.whereType<VpnConfig>().where((c) => c.protocol == proto).length;
-
-  Future<WarpAccount?> _tryRegister() async {
-    try {
-      return await WarpService.register();
-    } catch (_) {
-      return null;
-    }
-  }
-
-  Future<void> _warp(_Run run, {required int cap, int rounds = 4}) async {
-    if (run.stopped || cfFull) return;
-    cfStage = tr('ثبت اکانت رایگان WARP ...', 'Registering free WARP accounts...');
-    _notify();
-    final fresh = (await Future.wait(List.generate(3, (_) => _tryRegister()))).whereType<WarpAccount>().toList();
-    if (run.stopped) return;
-    var accs = fresh;
-    if (fresh.isNotEmpty) {
-      await app.addWarps(fresh);
-      _log(run, tr('WARP: ${num2(fresh.length)} اکانت جدید ثبت شد', 'WARP: ${fresh.length} new accounts registered'));
-    } else {
-      accs = app.warps;
-      _log(run, tr('WARP: ثبت جدید ممکن نشد، از اکانت‌های ذخیره‌شده استفاده می‌شود', 'WARP: registration failed, using saved accounts'));
-    }
-    if (accs.isEmpty) {
-      cfStage = tr('API ثبت WARP در دسترس نیست (فیلتر است)', 'WARP registration API is unreachable');
-      _notify();
-      return;
-    }
-    for (var round = 0; round < rounds; round++) {
-      if (run.stopped || cfFull || _countWhere('wireguard') >= cap) break;
-      cfStage = tr('تست اندپوینت‌های WARP (دور ${num2(round + 1)}) ...', 'Testing WARP endpoints (round ${round + 1})...');
-      _notify();
-      final cands = <VpnConfig>[];
-      for (var i = 0; i < 16; i++) {
-        final link = WarpService.linkFor(
-          accs[i % accs.length],
-          ip: WarpService.randomEndpointIp(),
-          port: WarpService.randomPort(),
-          name: 'WARP',
-        );
-        final c = configFromLink(link, Groups.freeCf);
-        if (c != null) cands.add(c);
-      }
-      await runPool<VpnConfig>(cands, 16, (c) async {
-        final d = await app.realDelay(c, cancelled: () => run.stopped);
-        if (run.stopped) return;
-        cfTested++;
-        if (d > 0 && !cfFull && _countWhere('wireguard') < cap) {
-          c.delay = d;
-          c.name = '☁ WARP ${c.host}:${c.port}';
-          _addCf(run, c);
-          _log(run, 'WARP ✓ ${c.host}:${c.port}  ${d}ms');
-        } else {
-          _notify();
-        }
-      }, shouldStop: () => run.stopped || cfFull || _countWhere('wireguard') >= cap);
-    }
-  }
-
-  Future<void> _worker(_Run run, List<CfAccount> accs) async {
-    for (final a in accs.where((a) => !a.hasWorker && a.token.isNotEmpty)) {
-      if (run.stopped) return;
-      try {
-        await CloudflareApi.setup(a, onStep: (s) {
-          if (run.stopped) return;
-          cfStage = '${a.label}: $s';
-          _notify();
-        });
-        await app.upsertAccount(a);
-        await Future.delayed(const Duration(seconds: 6));
-      } catch (e) {
-        a.status = 'invalid';
-        a.lastError = '$e';
-        await app.upsertAccount(a);
-        _log(run, '${a.label}: $e');
-      }
-    }
-    final hosts = accs.where((a) => a.hasWorker && !a.workerHost.contains('cloudflare.com')).toList();
-    if (hosts.isEmpty || run.stopped) return;
-    _log(run, tr('ورکرها: ${hosts.map((h) => h.workerHost).join('، ')}', 'Workers: ${hosts.map((h) => h.workerHost).join(', ')}'));
-
-    cfStage = tr('اسکن آی‌پی تمیز کلودفلر ...', 'Scanning clean Cloudflare IPs...');
-    _notify();
-    final userIps = app.settings.cleanIps
-        .split(RegExp(r'[\s,]+'))
-        .map((e) => e.trim())
-        .where((e) => e.isNotEmpty)
-        .toList();
-    final pool = [...userIps, ...randomCloudflareIps(120)];
-    final scored = <MapEntry<String, int>>[];
-    await runPool<String>(pool, 60, (ip) async {
-      final t = await tcpPing(ip, 443, timeout: const Duration(milliseconds: 1200));
-      if (t > 0) scored.add(MapEntry(ip, t));
-    }, shouldStop: () => run.stopped);
-    if (run.stopped) return;
-    scored.sort((a, b) => a.value.compareTo(b.value));
-    var ips = scored.map((e) => e.key).take(30).toList();
-    if (ips.isEmpty) ips = pool.take(20).toList();
-    _log(run, tr('آی‌پی تمیز: ${num2(scored.length)} پاسخ داد', 'Clean IPs: ${scored.length} responded'));
-
-    // TLS ports only: the core refuses plain VLESS to public addresses.
-    const portCycle = [443, 8443, 2053, 2096, 2083, 2087];
-    final cands = <VpnConfig>[];
-    for (var i = 0; i < ips.length; i++) {
-      final a = hosts[i % hosts.length];
-      final link = buildWorkerVlessLink(
-        uuid: a.workerUuid,
-        host: a.workerHost,
-        address: ips[i],
-        port: portCycle[i % portCycle.length],
-        name: 'Worker',
-        fragment: i.isEven,
-      );
-      final c = configFromLink(link, Groups.freeCf);
-      if (c != null) cands.add(c);
-    }
-    cfStage = tr('تست کانفیگ‌های ورکر ...', 'Testing worker configs...');
-    _notify();
-    await runPool<VpnConfig>(cands, 12, (c) async {
-      final d = await app.realDelay(c, cancelled: () => run.stopped);
-      if (run.stopped) return;
-      cfTested++;
-      if (d > 0 && !cfFull) {
-        c.delay = d;
-        c.name = '⚡ Worker${c.link.contains('aida_frag') ? '+frag' : ''} ${c.host}:${c.port}';
-        _addCf(run, c);
-        _log(run, 'Worker ✓ ${c.host}:${c.port}  ${d}ms');
-      } else {
-        _notify();
-      }
-    }, shouldStop: () => run.stopped || cfFull);
   }
 
   // ------------------------------------------------------------ public lists

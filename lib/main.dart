@@ -36,7 +36,7 @@ class AidaApp extends StatelessWidget {
           systemNavigationBarIconBrightness: p.dark ? Brightness.light : Brightness.dark,
         ));
         return MaterialApp(
-          title: 'Aida VPN',
+          title: 'No VPN',
           debugShowCheckedModeBanner: false,
           theme: buildTheme(p),
           locale: Locale(appLang),
