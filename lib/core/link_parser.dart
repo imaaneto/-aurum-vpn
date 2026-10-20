@@ -224,8 +224,22 @@ String normalizeLink(String link) {
 }
 
 /// Builds a config entry (metadata only) from a share link.
+final RegExp _uuidRe = RegExp(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+
+/// Some collectors label VLESS links as ss:// (UUID user + encryption param).
+String _fixMislabeled(String link) {
+  if (!link.toLowerCase().startsWith('ss://')) return link;
+  final p = _split(link);
+  if (p == null || !p.authority.contains('@')) return link;
+  final user = p.authority.substring(0, p.authority.lastIndexOf('@'));
+  if (_uuidRe.hasMatch(user) && p.params.containsKey('encryption')) {
+    return 'vless://${link.substring(5)}';
+  }
+  return link;
+}
+
 VpnConfig? configFromLink(String raw, String group) {
-  final link = raw.trim();
+  final link = _fixMislabeled(raw.trim());
   final p = _split(link);
   if (p == null) return null;
   final proto = normalizeScheme(p.scheme);
@@ -317,7 +331,10 @@ bool coreRejects(String proto, String link, String host) {
     final np = _split(norm);
     if (np != null && np.authority.contains('@')) {
       final mp = tryBase64(np.authority.substring(0, np.authority.lastIndexOf('@'))) ?? '';
-      final method = mp.split(':').first.toLowerCase();
+      final i = mp.indexOf(':');
+      if (i <= 0 || i == mp.length - 1) return true; // no method or password
+      final method = mp.substring(0, i).toLowerCase();
+      if (!RegExp(r'^[a-z0-9-]+$').hasMatch(method)) return true;
       if (_deadSsCiphers.contains(method)) return true;
     }
   }
