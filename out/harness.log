@@ -1,0 +1,777 @@
+2026/10/20 17:07:20.175845 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:20.175993 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:20.176003 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:20.176007 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.176071 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:20.176075 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:20.176078 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.176081 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:20.176084 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.177821 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.177939 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.177953 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.177964 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.177967 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178301 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178380 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178390 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178401 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.178418 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178422 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178436 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178439 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178619 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178744 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178752 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178755 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178758 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:20.178761 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.178939 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.179057 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.179327 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.179627 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.179865 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.179956 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:20.179965 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.180811 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.182428 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.188550 [Error] transport/internet/websocket: failed to dial to 104.16.7.70:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.190094 [Error] transport/internet/websocket: failed to dial to 104.18.12.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.197063 [Error] transport/internet/websocket: failed to dial to 104.16.7.70:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.197548 [Error] transport/internet/websocket: failed to dial to 104.18.12.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.265768 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.265894 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.308140 [Error] transport/internet/websocket: failed to dial to 104.16.7.70:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.308165 [Error] transport/internet/websocket: failed to dial to 104.18.12.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.318797 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:20.318812 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:20.318815 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.318973 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.330741 [Error] transport/internet/websocket: failed to dial to 104.16.174.121:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.340958 [Error] transport/internet/websocket: failed to dial to 104.16.174.121:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.396358 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:20.396448 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:20.449040 [Error] transport/internet/websocket: failed to dial to 104.16.174.121:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.517126 [Error] transport/internet/websocket: failed to dial to 104.18.12.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.521570 [Error] transport/internet/websocket: failed to dial to 104.16.7.70:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.658422 [Error] transport/internet/websocket: failed to dial to 104.16.174.121:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.826926 [Error] transport/internet/websocket: failed to dial to 104.18.12.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.834103 [Error] transport/internet/websocket: failed to dial to 104.16.7.70:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:20.966018 [Error] transport/internet/websocket: failed to dial to 104.16.174.121:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:21.087838 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:21.087863 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:21.087866 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.087973 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.227975 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.228073 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.234673 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:21.234684 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:21.234687 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.234697 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.308721 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:21.308736 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:21.308738 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.308892 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.367251 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.367360 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.468981 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:21.469000 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:21.469003 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:21.469124 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:21.476354 [Error] transport/internet/websocket: failed to dial to 190.93.245.148:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:21.482976 [Error] transport/internet/websocket: failed to dial to 190.93.245.148:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:21.590286 [Error] transport/internet/websocket: failed to dial to 190.93.245.148:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:21.802841 [Error] transport/internet/websocket: failed to dial to 190.93.245.148:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.113159 [Error] transport/internet/websocket: failed to dial to 190.93.245.148:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.132349 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:22.132363 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:22.132365 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.132481 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.197492 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:22.197506 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:22.197509 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.197614 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.204742 [Error] transport/internet/websocket: failed to dial to 185.18.250.245:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.211991 [Error] transport/internet/websocket: failed to dial to 185.18.250.245:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.282180 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.282281 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.321315 [Error] transport/internet/websocket: failed to dial to 185.18.250.245:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.405822 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:22.405838 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:22.405841 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.405974 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.514324 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.514419 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.530323 [Error] transport/internet/websocket: failed to dial to 185.18.250.245:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.836787 [Error] transport/internet/websocket: failed to dial to 185.18.250.245:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.845735 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:22.845747 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:22.845867 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:22.846019 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:22.861461 [Error] transport/internet/websocket: failed to dial to 104.18.35.86:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.878888 [Error] transport/internet/websocket: failed to dial to 104.18.35.86:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:22.991760 [Error] transport/internet/websocket: failed to dial to 104.18.35.86:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:23.194283 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:23.194299 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:23.194302 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:23.194416 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:23.198840 [Error] transport/internet/websocket: failed to dial to 151.101.56.56:443 > read tcp 10.1.1.159:45248->151.101.56.56:443: read: connection reset by peer
+2026/10/20 17:07:23.201854 [Error] transport/internet/websocket: failed to dial to 151.101.56.56:443 > read tcp 10.1.1.159:45254->151.101.56.56:443: read: connection reset by peer
+2026/10/20 17:07:23.202668 [Error] transport/internet/websocket: failed to dial to 104.18.35.86:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:23.237695 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:23.237787 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:23.269681 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:23.269693 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:23.269696 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:23.269764 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:23.305761 [Error] transport/internet/websocket: failed to dial to 151.101.56.56:443 > read tcp 10.1.1.159:45268->151.101.56.56:443: read: connection reset by peer
+2026/10/20 17:07:23.510866 [Error] transport/internet/websocket: failed to dial to 104.18.35.86:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:23.512432 [Error] transport/internet/websocket: failed to dial to 151.101.56.56:443 > read tcp 10.1.1.159:45270->151.101.56.56:443: read: connection reset by peer
+2026/10/20 17:07:23.538477 [Error] transport/internet/websocket: failed to dial to 46.62.230.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:23.802952 [Error] transport/internet/websocket: failed to dial to 46.62.230.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:23.817835 [Error] transport/internet/websocket: failed to dial to 151.101.56.56:443 > read tcp 10.1.1.159:45284->151.101.56.56:443: read: connection reset by peer
+2026/10/20 17:07:23.912192 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:23.922365 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:24.011446 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:24.175844 [Error] transport/internet/websocket: failed to dial to 46.62.230.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:24.219916 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:24.219935 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:24.220326 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:24.232729 [Error] transport/internet/websocket: failed to dial to 104.16.80.73:443 > remote error: tls: handshake failure
+2026/10/20 17:07:24.240660 [Error] transport/internet/websocket: failed to dial to 104.16.80.73:443 > remote error: tls: handshake failure
+2026/10/20 17:07:24.245596 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:24.448008 [Error] transport/internet/websocket: failed to dial to 104.16.80.73:443 > remote error: tls: handshake failure
+2026/10/20 17:07:24.651107 [Error] transport/internet/websocket: failed to dial to 46.62.230.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:24.854805 [Error] transport/internet/websocket: failed to dial to 104.16.80.73:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.182235 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.182252 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.182304 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.182331 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.183797 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.183807 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.183885 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.183997 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.184002 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.184125 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.184131 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.184400 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:25.184595 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.184634 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.184638 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.184642 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.184795 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.184814 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.184800 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.185022 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.190156 [Error] transport/internet/websocket: failed to dial to 154.92.9.2:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.197144 [Error] transport/internet/websocket: failed to dial to 154.92.9.2:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.217572 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.217583 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.217681 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.221688 [Error] transport/internet/websocket: failed to dial to 46.62.230.149:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:25.270371 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.270385 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.296739 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.303597 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.404467 [Error] transport/internet/websocket: failed to dial to 154.92.9.2:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.464562 [Error] transport/internet/websocket: failed to dial to 104.16.80.73:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.622304 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.622322 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.622446 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.642746 [Error] transport/internet/websocket: failed to dial to 104.21.73.239:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.662347 [Error] transport/internet/websocket: failed to dial to 104.21.73.239:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.691251 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.691265 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.691384 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.755125 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.816868 [Error] transport/internet/websocket: failed to dial to 154.92.9.2:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.879701 [Error] transport/internet/websocket: failed to dial to 104.21.73.239:443 > remote error: tls: handshake failure
+2026/10/20 17:07:25.938580 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:25.938745 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:25.971055 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:25.971082 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:25.971198 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:26.013452 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:26.181437 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:26.181455 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:26.181581 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:26.265266 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:26.299086 [Error] transport/internet/websocket: failed to dial to 104.21.73.239:443 > remote error: tls: handshake failure
+2026/10/20 17:07:26.399449 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:26.423165 [Error] transport/internet/websocket: failed to dial to 154.92.9.2:443 > remote error: tls: handshake failure
+2026/10/20 17:07:26.923571 [Error] transport/internet/websocket: failed to dial to 104.21.73.239:443 > remote error: tls: handshake failure
+2026/10/20 17:07:26.977551 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:26.977570 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:26.977680 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.224809 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.235804 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.393886 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.522768 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.670716 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:27.670732 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:27.670878 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:27.724427 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.010494 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.115819 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.133797 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.171643 [Error] transport/internet/reality: REALITY: received real certificate (potential MITM or redirection)
+2026/10/20 17:07:28.251692 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.364434 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.424378 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.605231 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.645512 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:28.645529 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:28.645657 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.660605 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.689479 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.798664 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:28.813470 [Error] transport/internet/reality: REALITY: received real certificate (potential MITM or redirection)
+2026/10/20 17:07:28.924077 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.058176 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.123617 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.245501 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.513295 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.516258 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.547177 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.574602 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.579912 [Error] transport/internet/reality: REALITY: received real certificate (potential MITM or redirection)
+2026/10/20 17:07:29.815327 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:29.815343 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:29.815469 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.913056 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:29.913077 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:29.913204 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:29.939136 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:30.012721 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:30.012740 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:30.012792 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:30.013061 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:30.064257 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:30.064278 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:30.064282 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:30.064398 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:30.216636 [Error] transport/internet/websocket: failed to dial to 185.71.67.212:443 > tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match 4861b6a1d8.cacheio.ru
+2026/10/20 17:07:30.471189 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:30.471225 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:30.471228 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:30.471331 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:30.612533 [Error] transport/internet/websocket: failed to dial to 185.71.67.212:443 > tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match 4861b6a1d8.cacheio.ru
+2026/10/20 17:07:30.640587 [Error] transport/internet/reality: REALITY: received real certificate (potential MITM or redirection)
+2026/10/20 17:07:30.986277 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:30.986298 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:30.986301 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:30.986413 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.183183 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.183202 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.183206 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.183361 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.185195 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.185205 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.185208 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.185211 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.185213 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.185218 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.185222 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.185225 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.211135 [Error] transport/internet/websocket: failed to dial to 185.71.67.212:443 > tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match 4861b6a1d8.cacheio.ru
+2026/10/20 17:07:31.217145 [Error] transport/internet/websocket: failed to dial to 172.67.179.199:443 > remote error: tls: handshake failure
+2026/10/20 17:07:31.241435 [Error] transport/internet/websocket: failed to dial to 172.67.179.199:443 > remote error: tls: handshake failure
+2026/10/20 17:07:31.270820 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.270833 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.270836 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.270971 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.407196 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.407212 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.407215 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.407323 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.510647 [Error] transport/internet/websocket: failed to dial to 172.67.179.199:443 > remote error: tls: handshake failure
+2026/10/20 17:07:31.736158 [Error] transport/internet/reality: REALITY: received real certificate (potential MITM or redirection)
+2026/10/20 17:07:31.738609 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.738622 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.738625 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.738802 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.755967 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:31.755982 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:31.755986 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.756103 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:31.929360 [Error] transport/internet/websocket: failed to dial to 172.67.179.199:443 > remote error: tls: handshake failure
+2026/10/20 17:07:31.939684 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:31.939807 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.012321 [Error] transport/internet/websocket: failed to dial to 185.71.67.212:443 > tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match 4861b6a1d8.cacheio.ru
+2026/10/20 17:07:32.116353 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.116374 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.116377 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.116497 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.195907 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.195931 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.195934 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.196039 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.266436 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.266455 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.266459 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.266615 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.298151 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.298172 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.298175 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.298282 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.537492 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.537513 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.537516 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.537611 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.549064 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.549089 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.549092 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.549099 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:32.563509 [Error] transport/internet/websocket: failed to dial to 172.67.179.199:443 > remote error: tls: handshake failure
+2026/10/20 17:07:32.978225 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:32.978250 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:32.978253 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:32.978394 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.024048 [Error] transport/internet/websocket: failed to dial to 185.71.67.212:443 > tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match 4861b6a1d8.cacheio.ru
+2026/10/20 17:07:33.238556 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.364157 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:33.364179 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:33.364182 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:33.364297 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.552796 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:33.552941 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.669936 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:33.669956 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:33.669959 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:33.670119 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.725029 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:33.725048 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:33.725050 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:33.725185 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:33.825256 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:33.825387 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:34.030191 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:34.119919 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:34.120089 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:34.512807 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:34.512827 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:34.512830 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:34.512987 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:34.710728 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:34.710853 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:35.049297 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:35.049409 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:35.758028 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:35.758138 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:36.014120 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:36.014140 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:36.014143 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:36.014265 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:36.065286 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:36.065303 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:36.065306 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:36.065423 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:36.196031 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:36.196062 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:36.196064 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:36.196167 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:36.451712 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:36.451831 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:36.472608 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:36.472622 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:36.472625 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:36.472741 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.186440 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.186459 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.186463 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.186466 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.186469 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.186472 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.186475 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.186525 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.186529 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.186532 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.272289 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.272308 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.272313 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.272329 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.272333 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.272336 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.272415 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.272420 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.384900 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.385314 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.407850 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.407864 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.407867 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.407969 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.739477 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.739492 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.739495 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.739628 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.756967 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.756984 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.756987 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.757073 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.903504 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:37.903522 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:37.903525 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.903642 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:37.940642 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:37.940764 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:38.004185 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:38.004206 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:38.004210 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:38.004311 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:38.240450 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:38.240470 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:38.240473 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:38.240579 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:38.277061 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:38.277077 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:38.277080 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:38.277180 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:38.538397 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:38.538530 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:38.550154 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:38.550171 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:39.328399 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:39.328513 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:39.365061 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:39.365077 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:39.365090 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:39.365187 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:39.671603 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:39.671623 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:39.671626 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:39.671717 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:39.725942 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:39.725961 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:39.725963 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:39.726088 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:40.121002 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:40.121115 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:40.388357 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:40.388376 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:40.388379 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:40.388533 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:40.712125 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:40.712144 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:40.712147 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:40.712270 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:40.740230 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:40.740251 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:40.740269 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:40.740383 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.076250 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.076473 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.312357 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.312534 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.364498 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.365132 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.392385 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.392562 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.570913 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.571059 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.696268 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.696448 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.740803 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.740914 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.759197 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.759482 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.798074 [Warning] proxy/wireguard: Using gVisor TUN
+2026/10/20 17:07:41.798219 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.809949 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:41.810035 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.852426 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:41.852534 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:41.961188 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:41.961277 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.030275 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.030297 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.092885 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.092969 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.110613 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.110689 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.197306 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.197419 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.423410 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.423566 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.452941 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.452962 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.473389 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.473411 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.477066 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:42.477077 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.662188 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:42.662283 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.112522 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.112622 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.187902 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.188020 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.256346 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.256450 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.273328 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.273345 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.294077 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.294090 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.386362 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.386381 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.408472 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.408486 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.692173 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.692337 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.740613 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.740702 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.886088 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.886196 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:43.941638 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:43.941676 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:44.241725 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:44.241831 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:44.278384 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:44.278405 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:44.551589 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:44.551705 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:44.987863 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:44.987996 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:45.240469 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:45.240566 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:45.366110 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:45.366252 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:45.823378 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:45.823499 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:46.119867 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:46.120013 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:46.522207 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:46.522304 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:46.712883 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:46.712989 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:47.761007 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:47.761095 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:47.962344 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:47.962450 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.031616 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.031717 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.093791 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.093827 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.198739 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.198807 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.254170 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.254188 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.454372 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.454397 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.474499 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.474518 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.477519 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.477528 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.500621 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.500636 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:48.870114 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:48.870226 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.113078 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.113169 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.189435 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.189501 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.274761 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.274859 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.294874 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.294891 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.387730 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.387837 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.409291 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.409311 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.596046 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.596149 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.693522 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.693635 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.714468 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.714484 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:49.943216 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:49.943330 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.186320 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:50.186393 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.242644 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:50.242724 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.315039 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:50.315055 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:50.315058 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:50.315160 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.420458 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:50.420575 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.552442 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:50.552462 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:50.552465 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:50.552578 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:50.559692 [Error] transport/internet/websocket: failed to dial to 162.159.244.91:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:50.567173 [Error] transport/internet/websocket: failed to dial to 162.159.244.91:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:50.676045 [Error] transport/internet/websocket: failed to dial to 162.159.244.91:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:50.884080 [Error] transport/internet/websocket: failed to dial to 162.159.244.91:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:51.159101 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:51.159133 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:51.159136 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.159250 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.192325 [Error] transport/internet/websocket: failed to dial to 162.159.244.91:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:51.241569 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:51.241587 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:51.241590 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.241690 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.367404 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:51.367422 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:51.367425 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.367520 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.470444 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.470551 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.497935 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:51.497948 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:51.497952 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.498025 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.593860 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.594017 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.717072 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:51.717088 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:51.717104 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.717198 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:51.824626 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:51.824729 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.120731 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.120849 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.523058 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:52.523078 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:52.523082 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.523236 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.663297 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.663391 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.714425 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:52.714447 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.714554 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.820371 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.820486 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:52.867567 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:52.867587 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:52.867695 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:53.106968 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:53.107093 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:53.321691 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:53.321711 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:53.321715 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:53.321833 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:53.422466 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:53.761707 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:53.761822 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.095312 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:54.095330 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:54.095333 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.095444 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.119440 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:54.119454 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:54.119457 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.119537 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.254660 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:54.254681 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.254784 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.455790 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.455892 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.501512 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.501592 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.580961 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:54.580979 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:54.580982 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.581073 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:54.682657 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:54.682688 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:54.682691 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:54.682799 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.019558 [Warning] common/errors: The feature gRPC transport (with unnecessary costs, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP stream-up H2 as soon as possible.
+2026/10/20 17:07:55.019582 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.019705 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.082259 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.082360 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.114256 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.114349 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.190795 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.190814 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.190818 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.190935 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.236100 [Error] transport/internet/websocket: failed to dial to 172.67.149.60:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.263522 [Error] transport/internet/websocket: failed to dial to 172.67.149.60:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.296101 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.296114 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.296116 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.296229 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.332737 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.332750 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.332753 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.332789 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.343320 [Error] transport/internet/websocket: failed to dial to 151.101.1.194:443 > tls: failed to verify certificate: x509: certificate is valid for *.freetls.fastly.net, *.global.ssl.fastly.net, not ssl.fastly.com
+2026/10/20 17:07:55.348089 [Error] transport/internet/websocket: failed to dial to 151.101.1.194:443 > tls: failed to verify certificate: x509: certificate is valid for *.freetls.fastly.net, *.global.ssl.fastly.net, not ssl.fastly.com
+2026/10/20 17:07:55.378350 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.378361 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.378363 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.378505 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.384702 [Error] transport/internet/websocket: failed to dial to 172.67.149.60:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.388269 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.388279 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.388283 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.388395 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.391499 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.391507 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.391511 [Warning] common/errors: The feature Trojan (with no Flow, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS with Flow & Seed as soon as possible.
+2026/10/20 17:07:55.391507 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.393698 [Error] transport/internet/websocket: failed to dial to huxley.ns.cloudflare.com:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.393858 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:07:55.393863 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:07:55.393866 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:07:55.393987 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.411734 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.456452 [Error] transport/internet/websocket: failed to dial to 151.101.1.194:443 > tls: failed to verify certificate: x509: certificate is valid for *.freetls.fastly.net, *.global.ssl.fastly.net, not ssl.fastly.com
+2026/10/20 17:07:55.619034 [Error] transport/internet/websocket: failed to dial to 172.67.149.60:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.663454 [Error] transport/internet/websocket: failed to dial to 151.101.1.194:443 > tls: failed to verify certificate: x509: certificate is valid for *.freetls.fastly.net, *.global.ssl.fastly.net, not ssl.fastly.com
+2026/10/20 17:07:55.667768 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.828257 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.841884 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.871715 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.944546 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:55.953428 [Error] transport/internet/websocket: failed to dial to 172.67.149.60:443 > tls: CurvePreferences includes unsupported curve
+2026/10/20 17:07:55.970040 [Error] transport/internet/websocket: failed to dial to 151.101.1.194:443 > tls: failed to verify certificate: x509: certificate is valid for *.freetls.fastly.net, *.global.ssl.fastly.net, not ssl.fastly.com
+2026/10/20 17:07:56.015173 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.151658 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.184013 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.187079 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.243770 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.354452 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.371464 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.448467 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.476910 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.602060 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:56.619286 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:57.303606 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:57.523213 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:58.388591 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:58.664170 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:58.715584 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:07:58.868399 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:00.255595 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:00.413481 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:00.669426 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:00.829651 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:00.873699 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:01.017423 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:01.020214 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:01.153064 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:01.389455 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.184651 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.187547 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.244676 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.355521 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.372476 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.449837 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.478308 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.603174 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:02.620184 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:03.304669 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:03.524682 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:08:03.524803 [Warning] core: Xray 26.10.10 started
+2026/10/20 17:08:04.389821 [Warning] common/errors: The feature Shadowsocks (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+2026/10/20 17:08:04.389861 [Warning] core: Xray 26.10.10 started
+total=311 ok=44 config_errors=2
+2026/10/20 17:08:10.403650 [Warning] common/errors: The feature WebSocket transport (with ALPN http/1.1, etc.) is deprecated, not recommended for using and might be removed. Please migrate to XHTTP H2 & H3 as soon as possible.
+2026/10/20 17:08:10.403665 [Warning] common/errors: This feature "host" in "headers" is deprecated, will be removed soon and being migrated to independent "host". Please update your config(s) according to release note and documentation before removal.
+2026/10/20 17:08:10.403669 [Info] infra/conf: t.example.com. 147
+2026/10/20 17:08:10.403729 [Warning] common/errors: The feature VMess (with no Forward Secrecy, etc.) is deprecated, not recommended for using and might be removed. Please migrate to VLESS Encryption as soon as possible.
+total=2 ok=2 config_errors=0

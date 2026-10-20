@@ -1,0 +1,10 @@
+[
+ {
+  "file": "workerfrag.json",
+  "delay": 1
+ },
+ {
+  "file": "xdns.json",
+  "delay": 1
+ }
+]

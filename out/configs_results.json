@@ -1,0 +1,1513 @@
+[
+ {
+  "file": "pub_hysteria2_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_1.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_10.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_11.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_12.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_13.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_14.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_15.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_16.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_17.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_18.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_19.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_2.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_20.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_21.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_22.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_23.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_24.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_25.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_26.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_27.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_28.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_29.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_3.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_30.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_31.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_32.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_33.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_34.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_35.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_36.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_37.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_38.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_39.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_4.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_40.json",
+  "delay": 309
+ },
+ {
+  "file": "pub_hysteria2_41.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_42.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_43.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_44.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_45.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_46.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_47.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_48.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_49.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_5.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_50.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_51.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_hysteria2_52.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_53.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_54.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_55.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_56.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_57.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_58.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_59.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_6.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_7.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_8.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_hysteria2_9.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_socks_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_1.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_10.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_11.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_12.json",
+  "delay": 300
+ },
+ {
+  "file": "pub_ss_13.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_14.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_15.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_16.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_17.json",
+  "delay": 312
+ },
+ {
+  "file": "pub_ss_18.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_19.json",
+  "delay": 53
+ },
+ {
+  "file": "pub_ss_2.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_20.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_21.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_22.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_23.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_24.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_25.json",
+  "delay": 37
+ },
+ {
+  "file": "pub_ss_26.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_27.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_28.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_29.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_3.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_30.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_31.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_32.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_33.json",
+  "delay": 961
+ },
+ {
+  "file": "pub_ss_34.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_35.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_36.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_37.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_38.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_39.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_4.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_40.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_41.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_42.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_43.json",
+  "delay": 291
+ },
+ {
+  "file": "pub_ss_44.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_45.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_46.json",
+  "delay": 301
+ },
+ {
+  "file": "pub_ss_47.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_48.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_49.json",
+  "delay": 395
+ },
+ {
+  "file": "pub_ss_5.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_50.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_51.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_52.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_53.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_54.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_55.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_56.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_57.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_58.json",
+  "delay": 589
+ },
+ {
+  "file": "pub_ss_59.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_6.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_ss_7.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_8.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_ss_9.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_1.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_10.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_11.json",
+  "delay": 3523
+ },
+ {
+  "file": "pub_trojan_12.json",
+  "delay": 6281
+ },
+ {
+  "file": "pub_trojan_13.json",
+  "delay": 4299
+ },
+ {
+  "file": "pub_trojan_14.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_15.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_16.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_17.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_18.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_19.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_2.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_20.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_21.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_22.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_23.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_24.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_25.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_26.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_27.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_28.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_29.json",
+  "delay": 1258
+ },
+ {
+  "file": "pub_trojan_3.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_30.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_31.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_32.json",
+  "delay": 1290
+ },
+ {
+  "file": "pub_trojan_33.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_34.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_35.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_36.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_37.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_38.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_39.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_4.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_40.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_41.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_42.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_43.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_44.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_45.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_46.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_47.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_48.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_49.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_5.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_50.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_51.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_52.json",
+  "delay": 1885
+ },
+ {
+  "file": "pub_trojan_53.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_54.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_55.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_trojan_56.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_57.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_58.json",
+  "delay": 863
+ },
+ {
+  "file": "pub_trojan_59.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_6.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_7.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_8.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_trojan_9.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_1.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_10.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_11.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_12.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_13.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_14.json",
+  "delay": -1,
+  "error": "config load error: infra/conf/serial: failed to parse json config \u003e infra/conf: failed to build outbound config with tag proxy \u003e infra/conf: failed to build stream settings for outbound detour \u003e infra/conf: Failed to build REALITY config. \u003e infra/conf: empty \"password\""
+ },
+ {
+  "file": "pub_vless_15.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_16.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_17.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_18.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_19.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_2.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_20.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_21.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_22.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_23.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_24.json",
+  "delay": -1,
+  "error": "config load error: infra/conf/serial: failed to parse json config \u003e infra/conf: failed to build outbound config with tag proxy \u003e infra/conf: failed to build stream settings for outbound detour \u003e infra/conf: Failed to build REALITY config. \u003e infra/conf: empty \"password\""
+ },
+ {
+  "file": "pub_vless_25.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_26.json",
+  "delay": 667
+ },
+ {
+  "file": "pub_vless_27.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_28.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_29.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_3.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_30.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_31.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_32.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_33.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_34.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_35.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_36.json",
+  "delay": 2658
+ },
+ {
+  "file": "pub_vless_37.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_38.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_39.json",
+  "delay": 1687
+ },
+ {
+  "file": "pub_vless_4.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_40.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_41.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_42.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vless_43.json",
+  "delay": 594
+ },
+ {
+  "file": "pub_vless_44.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_45.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_46.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_47.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_48.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vless_49.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_5.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_50.json",
+  "delay": 584
+ },
+ {
+  "file": "pub_vless_51.json",
+  "delay": 433
+ },
+ {
+  "file": "pub_vless_52.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_53.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_54.json",
+  "delay": 457
+ },
+ {
+  "file": "pub_vless_55.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_56.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_57.json",
+  "delay": 60
+ },
+ {
+  "file": "pub_vless_58.json",
+  "delay": 4153
+ },
+ {
+  "file": "pub_vless_59.json",
+  "delay": 391
+ },
+ {
+  "file": "pub_vless_6.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_7.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_8.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vless_9.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_0.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_1.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_10.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_11.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_12.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_13.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_14.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_15.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_16.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_17.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_18.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_19.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_2.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_20.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_21.json",
+  "delay": 3999
+ },
+ {
+  "file": "pub_vmess_22.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_23.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_24.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_25.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_26.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_27.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_28.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_29.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_3.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_30.json",
+  "delay": 204
+ },
+ {
+  "file": "pub_vmess_31.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_32.json",
+  "delay": 3490
+ },
+ {
+  "file": "pub_vmess_33.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_34.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_35.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_36.json",
+  "delay": 6647
+ },
+ {
+  "file": "pub_vmess_37.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_38.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_39.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_4.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_40.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_41.json",
+  "delay": 197
+ },
+ {
+  "file": "pub_vmess_42.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_43.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_44.json",
+  "delay": 630
+ },
+ {
+  "file": "pub_vmess_45.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_46.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_47.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_48.json",
+  "delay": 5498
+ },
+ {
+  "file": "pub_vmess_49.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_5.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_50.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_51.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_52.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_53.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_54.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_55.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_56.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_57.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_58.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_59.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "pub_vmess_6.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": EOF"
+ },
+ {
+  "file": "pub_vmess_7.json",
+  "delay": 3303
+ },
+ {
+  "file": "pub_vmess_8.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "pub_vmess_9.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": io: read/write on closed pipe"
+ },
+ {
+  "file": "warp_0.json",
+  "delay": 619
+ },
+ {
+  "file": "warp_1.json",
+  "delay": 51
+ },
+ {
+  "file": "warp_2.json",
+  "delay": 595
+ },
+ {
+  "file": "warp_3.json",
+  "delay": 177
+ },
+ {
+  "file": "warp_4.json",
+  "delay": 521
+ },
+ {
+  "file": "warp_5.json",
+  "delay": 43
+ },
+ {
+  "file": "warp_6.json",
+  "delay": 68
+ },
+ {
+  "file": "warp_7.json",
+  "delay": -1,
+  "error": "Get \"https://www.gstatic.com/generate_204\": net/http: TLS handshake timeout"
+ },
+ {
+  "file": "warp_8.json",
+  "delay": 53
+ },
+ {
+  "file": "warp_9.json",
+  "delay": 910
+ }
+]
