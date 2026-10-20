@@ -80,9 +80,9 @@ void main() {
       warp['registered'] = accs.length;
       for (var i = 0; i < 10; i++) {
         final link = WarpService.linkFor(accs[i % accs.length],
-            ip: WarpService.randomEndpointIp(), port: WarpService.randomPort(), name: 'WARP', noise: i.isOdd);
+            ip: WarpService.randomEndpointIp(), port: WarpService.randomPort(), name: 'WARP');
         final c = configFromLink(link, Groups.freeCf)!;
-        File('${out.path}/warp${i.isOdd ? 'noise' : ''}_$i.json').writeAsStringSync(buildXrayJson(c, settings));
+        File('${out.path}/warp_$i.json').writeAsStringSync(buildXrayJson(c, settings));
         if (i == 0) warp['sample_link'] = link;
       }
     } catch (e) {

@@ -456,7 +456,6 @@ void _ensureServerHint(Map<String, dynamic> ob) {
 
 /// Optional anti-filtering helpers, requested by app-generated links:
 ///  aida_frag=1  -> split the TLS ClientHello (hides SNI like *.workers.dev)
-///  aida_noise=1 -> send random UDP noise before WireGuard (WARP in Iran)
 /// Both route the proxy's own socket through a local "freedom" dialer.
 void _applyAntiFilter(Map<String, dynamic> full, Map<String, dynamic> ob, Map<String, String> q) {
   Map<String, dynamic>? dialer;
@@ -466,17 +465,6 @@ void _applyAntiFilter(Map<String, dynamic> full, Map<String, dynamic> ob, Map<St
       'protocol': 'freedom',
       'settings': {
         'fragment': {'packets': 'tlshello', 'length': '10-30', 'interval': '10-20'},
-      },
-    };
-  } else if (q['aida_noise'] == '1') {
-    dialer = {
-      'tag': 'aida-dialer',
-      'protocol': 'freedom',
-      'settings': {
-        'noises': [
-          {'type': 'rand', 'packet': '50-100', 'delay': '10-16'},
-          {'type': 'rand', 'packet': '50-100', 'delay': '10-16'},
-        ],
       },
     };
   }

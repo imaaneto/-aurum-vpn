@@ -267,6 +267,28 @@ class _TokensPageState extends State<TokensPage> {
                 ),
               ]),
             ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Pal.warning.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Pal.warning.withValues(alpha: 0.45)),
+              ),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const Icon(Icons.warning_amber_rounded, color: Pal.warning, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    tr(
+                      'هشدار: استفاده از ورکر کلودفلر به‌عنوان پروکسی/VPN ممکن است خلاف قوانین کلودفلر باشد. کلودفلر ممکن است گزارش سوءاستفاده (Network abuse) بفرستد، ورکر را غیرفعال کند یا اکانت را محدود کند. از اکانت اصلی و مهم خود استفاده نکنید؛ مسئولیت با صاحب اکانت است.',
+                      'Warning: using a Cloudflare Worker as a proxy/VPN may break Cloudflare\'s terms. Cloudflare may send abuse reports, disable the worker or restrict the account. Do not use an important account; the account owner is responsible.',
+                    ),
+                    style: const TextStyle(color: Pal.warning, fontSize: 12, height: 1.6),
+                  ),
+                ),
+              ]),
+            ),
             const SizedBox(height: 14),
             Row(children: [
               Expanded(child: LuxButton(label: tr('افزودن توکن', 'Add token'), icon: Icons.key_rounded, onTap: _addToken)),

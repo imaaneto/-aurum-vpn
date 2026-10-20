@@ -239,7 +239,6 @@ class FreeEngine extends ChangeNotifier {
           ip: WarpService.randomEndpointIp(),
           port: WarpService.randomPort(),
           name: 'WARP',
-          noise: i.isEven,
         );
         final c = configFromLink(link, Groups.freeCf);
         if (c != null) cands.add(c);
@@ -250,7 +249,7 @@ class FreeEngine extends ChangeNotifier {
         cfTested++;
         if (d > 0 && !cfFull && _countWhere('wireguard') < cap) {
           c.delay = d;
-          c.name = '☁ WARP${c.link.contains('aida_noise') ? '+noise' : ''} ${c.host}:${c.port}';
+          c.name = '☁ WARP ${c.host}:${c.port}';
           _addCf(run, c);
           _log(run, 'WARP ✓ ${c.host}:${c.port}  ${d}ms');
         } else {
